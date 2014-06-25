@@ -1,0 +1,445 @@
+.clickDent {
+	font-family: "Open Sans", "Arial";
+}
+
+.clickDent header{
+	background-color: #005990;
+	height: 30px;
+	font-weight: bold;
+	color: white;
+	text-align: center;
+	padding: .5em;
+}
+
+.clickDent .menu{
+	width: 30%;
+	float: left;
+	background-color: #005990;
+	min-height: 100%;
+	display: none;
+}
+
+.clickDent .contenido{
+	display: inline-block;
+	min-height: 100%;
+	width: 100%;
+}
+
+.clickDent .avatar {
+	padding: 30px;
+}
+
+.clickDent .imgAvatar {
+	border: 1px dashed white;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	display: block;
+}
+
+.clickDent .datosLogin {
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	padding-bottom: 1em;
+}
+
+.clickDent .menu nav{
+	width: 100%;
+}
+
+.clickDent .menu nav ul{
+
+}
+
+.clickDent .menu nav ul li{
+	list-style: none;
+	text-align: left;
+}
+
+.clickDent .menu nav ul li.itemMenu{
+	padding: .9em;
+	margin-left: 20%;
+	background-color: #5c94c7;
+	margin-top: .2em;
+	position: relative;
+	color: white;
+  	font-size: 0.8em;
+  	text-align: center;
+}
+
+.clickDent .menu nav ul li.itemMenu:after {
+  border-top: 24px solid transparent;
+  border-bottom: 24px solid transparent;
+  content: "";
+  left: 0;
+  position: absolute;
+  border-left: 15px solid #005990;
+  top: 0;
+}
+
+.seleccion{
+	background-color: #f1816e !important;
+}
+
+
+
+
+.clickDent .menu nav ul li.titulo{
+	border: 0;
+	padding: 0.5em 0;
+	padding-left: 0;
+	margin: 0;
+	background-color: transparent;
+}
+
+
+
+.clickDent .menu nav ul li a{
+	margin-left: 2em;
+	color: white;
+	text-decoration: none;
+	width: 100%;
+}
+
+.clickDent .menu nav ul li.itemMenu:hover{
+	color: #e7ebd8 !important;
+	cursor: pointer;
+	background-color: #f1816e;
+}
+
+.clickDent .menu .titulo{
+	font-size: 1.5em;
+	color: #5c94c7;
+}
+
+.clickDent .notificaciones{
+	float: right;
+	border-left: solid 1px white;
+	padding: .5em;
+	padding-left: 1em;
+}
+
+.clickDent .cont-menu{
+	float: left;
+	border-right: solid 1px white;
+	padding: .5em;
+	padding-right: 1em;
+}
+
+.busqueda {
+	text-align: center;
+	padding: 2em;
+}
+
+.busqueda label {
+	font-weight: bolder;
+	font-size: 1em !important;
+}
+
+.buscar {
+	display: block;
+	margin: 2em auto;
+}
+
+.buscar div{
+	display: inline-block;
+	margin-left: 1em;
+	color: #22b0e6;
+}
+
+.buscar div:hover{
+	color: #f15d45;
+	cursor: pointer;
+}
+
+.busqueda input{
+	margin-left: 1em;
+	width: 80%;
+	max-width: 500px;
+	font-size: 0.9em;
+	padding: .2em;
+	border: 1px solid #22b0e6;
+	border-radius: .2em;
+}
+
+.avanzado{
+	font-size: .6em;
+	margin-left: -2.5em !important;
+
+}
+
+.citas{
+	text-align: center;
+	margin-top: 3em;
+	color: #8a9c9d;
+
+}
+
+.cita{
+	display: inline-block;
+	width: 80%;
+	border-bottom: 1px solid #0069aa;
+	vertical-align: top;
+}
+
+.citas div{
+	margin-bottom: 1em;
+}
+
+
+.cita div{
+	margin-top: 1em;
+}
+
+.proximas {
+	display: inline-block;
+	width: 80%
+}
+
+.proximas .citap:first-child{
+	border-bottom: 1px solid #0069aa;
+}
+
+.citap{
+	padding: 1em 0;
+}
+
+.acciones {
+	text-align:right;
+	padding-right: 1em;
+	font-size: .9em;
+}
+
+.acciones div{
+	display: inline-block;
+}
+
+.horario {
+	color: #0069aa;
+	/*color: #f15d45;*/
+}
+
+.citas a{
+	color: #22b0e6;
+	text-decoration: none;
+}
+
+.citas a:hover{
+	color: #f1816e;
+}
+
+.button {
+  padding: 0.2em .5em; 
+  background-color: #f15d45;
+  color: #fff;
+  border-radius: 0.5em;
+  border: #f1816e solid 2px;
+}
+.button:hover {
+  background-color: #f1816e;
+  border: #f15d45 solid 2px;
+}
+
+label{
+	color: #363636;
+	font-weight: bold;
+	font-size: 0.9em;
+	margin-right: 1em;
+}
+
+.historial a{
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.tabs {
+	text-align: center;
+}
+
+.contenidos-tabs {
+	display: inline-block;
+	width: 100%;
+	min-height: 100%;
+	text-align: left;
+}
+
+.tab1{
+	display: block;
+	}
+
+.tab2 .titulo-tab{
+	padding-top: 1em !important;
+}
+
+.valor-conf{
+	margin: 1em;
+	color: #363636;
+	font-size: 0.85em;
+}
+
+.valor-conf label{
+	display: inline-block;
+	color: #8a9c9d !important;
+	width: 40%;
+	vertical-align: top;
+}
+
+.valor-conf input{
+	width: 50%;
+	font-size: 0.8em;
+}
+
+.valor-conf input[type="time"]{
+	width: 20%;
+	font-size: 0.8em;
+}
+
+.valor-conf textarea{
+	width: 50%;
+	height: 5em;
+	font-size: 0.8em;
+	resize: none;
+}
+
+.valor-conf select{
+	width: 50%;
+	font-size: 0.8em;
+}
+
+.valor-conf div {
+	vertical-align: top;
+	margin: 1em;
+}
+
+.valor-conf div label{
+	width: 30%;
+	padding-left: 10%;
+
+}
+
+.check {
+	padding: .5em;
+	font-size: 0.8em;
+	width: 90%;
+	padding-left: 30%; 
+}
+
+.check input{
+	margin-right: 1em;
+	width: auto;
+}
+
+.check label{
+	width: auto !important;
+	padding-left: 0 !important;
+}
+
+output {
+	display: inline-block;
+	text-align: center;
+	width: 90%;
+}
+
+.titulo-tab{
+	text-align: left;
+	border-bottom: 1px solid #EEE;
+	padding: .5em;
+	margin: 1em 1em 2em 2em;
+	font-size: 0.9em;
+	color: rgba(54, 54, 54, .9);
+	font-family: Arial;
+	font-weight: 700;
+	padding-top: 3em;
+}
+
+#list img{
+	margin-top: .8em;
+	margin-left: 60%;
+}
+
+.estudios{
+	width: 90% !important;
+}
+
+.estudios a {
+	font-size: 0.9em;
+}
+
+
+.estudios a div{ 
+	display: inline-block; 
+	vertical-align: middle;
+	margin-right: 0;
+}
+
+a {
+	text-decoration: none;
+	float: right;
+	color: #22b0e6;
+	font-family: Arial;
+}
+
+a:hover{
+	color: #f1816e;
+}
+
+
+@media screen and (min-width: 650px) {
+
+	.clickDent .menu{
+		display: inline-block;
+		width: 30%;
+	}
+
+	.clickDent .contenido{
+		display: inline-block;
+		width: 70%;
+	}
+
+	.clickDent .cont-menu{
+		display: none;
+	}
+	.proximas{
+		width: 28%;
+	}
+
+	.cita{
+		width: 70%;
+		border-right: 1px solid #0069aa;
+		border-bottom: none;
+	}
+	
+
+}
+
+
+@media screen and (min-width: 1030px) {
+
+	.clickDent .imgAvatar {
+		width: 120px;
+		height: 120px;
+	}
+
+	.clickDent .menu{
+		width: 25%;
+	}
+
+	.clickDent .contenido{
+		width: 75%;
+	}
+
+	.proximas{
+		width: 19%;
+	}
+
+	.cita{
+		width: 80%;
+	}
+
+	.contenidos-tabs{
+		margin: auto;
+	}
+
+}

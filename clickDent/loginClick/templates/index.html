@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clickDent : Sistema para administrar tu consultorio</title>
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="css/estilos2.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <div class="hd-visible">
+      <h1 class = "logo">
+        <figure></figure>
+        <span>clickDent</span>
+      </h1>
+      <nav class = "nav">
+        <ul>
+          <li><a href=""> Iniciar Sesion </a></li><li li class="menu"><a href="" id="btn-menu"><span class="icon-menu"></span></a></li><li><a href="" class = "desktop"> Conoce mas </a></li><li><a href="" class = "desktop"> Preguntas Frecuentes </a></li><li><a href="" class = "desktop"> Planes </a></li><li><a href="" class = "desktop"> Iniciar Sesion </a></li>
+
+        </ul>
+      </nav>
+    </div>
+    <nav class="nav-oculto" id="nav-oculto">
+      <ul>
+        <li><a href="">Conoce mas de clickDent</a></li>
+        <li><a href="">Preguntas Frecuentes</a></li>
+        <li><a href="">Registrarse</a></li>
+        <li><a href="">Nuestros Planes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <article class="principal">
+      <div class="principal-desc"> 
+          <h2 class="">El sistema para tu consultorio</h2>
+          <p>Entonces seguramenta ya usas clickDent, un sistema diseñado para ti, que te ayuda a llevar el control de tu consultorio y tus pacientes facilmente y desde cualquier lugar. <br><span class="negritas">Solo registrate y comienza a usarlo. </span></p>
+           <a href="#" class="button desktop">Registrate</a>
+      </div>
+      <div class=""> 
+        <figure></figure>
+      </div>
+      <div class="boton"> 
+        <a href="#" class="button">Registrate</a>
+      </div>
+    </article>
+
+    <div class="secundaria zigzag">
+
+      <article class="rojo">
+        <h2 class="">Administración de pacientes</h2>
+        <p>Maten a la mano y al dia la informacion de tus pacientes. Asi como  su completo historial que te brinda clickDent<br></p>
+        <div class=""> 
+          <figure></figure>
+          <figure class="tablet"></figure>
+        </div>
+      </article>
+
+      <div class="col-article">
+
+        <article class="azul article-colores">
+          <h2 class="">Control de citas</h2>
+          <p>No pierdas una sola cita. Programa citas desde cualquier lugar y en cualquier moemento. Ademas clickDent se encarga de recordale a tus pacientes para su asistencia
+          <div class="">
+            <figure></figure>
+          </div>
+        </article>
+
+        <article class="verde article-colores">
+          <h2 class="">¿Tienes Socios?</h2>
+          <p>Comparte de manera facil la informacion de tus pacientes o de los pacientes que el te envie. Solo con las herramientas que te ofrece clickDent es la opcion que estas buscando
+          <div class=""> 
+            <figure></figure>
+          </div>
+      </article>
+
+    </div>
+
+    </div>
+
+    <article>
+      <h2 class="">Nuestros planes</h2>
+      <div  class="cont-principal">
+        <article class = "division">
+          <div class="plan plan_verde">
+            <div class="precio">Gratis</div>
+              <div class="titulo-plan">
+              Basico
+              </div>
+              <div class="boton">
+                <a href="" class ="button">Elegir <span class="chico"> plan</span></a>
+              </div>
+          </div>  
+          <ul class = "lista-plan link-azul-claro">
+            <li>Administracion de pacientes e Historial</li>
+            <li>Control de citas</li>
+            <li>Compartir historiales</li>
+            <li>Inclusion en <a href="">wwww.buscodoctor.com</a></li>
+            <li>Recetas</li>
+          </ul>
+        </article>
+
+        <article>
+          <div class="plan plan_azul">
+            <div class="precio">$500</div>
+            <div class="titulo-plan">
+              Premium
+            </div>
+            <div class="boton">
+             <a href="" class ="button">Elegir <span class="chico"> plan</span></a>
+           </div>
+          </div>  
+          <ul class = "lista-plan link-azul-claro">
+            <li>Multicuentas y roles, ideal si tienes asiste y/o secretaria</li>
+            <li>Cotizador de tratamientos</li>
+            <li>Administracion de pagos de pacientes</li>
+            <li>Recordatorio de citas</li>
+            <li>Inclusion PREMIUM en <a href="">wwww.buscodoctor.com</a></li>
+          </ul>
+        </article>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <div class="contactanos link-blanco">
+      <div class = "cont-logo"> 
+        <h1 class = "logo">
+          <figure></figure>
+          <br>
+        </h1>
+      </div>
+      <div class="social">
+        <div class="col">
+          <div><a href=""><span class = "icon-facebook"></span> /clickDent</a></div>
+          <div><a href=""><span class = "icon-twitter"></span>  @clickDent</a></div>
+        </div>
+        <div class="col">
+           <div><a href=""><span class = "icon-phone"></span>  01 800 123456</a></div>
+          <div><a href=""><span class = "icon-envelope"></span>  contacto@clickDent.com</a></div>
+        </div>
+      </div>
+    </div>
+    <div class = "enlaces link-azul">
+      <a href="">Terminos y   Condiciones</a> | <a href="">Mapa del Sitio</a> | <a href="">   Copyright</a>
+    </div>
+  </footer>
+
+  <script src="js/vendor/jquery.js"></script>
+  <script type="text/javascript">
+    $('#btn-menu').on('click', function(ev) {
+      $('#nav-oculto').slideToggle();
+      return false;
+    });
+
+  </script>
+
+</body>
+</html>

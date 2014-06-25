@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>ClickDent - {% block titulo %} {% endblock %} </title>
+	<title></title>
+	<link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css" />
+  	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/estilos2.css">
+  	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
+</head>
+<body class="clickDent">
+	<div class="menu" id="menu">
+		<div class="avatar">
+			<img class="imgAvatar" src="{{STATIC_URL}}img/usuario.png"></img>
+		</div>
+		<div class="datosLogin">
+			username13
+		</div>
+		<nav>
+			<ul>
+				<li class="itemMenu">Inicio</li>
+				<li class="titulo">Citas</li>
+				<li class="itemMenu">Agrgar Cita</li>
+				<li class="itemMenu">Calendario</li>
+				<li class="titulo">Pacientes</li>
+				<li class="itemMenu">Agregar Paciente</li>
+				<li class="itemMenu">Consultar Paciente</li>
+				<li class="itemMenu">Pagos Pendientes</li>
+				<li class="titulo">Consultorio</li>
+				<li class="itemMenu">Tratamientos</li>
+				<li class="itemMenu">Receta</li>
+				<li class="titulo">Perfil</li>
+				<li class="itemMenu">Mi perfil</li>
+				<li class="itemMenu seleccion">Configuracion</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="contenido" id="contenido">
+		<header>
+			<div class="cont-menu icon-menu"></div>
+			clickDent 
+			<div class="notificaciones icon-bell"></div>
+		</header>
+		
+
+	{% block contenido %} {% endblock %}
+
+	</div>
+
+<script src="{{STATIC_URL}}js/vendor/jquery.js"></script>
+<script type="text/javascript">
+
+	function establearAncho(){
+		var heightMenu = $('#menu').height();
+        var heightContenido = $('#contenido').height();
+
+        if (heightMenu > heightContenido){
+        	 $('#contenido').height(heightMenu);
+        }else{
+        	$('#menu').height(heightContenido);
+        }
+	}
+
+	$(function() {
+        establearAncho();
+    });
+</script>
+
+</body>
+</html>

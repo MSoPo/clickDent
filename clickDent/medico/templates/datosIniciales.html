@@ -1,0 +1,109 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css" />
+  	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/estilos2.css">
+  	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
+</head>
+<body class="clickDent">
+	<div class="menu">
+		<div class="avatar">
+			<img class="imgAvatar" src="{{STATIC_URL}}img/usuario.png"></img>
+		</div>
+		<div class="datosLogin">
+			username13
+		</div>
+		<nav>
+			<ul>
+				<li class="itemMenu seleccion">Inicio</li>
+				<li class="titulo">Citas</li>
+				<li class="itemMenu">Agrgar Cita</li>
+				<li class="itemMenu">Calendario</li>
+				<li class="titulo">Pacientes</li>
+				<li class="itemMenu">Agregar Paciente</li>
+				<li class="itemMenu">Consultar Paciente</li>
+				<li class="itemMenu">Pagos Pendientes</li>
+				<li class="titulo">Consultorio</li>
+				<li class="itemMenu">Tratamientos</li>
+				<li class="itemMenu">Receta</li>
+				<li class="titulo">Perfil</li>
+				<li class="itemMenu">Mi perfil</li>
+				<li class="itemMenu">Configuracion</li>
+			</ul>
+		</nav>
+	</div>	
+	<div class="contenido">
+		<header><div class="cont-menu icon-menu"></div>clickDent <div class="notificaciones icon-bell"></div></header>
+		<section>
+			<div class="busqueda">
+				<label for="buscar">Buscar Paciente: </label>
+
+				<div class="buscar">
+					<input placeholder="Ingresa clave o nombre" name ="buscar" />
+					<div class="icon-plus avanzado"></div>
+					<div class="icon-search"></div>
+				</div>
+
+			</div>
+
+			<div class="citas">
+				<div class="cita">
+					<div class="horario">9:00 - 9:30</div>
+					<div class="clavePaciente"><a href="">MSOSA01</a></div>
+					<div class="nombre">Miguel Angel</div>
+					<div class="apellido">Sosa Posadas</div>
+					<div class="ultima"><label>Ultima Cita:</label> 05 Mayo 2011</div>
+					<div class="tratamientos-pendientes"><label>Pendiente:</label> $2598.00</div>
+					<div class="historial"><a href="#">Historial</a><a href="#">Receta</a><a href="#">Pagar</a></div>
+					<div class="observaciones">Se creara una carilla en el diente canino inferior derecho</div>
+					<div class="acciones">
+						<div class="reprogramar"><button class="button">Reprogramar</button></div>
+						<div class="cancelar"><button class="button">Cancelar</button></div>
+					</div>
+				</div>
+				<div class="proximas">
+					<div class="citap">
+						<div class="horario">9:00 - 9:30</div>
+						<div class="clavePaciente"><a href="">Agregar cita</a></div>
+					</div>
+					<div class="citap">
+						<div class="horario">13:00 - 14:30</div>
+						<div class="clavePaciente">MSOSA01</div>
+						<div class="nombre">Miguel Angel</div>
+						<div class="apellido">Sosa Posadas</div>
+						<div class="historial"><a href="#">Historial</a></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<!--<form>
+		<input name="nombre">
+		<input name="ape_pat">
+		<input namE="ape_mat">
+		<input name="num_cedula">
+		<input name="declaracion">
+		<select>
+			<option>Especialidad1</option>
+			<option>Especialidad2</option>
+			<option>Especialidad3</option>
+			<option>Especialidad4</option>
+			<option>Especialidad5</option>
+		</select>
+
+		<hr>Consultorio	<hr>
+		<input name="consultorio_nombre">
+		<input name="cp">
+		<select>
+			<option>Colonia1</option>
+			<option>Colonia2</option>
+			<option>Colonia3</option>
+			<option>Colonia4</option>
+		</select>
+		<input name="Estado">
+		<input name="Pais">
+
+	</form>-->
+</body>
+</html>

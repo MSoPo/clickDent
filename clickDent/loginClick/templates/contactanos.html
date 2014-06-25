@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>clickDent : Sistema para administrar tu consultorio</title>
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="css/estilos2.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/style2.css">
+  <link rel="stylesheet" type="text/css" href="css/style4.css">
+</head>
+<body>
+
+  <header>
+    <div class="hd-visible">
+      <h1 class = "logo">
+        <figure></figure>
+        <span>clickDent</span>
+      </h1>
+      <nav class = "nav">
+        <ul>
+          <li><a href=""> Registrate </a></li><li li class="menu"><a href="" id="btn-menu"><span class="icon-menu"></span></a></li><li><a href="" class = "desktop"> Conoce mas </a></li><li><a href="" class = "desktop"> Preguntas Frecuentes </a></li><li><a href="" class = "desktop"> Planes </a></li><li><a href="" class = "desktop"> Iniciar Sesion </a></li>
+
+        </ul>
+      </nav>
+    </div>
+    <nav class="nav-oculto" id="nav-oculto">
+      <ul>
+        <li><a href="">Conoce mas de clickDent</a></li>
+        <li><a href="">Preguntas Frecuentes</a></li>
+        <li><a href="">Registrarse</a></li>
+        <li><a href="">Nuestros Planes</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section>
+    <div class="seccion-blanca">
+  	<article class="principal preguntas-frecuentes">
+  		<div class="btn-div"> 
+  			<div><a href="" class="bnt-regresar"><span class="flecha"></span>Regresar</a> </div>
+  		</div>
+  		<h2>
+  			<div class="icon4-mail"></div>
+  			Contactanos
+  			<div class="chico">Dejanos tu duda y obtendras una <br/> respuesta casi inmediata a tu correo electronico</div>
+  		</h2>
+  		<form class="form-contactanos">
+        <input placeholder = "Tu correo">
+        <input placeholder = "Tu nombre">
+        <textarea placeholder = "Tu pregunta"></textarea>
+      </form>
+
+      <div class="boton">
+        <a href="" class="button">Enviar</a>
+      </div>
+  	</article>
+    </div>
+
+    <div class="secundaria zigzag">
+
+      <article class="preguntas">
+
+        <h2> Tambien contactanos en </h2>
+
+      <div class="contactanos link-azul-claro">
+          <div><a href=""><span class = "icon-facebook"></span> /clickDent</a></div>
+          <div><a href=""><span class = "icon-twitter"></span>  @clickDent</a></div>
+           <div><a href=""><span class = "icon-phone"></span>  01 800 123456</a></div>
+    </div>
+    </article>
+  </section>
+
+  <footer>
+    <div class = "enlaces link-azul">
+      <a href="">Terminos y   Condiciones</a> | <a href="">Mapa del Sitio</a> | <a href="">   Copyright</a>
+    </div>
+  </footer>
+
+  <script src="js/vendor/jquery.js"></script>
+  <script type="text/javascript">
+    $('#btn-menu').on('click', function(ev) {
+      $('#nav-oculto').slideToggle();
+      return false;
+    });
+
+  </script>
+
+</body>
+</html>
