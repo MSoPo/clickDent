@@ -31,3 +31,14 @@ class Consultorio(models.Model):
 
 	def __unicode__(self):
 		return self.nombre
+
+class CatConfiguracion(models.Model):
+	nombre=models.CharField(max_length=100)
+
+	def __unicode__(self):
+		return self.nombre
+
+class Configuracion(models.Model):
+	cat_configuracion=models.ForeignKey(CatConfiguracion)
+	medico=models.ForeignKey(Medico)
+	valor=models.CharField(max_length=100)

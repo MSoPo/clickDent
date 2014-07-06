@@ -36,10 +36,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_auth',
+    'rest_framework',
     'loginClick',
     'direccion',
     'catalogo',
-    'social_auth',
     'medico',
     'paciente',
     'tratamiento',
@@ -54,6 +55,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+#REST_FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
+}
 
 ROOT_URLCONF = 'clickDent.urls'
 

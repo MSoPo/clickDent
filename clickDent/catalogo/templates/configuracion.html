@@ -1,190 +1,115 @@
-{% extends 'base.html' %}
-{% comment %} Comentarios plantilla django {% endcomment %}
-{% block titulo %} Configuracion {% endblock %}
-
-{% block contenido %}
-
-	<seccion class="tabs">
-		<div class="contenidos-tabs">
-
-			<div class="tab2">
-				<div class="titulo-tab">Datos Medico</div>
-				<div class="valor-conf">
-					<label>Nombre: </label>
-					<input>
+<seccion class="tabs">
+	<div class="contenidos-tabs">
+		<div class="tab2">
+			<div class="titulo-tab">Datos Medico</div>
+			<div class="valor-conf">
+			<label>Nombre: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Apellido Paterno: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Apellido Materno: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Num. Cedula: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Declaracion: </label>
+				<textarea></textarea>
+			</div>
+			<div class="valor-conf">
+				<label>Especialidad: </label>
+				<select>
+					<option>Medico General</option>
+					<option>Odontologia</option>
+					<option>Estomatoliga</option>
+					<option>Maxilo Facial</option>
+				</select>
+			</div>
+			<div class="valor-conf">
+				<label class="estudios">Estudios: <a href="#"><div class="icon-plus"></div> Agregar escuela </a></label> 
+				<div>
+					<label>Escuela: </label><input> 
 				</div>
-				<div class="valor-conf">
-					<label>Apellido Paterno: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Apellido Materno: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Num. Cedula: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Declaracion: </label>
-					<textarea></textarea>
-				</div>
-				<div class="valor-conf">
-					<label>Avatar: </label>
-						<input type="file" id="files" name="files" />
-						<output id="list"></output>
-				</div>
-				<div class="valor-conf">
-					<label>Especialidad: </label>
-					<select>
-						<option>Medico General</option>
-						<option>Odontologia</option>
-						<option>Estomatoliga</option>
-						<option>Maxilo Facial</option>
-					</select>
-				</div>
-				<div class="valor-conf">
-					<label class="estudios">Estudios: <a href="#"><div class="icon-plus"></div> Agregar escuela </a></label> 
-					<div>
-						<label>Escuela: </label><input> 
-					</div>
-					<div>
-						<label>Titulo Obtenido: </label><input>
-					</div>
+				<div>
+					<label>Titulo Obtenido: </label><input>
 				</div>
 			</div>
-
-			<div class="tab1">
-				<div class="titulo-tab">Citas</div>
-				<div class="valor-conf">
-					<label>Duracion de consulta regular: </label>
-					<select>
-						<option>10 min</option>
-						<option>15 min</option>
-						<option>20 min</option>
-						<option>30 min</option>
-					</select>
-				</div>
-				<div class="valor-conf">
-					<label>Horario de consulta: </label>
-					<input type="time"> - <input type="time">
-				</div>
-				<div class="valor-conf">
-					<label>Horario de comida: </label>
-					<input type="time"> - <input type="time">
-				</div>
-				<div class="valor-conf">
-					<label>Confirmacion por correo: </label>
-					<input type="checkbox">
-				</div>
-				<div class="valor-conf">
-					<label>Recordatorio de cita por correo: </label>
-					<div class="check"><input type="checkbox"><label>3 horas</label></div>
+		</div>
+		<div class="tab1">
+			<div class="titulo-tab">Citas</div>
+			<div class="valor-conf">
+				<label>Duracion de consulta regular: </label>
+				<select>
+					<option>10 min</option>
+					<option>15 min</option>
+					<option>20 min</option>
+					<option>30 min</option>
+				</select>
+			</div>
+			<div class="valor-conf">
+				<label>Horario de consulta: </label>
+				<input type="time"> - <input type="time">
+			</div>
+			<div class="valor-conf">
+				<label>Horario de comida: </label>
+				<input type="time"> - <input type="time">
+			</div>
+			<div class="valor-conf">
+				<label>Confirmacion por correo: </label>
+				<input type="checkbox">
+			</div>
+			<div class="valor-conf">
+				<label>Recordatorio de cita por correo: </label>
+				<div class="check"><input type="checkbox"><label>3 horas</label></div>
 					<div class="check"><input type="checkbox"><label>6 horas</label></div>
 					<div class="check"><input type="checkbox"><label>12 horas</label></div>
 					<div class="check"><input type="checkbox"><label>1 dia</label></div>
-				</div>	
+			</div>	
+		</div>
+
+		<div class="tab2">
+			<div class="titulo-tab">Datos Consultorio</div>
+			<div class="valor-conf">
+				<label>Nombre del consultorio: </label>
+				<input>
 			</div>
-			<div class="tab2">
-				<div class="titulo-tab">Datos Consultorio</div>
-				<div class="valor-conf">
-					<label>Nombre del consultorio: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Codigo Postal: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Calle: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Num. Exterior: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Num. Interior: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Colonia: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Municipio/Delegacion: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Estado: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Referencia de localizacion: </label>
-					<textarea></textarea>
-				</div>
+			<div class="valor-conf">
+				<label>Codigo Postal: </label>
+				<input>
 			</div>
+			<div class="valor-conf">
+				<label>Calle: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Num. Exterior: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Num. Interior: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Colonia: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Municipio/Delegacion: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Estado: </label>
+				<input>
+			</div>
+			<div class="valor-conf">
+				<label>Referencia de localizacion: </label>
+				<textarea></textarea>
+			</div>
+		</div>
 	</seccion>
-
-
-	<!--<form>
-		<input name="nombre">
-		<input name="ape_pat">
-		<input namE="ape_mat">
-		<input name="num_cedula">
-		<input name="declaracion">
-		<select>
-			<option>Especialidad1</option>
-			<option>Especialidad2</option>
-			<option>Especialidad3</option>
-			<option>Especialidad4</option>
-			<option>Especialidad5</option>
-		</select>
-
-		<hr>Consultorio	<hr>
-		<input name="consultorio_nombre">
-		<input name="cp">
-		<select>
-			<option>Colonia1</option>
-			<option>Colonia2</option>
-			<option>Colonia3</option>
-			<option>Colonia4</option>
-		</select>
-		<input name="Estado">
-		<input name="Pais">
-
-	</form>-->
-
-	<script type="text/javascript">
-
-	function archivo(evt) {
-                  var files = evt.target.files; // FileList object
-             
-                  // Obtenemos la imagen del campo "file".
-                  for (var i = 0, f; f = files[i]; i++) {
-                    //Solo admitimos imágenes.
-                    if (!f.type.match('image.*')) {
-                        continue;
-                    }
-             
-                    var reader = new FileReader();
-             
-                    reader.onload = (function(theFile) {
-                        return function(e) {
-                          // Insertamos la imagen
-                         document.getElementById("list").innerHTML = ['<img class="imgAvatar" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
-                        };
-
-                    })(f);
-             
-                    reader.readAsDataURL(f);
-                  }
-
-                  $('#menu').height($('#menu').height() + 150);
-              }
-             
-              document.getElementById('files').addEventListener('change', archivo, false);
-
-	</script>
-
-{% endblock %}

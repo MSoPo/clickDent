@@ -2,6 +2,9 @@ from django.contrib import admin
 
 from models import *
 
+class ConfiguracionAdmin(admin.ModelAdmin):
+	list_display = ('cat_configuracion', 'medico', 'valor')
+
 class FromacionAdmin(admin.ModelAdmin):
 	list_display = ('escuela', 'titulo', 'medico')
 
@@ -14,3 +17,5 @@ class MedicoAdmin(admin.ModelAdmin):
 admin.site.register(Formacion, FromacionAdmin)
 admin.site.register(Consultorio, ConsultorioAdmin)
 admin.site.register(Medico, MedicoAdmin)
+admin.site.register(Configuracion, ConfiguracionAdmin)
+admin.site.register(CatConfiguracion)

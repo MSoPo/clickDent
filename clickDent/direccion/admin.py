@@ -10,6 +10,5 @@ class DireccionAdmin(admin.ModelAdmin):
 
 admin.site.register(Estado)
 admin.site.register(Pais)
-admin.site.register(CP)
 admin.site.register(Colonia, ColoniaAdmin)
 admin.site.register(Direccion, DireccionAdmin)

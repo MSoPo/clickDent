@@ -1,0 +1,89 @@
+<seccion class="tabs">
+		<div class="contenidos-tabs">
+
+			<div class="tab2">
+				<div class="titulo-tab">Mi Perfil</div>
+				<div class="valor-conf">
+					<label>Usuario: </label>
+					<input>
+				</div>
+				<div class="valor-conf">
+					<label>Correo eletronico: </label>
+					<input>
+				</div>
+				<div class="valor-conf">
+					<label>Avatar: </label>
+						<input type="file" id="files" name="files" />
+						<output id="list">
+							<img class="imgAvatar" src="{{STATIC_URL}}img/usuario.png"></img>
+						</output>
+				</div>
+			</div>
+
+			<div class="tab">
+				<div class="titulo-tab">Cambiar Contraseña</div>
+				<div class="valor-conf">
+					<label>Nueva Contraseña: </label>
+					<input>
+				</div>
+				<div class="valor-conf">
+					<label>Confirmar Contraseña: </label>
+					<input>
+				</div>
+			</div>
+
+			<div class="tab">
+				<div class="titulo-tab">Notificaciones</div>
+				<div class="valor-conf">
+					<label>Recibir notificaciones de citas: </label>
+					<div class="check"><input checked type="checkbox"><label>Web</label></div>
+					<div class="check"><input checked type="checkbox"><label>Mail</label></div>
+				</div>	
+			</div>
+
+			<div class="tab">
+				<div class="titulo-tab">Plan</div>
+				<div class="valor-conf">
+					<label>Actualizar plan: </label>
+					<div class="check"><input checked type="radio" nema="plan" value="free"><label>Gratis</label>
+					</div>
+					<div class="check"><input type="radio" nema="plan" value="mesual"><label>$500 mesuales</label>
+					</div>
+					<div class="check"><input type="radio" nema="plan" value="anual"><label>$2500 anual</label>
+					</div>
+					
+				</div>	
+			</div>
+
+	</seccion>
+
+
+	<script type="text/javascript">
+
+	function archivo(evt) {
+                  var files = evt.target.files; // FileList object
+             
+                  // Obtenemos la imagen del campo "file".
+                  for (var i = 0, f; f = files[i]; i++) {
+                    //Solo admitimos imágenes.
+                    if (!f.type.match('image.*')) {
+                        continue;
+                    }
+             
+                    var reader = new FileReader();
+             
+                    reader.onload = (function(theFile) {
+                        return function(e) {
+                          // Insertamos la imagen
+                         document.getElementById("list").innerHTML = ['<img class="imgAvatar" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+                        };
+
+                    })(f);
+             
+                    reader.readAsDataURL(f);
+                  }
+              }
+             
+              document.getElementById('files').addEventListener('change', archivo, false);
+
+	</script>

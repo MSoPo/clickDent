@@ -2,6 +2,26 @@ from django.shortcuts import render
 from django.core import serializers
 from direccion.models import *
 from django.http import HttpResponse
+from serialize import *
+from rest_framework import viewsets
+from rest_framework import filters
+
+class PaisViewSet(viewsets.ModelViewSet):
+    queryset = Pais.objects.all()
+    serializer_class = PaisSerializer  
+
+class EstadoViewSet(viewsets.ModelViewSet):
+    queryset = Estado.objects.all()
+    serializer_class = EstadoSerializer   
+
+class ColoniaViewSet(viewsets.ModelViewSet):
+    queryset = Colonia.objects.all()
+    serializer_class = ColoniaSerializer  
+    filter_backends = (filters.DjangoFilterBackend,)
+
+class DireccionViewSet(viewsets.ModelViewSet):
+    queryset = Direccion.objects.all()
+    serializer_class = DireccionSerializer
 
 def direccion(request):
     """Vista inicial para el login"""

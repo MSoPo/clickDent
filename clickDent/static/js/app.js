@@ -5,4 +5,12 @@ var clickDent = {
 	Router: {}
 }
 
+var app = {
+	Models: {},
+	Views: {},
+	Collections: {},
+	Router: {}
+}
+
 window.clickDent = clickDent;
+window.app = app;

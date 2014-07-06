@@ -12,11 +12,12 @@
 }
 
 .clickDent .menu{
-	width: 30%;
+	width: 80%;
 	float: left;
 	background-color: #005990;
 	min-height: 100%;
 	display: none;
+	position: absolute;
 }
 
 .clickDent .contenido{
@@ -70,8 +71,8 @@
 }
 
 .clickDent .menu nav ul li.itemMenu:after {
-  border-top: 24px solid transparent;
-  border-bottom: 24px solid transparent;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
   content: "";
   left: 0;
   position: absolute;
@@ -114,17 +115,35 @@
 	color: #5c94c7;
 }
 
+.clickDent .notificaciones:hover,
+.clickDent .cont-menu:hover,
+.clickDent .cerra:hover
+{
+	opacity: .6;
+}
+
+.clickDent .notificaciones,
+.clickDent .cont-menu,
+.clickDent .cerra{
+	padding: .5em;
+	cursor: pointer;
+	color: white;
+}
+
+.clickDent .cerra{
+	position: absolute;
+	right: 0;
+}
+
 .clickDent .notificaciones{
 	float: right;
 	border-left: solid 1px white;
-	padding: .5em;
 	padding-left: 1em;
 }
 
 .clickDent .cont-menu{
 	float: left;
 	border-right: solid 1px white;
-	padding: .5em;
 	padding-right: 1em;
 }
 
@@ -322,7 +341,6 @@ label{
 .check {
 	padding: .5em;
 	font-size: 0.8em;
-	width: 90%;
 	padding-left: 30%; 
 }
 
@@ -365,6 +383,7 @@ output {
 
 .estudios a {
 	font-size: 0.9em;
+	float: right;
 }
 
 
@@ -376,7 +395,6 @@ output {
 
 a {
 	text-decoration: none;
-	float: right;
 	color: #22b0e6;
 	font-family: Arial;
 }
@@ -385,12 +403,158 @@ a:hover{
 	color: #f1816e;
 }
 
+.calendario{
+	border: 1px solid black;
+}
+
+.calendario .cita-calendario div{
+	display: inline-block;
+	width: 85%
+}
+
+.calendario {
+	width: 90%;
+	margin: auto;
+	margin-top: 2em;
+	color: #8a9c9d
+}
+
+.calendario .fechas{
+	background-color: #0069aa;
+	color: white;
+}
+
+.calendario .fechas div{
+	display: inline-block;
+	width: 29%;
+}
+
+.calendario .fechas .navegacion{
+	border-bottom: 2px solid transparent;
+}
+
+.float-rigth {
+	float: right;
+}
+
+.float-left {
+	float: left;
+}
+
+
+.calendario div.navegacion{
+	vertical-align: top;
+	width: 4% !important;
+	background-color: #22b0e6;
+	opacity: .6;
+	cursor: pointer;
+}
+
+.calendario div.navegacion:hover{
+	opacity: 1;
+}
+
+.calendario div.navegacion a{
+	color: white;
+	font-weight: bolder;
+	font-style: oblique;
+}
+
+.cita-calendario .navegacion{
+	margin-top: 9em;
+	background-color: transparent !important;
+	-webkit-transform: scale(1.5,7);
+}
+
+.buscar-cita {
+	margin-top: 2em;
+}
+
+.cita-datos div{
+	margin-top: .8em;
+}
+
+.cita-calendario .acciones button{
+	margin: .5em;
+}
+
+.cita-calendario .acciones {
+	text-align: center;
+}
+
+.cita-seleccion{
+	border-bottom: 3px solid #f15d45;
+}
+
+.botones-form{
+	text-align: center;
+}
+
+.botones-form button{
+	margin: .5em;
+	font-size: .8em;
+}
+
+table{
+	width: 90%;
+	margin: auto;
+	margin-top: 3em;
+	font-size: .8em;
+}
+
+thead{
+	font-size: .9em;
+	background-color: #22b0e6;
+	color: white;
+}
+
+tr{
+	border-bottom: 1px solid #8a9c9d;
+}
+
+td {
+	padding: .5em;
+	color: #363636;
+}
+
+td.gris {
+	background-color: #EEE;
+}
+
+td div{
+	display: inline-block;
+	padding-left: .4em;
+	padding-right: .4em;
+	cursor: pointer;
+	color: #005990;
+}
+
+td div:hover{
+	color: gray;
+}
+
+td div:first-child{
+	border-right: 1px solid gray;
+}
+
+table.pagos td div{
+	border-right: none;
+}
+
+.busca-pago {
+	padding: 1em;
+}
 
 @media screen and (min-width: 650px) {
+
+	.clickDent .cerra{
+		display: none;
+	}
 
 	.clickDent .menu{
 		display: inline-block;
 		width: 30%;
+		position: relative;
 	}
 
 	.clickDent .contenido{
@@ -410,6 +574,10 @@ a:hover{
 		border-right: 1px solid #0069aa;
 		border-bottom: none;
 	}
+
+	.busca-pago{
+		display: inline-block;
+	}	
 	
 
 }

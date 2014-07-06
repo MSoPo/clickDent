@@ -8,8 +8,9 @@
   	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/estilos2.css">
   	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
 </head>
-<body class="clickDent">
+<body class="clickDent" id="clickDent">
 	<div class="menu" id="menu">
+		<div class="cerra icon-cancel-circle" id="cerrar-menu"></div>
 		<div class="avatar">
 			<img class="imgAvatar" src="{{STATIC_URL}}img/usuario.png"></img>
 		</div>
@@ -18,53 +19,54 @@
 		</div>
 		<nav>
 			<ul>
-				<li class="itemMenu">Inicio</li>
+				<li id="inicio" class="itemMenu">Inicio</li>
 				<li class="titulo">Citas</li>
-				<li class="itemMenu">Agrgar Cita</li>
-				<li class="itemMenu">Calendario</li>
+				<li id="citas" class="itemMenu">Agrgar Cita</li>
+				<li id="calendario" class="itemMenu">Calendario</li>
 				<li class="titulo">Pacientes</li>
-				<li class="itemMenu">Agregar Paciente</li>
-				<li class="itemMenu">Consultar Paciente</li>
-				<li class="itemMenu">Pagos Pendientes</li>
+				<li id="paciente" class="itemMenu">Agregar Paciente</li>
+				<li id="paciente-consultar" class="itemMenu">Consultar Paciente</li>
+				<li id="pagos" class="itemMenu">Pagos Pendientes</li>
 				<li class="titulo">Consultorio</li>
-				<li class="itemMenu">Tratamientos</li>
-				<li class="itemMenu">Receta</li>
+				<li id="tratamientos" class="itemMenu">Tratamientos</li>
+				<li id="receta" class="itemMenu">Receta</li>
 				<li class="titulo">Perfil</li>
-				<li class="itemMenu">Mi perfil</li>
-				<li class="itemMenu seleccion">Configuracion</li>
+				<li id="miperfil" class="itemMenu">Mi perfil</li>
+				<li id="configuracion" class="itemMenu seleccion">Configuracion</li>
 			</ul>
 		</nav>
 	</div>
 	<div class="contenido" id="contenido">
-		<header>
-			<div class="cont-menu icon-menu"></div>
+		<header id="header">
+			<div id="btn-menu" class="cont-menu icon-menu"></div>
 			clickDent 
-			<div class="notificaciones icon-bell"></div>
+			<div id="notificaciones" class="notificaciones icon-bell"></div>
 		</header>
 		
-
-	{% block contenido %} {% endblock %}
-
+		<div id="interaccion">
+			{% block contenido %} {% endblock %}
+		</div>
 	</div>
 
 <script src="{{STATIC_URL}}js/vendor/jquery.js"></script>
-<script type="text/javascript">
+<script src="{{STATIC_URL}}js/vendor/underscore.js"></script>
+<script src="{{STATIC_URL}}js/vendor/backbone.js"></script>
+<script src="{{STATIC_URL}}js/utils/utils.js"></script>
+<script src="{{STATIC_URL}}js/app.js"></script>
+<!--<script src="{{STATIC_URL}}js/models/usuario.js"></script>-->
+<script src="{{STATIC_URL}}js/models/paciente.js"></script>
+<script src="{{STATIC_URL}}js/models/direccion.js"></script>
+<script src="{{STATIC_URL}}js/models/colonia.js"></script>
+<script src="{{STATIC_URL}}js/collections/pacientes.js"></script>
+<script src="{{STATIC_URL}}js/collections/direcciones.js"></script>
+<script src="{{STATIC_URL}}js/collections/colonias.js"></script>
+<script src="{{STATIC_URL}}js/views/test-menu.js"></script>
+<script src="{{STATIC_URL}}js/views/test-paciente.js"></script>
+<script src="{{STATIC_URL}}js/views/test-menu.js"></script>
+<script src="{{STATIC_URL}}js/views/test-inicial.js"></script>
+<script src="{{STATIC_URL}}js/routers/router.js"></script>
+<script src="{{STATIC_URL}}js/main.js"></script>
 
-	function establearAncho(){
-		var heightMenu = $('#menu').height();
-        var heightContenido = $('#contenido').height();
-
-        if (heightMenu > heightContenido){
-        	 $('#contenido').height(heightMenu);
-        }else{
-        	$('#menu').height(heightContenido);
-        }
-	}
-
-	$(function() {
-        establearAncho();
-    });
-</script>
 
 </body>
 </html>
