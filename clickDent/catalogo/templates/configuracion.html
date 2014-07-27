@@ -4,112 +4,167 @@
 			<div class="titulo-tab">Datos Medico</div>
 			<div class="valor-conf">
 			<label>Nombre: </label>
-				<input>
+				<input name="nombre" value="{{ medico.nombre }}">
 			</div>
 			<div class="valor-conf">
 				<label>Apellido Paterno: </label>
-				<input>
+				<input name="ape_paterno" value="{{ medico.ape_paterno }}">
 			</div>
 			<div class="valor-conf">
 				<label>Apellido Materno: </label>
-				<input>
+				<input name="ape_materno" value="{{ medico.ape_materno }}">
 			</div>
 			<div class="valor-conf">
 				<label>Num. Cedula: </label>
-				<input>
+				<input name="num_cedula" value="{{ medico.num_cedula }}">
 			</div>
 			<div class="valor-conf">
 				<label>Declaracion: </label>
-				<textarea></textarea>
+				<textarea name="declaracion">{{ medico.declaracion }}</textarea>
 			</div>
 			<div class="valor-conf">
 				<label>Especialidad: </label>
-				<select>
-					<option>Medico General</option>
-					<option>Odontologia</option>
-					<option>Estomatoliga</option>
-					<option>Maxilo Facial</option>
+				<select name="especialidad" value="{{ medico.especialidad }}">
+					{% for dato in especialidad %}
+					
+						{% if dato.id == medico.especialidad.id %}	
+							<option selected  value="{{ dato.id }}">{{ dato.nombre }}</option>
+						{% else %}
+							<option value="{{ dato.id }}">{{ dato.nombre }}</option>
+						{% endif %}	
+						
+					
+					{% endfor %}
 				</select>
 			</div>
-			<div class="valor-conf">
-				<label class="estudios">Estudios: <a href="#"><div class="icon-plus"></div> Agregar escuela </a></label> 
-				<div>
-					<label>Escuela: </label><input> 
-				</div>
-				<div>
-					<label>Titulo Obtenido: </label><input>
-				</div>
-			</div>
+		</div>
+		<div class="tab">
+			<div class="titulo-tab">Formacion</div>
+			<div class="valor-conf" id="datosEscuela">
+				<label class="estudios"><a href="#" id="agregarEscuela"><div class="icon-plus"></div> Agregar escuela </a></label> 
+				{% for dato in formacion %}
+					<div class="datoEscuela">
+						<div>
+						
+						{% if forloop.counter0 %}
+							<div class="contenedorEscuela"><div class="icon-cancel-circle cerraEscuela"></div></div>
+						{% endif %}
+							
+							<label>Escuela: </label><input name="escuela" value="{{ dato.escuela }}"> 
+						</div>
+						<div>
+							<label>Titulo Obtenido: </label><input name="titulo" value="{{ dato.titulo }}">
+						</div>
+					</div>
+
+				{% empty %}
+
+					<div class="datoEscuela">
+						<div>
+							<label>Escuela: </label><input name="escuela" > 
+						</div>
+						<div>
+							<label>Titulo Obtenido: </label><input name="titulo" >
+						</div>
+					</div>
+
+
+				{% endfor %}
+			</div>	
 		</div>
 		<div class="tab1">
 			<div class="titulo-tab">Citas</div>
 			<div class="valor-conf">
 				<label>Duracion de consulta regular: </label>
-				<select>
-					<option>10 min</option>
-					<option>15 min</option>
-					<option>20 min</option>
-					<option>30 min</option>
+				<select name="duracion_consulta">
+					<option {% if configuracion.duracion_consulta == 10 %} selected {% endif %} value="10">10 min</option>
+					<option {% if configuracion.duracion_consulta == 15 %} selected {% endif %} value="15">15 min</option>
+					<option {% if configuracion.duracion_consulta == 20 %} selected {% endif %} value="20">20 min</option>
+					<option {% if configuracion.duracion_consulta == 30 %} selected {% endif %} value="30">30 min</option>
 				</select>
 			</div>
 			<div class="valor-conf">
+				<input name="configuracion-id" value="{{ configuracion.id }}" type="hidden" >
 				<label>Horario de consulta: </label>
-				<input type="time"> - <input type="time">
+				<input type="time" name="hora_consulta_inicio" value='{{configuracion.hora_consulta_inicio|time:"H:i"}}'>
+				 - 
+				 <input type="time" name="hora_consulta_fin"  value='{{configuracion.hora_consulta_fin|time:"H:i"}}'>
 			</div>
 			<div class="valor-conf">
 				<label>Horario de comida: </label>
-				<input type="time"> - <input type="time">
+				<input type="time" name="hora_comida_inicio" value='{{ configuracion.hora_comida_inicio|time:"H:i" }}'>
+				 - 
+				<input type="time" name="hora_comida_fin" value='{{ configuracion.hora_comida_fin|time:"H:i" }}'>
 			</div>
 			<div class="valor-conf">
 				<label>Confirmacion por correo: </label>
-				<input type="checkbox">
+				<input type="checkbox" name="confirmacion_correo" {% if configuracion.confirmacion_correo %} checked {% endif %} >
 			</div>
 			<div class="valor-conf">
+				<input type="hidden" value="{{ configuracion.recordatorio_cita }}" id="recordatorio">
 				<label>Recordatorio de cita por correo: </label>
-				<div class="check"><input type="checkbox"><label>3 horas</label></div>
-					<div class="check"><input type="checkbox"><label>6 horas</label></div>
-					<div class="check"><input type="checkbox"><label>12 horas</label></div>
-					<div class="check"><input type="checkbox"><label>1 dia</label></div>
-			</div>	
+				<div class="check"><input name="recordatorio_cita" value="3" id="3" type="checkbox"><label>3 horas</label></div>
+				<div class="check"><input name="recordatorio_cita" value="6" id="6" type="checkbox"><label>6 horas</label></div>
+				<div class="check"><input name="recordatorio_cita" value="12" id="12" type="checkbox"><label>12 horas</label></div>
+				<div class="check"><input name="recordatorio_cita" value="24" id="24" type="checkbox"><label>24 horas</label></div>
+			</div>
+			<div class="valor-conf">
+				<label>Recibir notificaciones de citas: </label>
+				<div class="check"><input name="notificacion_mail" {% if configuracion.notificacion_mail %} checked  {% endif %} type="checkbox"><label>Web</label></div>
+			</div>		
 		</div>
 
 		<div class="tab2">
+			<input type="hidden" value="{{ consultorio.id }}" name="consultorio-id">
+			<input type="hidden" value="{{ consultorio.direccion.id }}" name="direccion-id">
 			<div class="titulo-tab">Datos Consultorio</div>
 			<div class="valor-conf">
 				<label>Nombre del consultorio: </label>
-				<input>
+				<input value="{{consultorio.nombre}}" name="consultorio-nombre" />
 			</div>
 			<div class="valor-conf">
 				<label>Codigo Postal: </label>
-				<input>
+				<input id="cp" value="{{consultorio.direccion.colonia.cp}}">
 			</div>
 			<div class="valor-conf">
 				<label>Calle: </label>
-				<input>
+				<input name="calle" value="{{consultorio.direccion.calle}}">
 			</div>
 			<div class="valor-conf">
 				<label>Num. Exterior: </label>
-				<input>
+				<input name="num_exterior" value="{{consultorio.direccion.num_exterior}}">
 			</div>
 			<div class="valor-conf">
 				<label>Num. Interior: </label>
-				<input>
+				<input name="num_interior" value="{{consultorio.direccion.num_interior}}">
 			</div>
 			<div class="valor-conf">
 				<label>Colonia: </label>
-				<input>
+				<select name="colonia" id="colonia">
+					<option value="{{consultorio.direccion.colonia.id}}">{{consultorio.direccion.colonia.nombre}}</option>
+				</select>
 			</div>
 			<div class="valor-conf">
 				<label>Municipio/Delegacion: </label>
-				<input>
+				<select id="municipio">
+					<option value="{{consultorio.direccion.colonia.municipio.id}}">{{consultorio.direccion.colonia.municipio.nombre}}</option>
+				</select>
 			</div>
 			<div class="valor-conf">
 				<label>Estado: </label>
-				<input>
+				<select id="estado">
+					<option  value="{{consultorio.direccion.colonia.municipio.estado.id}}">{{consultorio.direccion.colonia.municipio.estado.nombre}}</option>
+				</select>
 			</div>
 			<div class="valor-conf">
 				<label>Referencia de localizacion: </label>
-				<textarea></textarea>
+				<textarea name ="referencias">{{consultorio.direccion.referencias}}</textarea>
+			</div>
+
+			<div class="botones-form">
+				<button class="button" id="guardar">
+					Guardar
+				</button>
 			</div>
 		</div>
 	</seccion>

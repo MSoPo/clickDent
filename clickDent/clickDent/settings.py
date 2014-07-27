@@ -56,11 +56,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-#REST_FRAMEWORK
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
-}
-
 ROOT_URLCONF = 'clickDent.urls'
 
 WSGI_APPLICATION = 'clickDent.wsgi.application'
@@ -121,3 +116,12 @@ FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 TWITTER_EXTENDED_PERMISSIONS = ['email']
 
 LOGIN_REDIRECT_URL = '/'
+
+#REST_FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}

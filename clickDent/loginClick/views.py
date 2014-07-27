@@ -6,7 +6,10 @@ from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.utils import simplejson
-
+from medico.models import *
+import time
+from django.conf import settings
+from datetime import date, timedelta
 
 from social_auth import __version__ as version
 
@@ -119,6 +122,96 @@ def validaCorreo(request):
 	}
 	data = simplejson.dumps(json)
 	return HttpResponse(data, mimetype='application/json')
+
+def handle_uploaded_file(f):
+	extension = f.name.split('.')
+	ultimo = len(extension) - 1
+	extension = '.' + extension[ultimo]
+	rutaAbsoluta = settings.RUTA_PROYECTO + settings.STATIC_URL
+	print settings.RUTA_PROYECTO
+	rutaRelatica = 'Imagenes/' + time.strftime("%y%m%d%H%M%S") + extension
+
+	nombre = rutaAbsoluta + rutaRelatica
+	print nombre
+	
+	with open(nombre, 'wb+') as destination:
+		for chunk in f.chunks():
+			destination.write(chunk)
+
+	return rutaRelatica
+
+def actualizarPerfil(request):
+	correo = request.POST['correo']
+	usuario = request.POST['usuario']
+
+	user = User.objects.get(username=request.user)
+	user.email = correo
+	user.username = usuario
+
+	user.save()
+
+	if request.FILES:
+		imagenPath = handle_uploaded_file(request.FILES['file'])
+		medico = Medico.objects.get(usuario=user)
+		imagen = imagenPath
+		medico.url_imagen = imagen
+		medico.save()
+
+
+	json = {
+   		'validacion': 'ok',
+   		'mail': correo,
+	}
+	data = simplejson.dumps(json)
+	return HttpResponse(data, mimetype='application/json')
+
+def cambiarContrasena(request):
+	actualPass = request.POST['actual']
+	nuevoPass = request.POST['nueva']
+
+	usuario = User.objects.get(username=request.user)
+
+	print actualPass
+	print usuario.check_password(actualPass)
+	if usuario.check_password(actualPass):
+		usuario.set_password(nuevoPass)
+		usuario.save()
+		json = {
+   			'validacion': 'ok'
+		}
+
+	else:
+		json = {
+   			'validacion': 'error'
+		}
+
+	data = simplejson.dumps(json)
+	return HttpResponse(data, mimetype='application/json')
+
+def actualizarPlan(request):
+	plan = request.POST['plan']
+	usuario = User.objects.get(username=request.user)
+	medico = Medico.objects.get(usuario=usuario)
+	plan = Planes.objects.get(id=plan)
+	hoy = date.today()
+	d=hoy+timedelta(days=plan.duracion)
+
+	configuracion = Configuracion.objects.get(medico=medico)
+	print d
+	print hoy
+	configuracion.fecha_inicio = hoy
+	configuracion.fecha_expira = d
+	configuracion.plan = plan
+	configuracion.save()
+
+	json = {
+   			'validacion': 'ok'
+		}
+
+	data = simplejson.dumps(json)
+	return HttpResponse(data, mimetype='application/json')
+
+
 
 
     

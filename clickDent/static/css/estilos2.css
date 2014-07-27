@@ -545,7 +545,115 @@ table.pagos td div{
 	padding: 1em;
 }
 
+.cerraEscuela {
+	color: #f1816e;
+	font-size: .8em;
+	margin: 0 !important;
+	display: inline-block;
+}
+.cerraEscuela:hover {
+	cursor: pointer;
+	color: red;
+}
+
+.contenedorEscuela {
+	display: block;
+	margin: 0 !important;
+}
+
+.tratamiento {
+	padding: 0 !important;
+}
+
+.popup {
+	width: 90%;
+	text-align: center;
+	position: fixed;
+	margin-top	: 1.5em;
+	margin-left: 3%;
+	background-color: red;
+	border-radius: .5em;
+	padding: 1em;
+	background-color: #005990;
+	color: white;
+}
+
+.backpopup {
+	width: 100%;
+	position: absolute;
+	background-color: rgba(0,0,0,.8); /*rgba(92,148,199,.3)*/
+	z-index: 1;
+	display: none;
+}
+
+.popup div .campo {
+	display: block;
+	padding: 1em;
+	text-align: center;
+}
+
+.popup .campo label {
+	color: #CCC !important;
+	font-weight: normal;
+	font-size: .8em;
+	width: 30%;
+	display: inline-block;
+}
+
+.popup .campo input, .popup .campo select{
+	width: 60%;
+	font-size: .8em;
+	color: #222 !important;
+}
+
+.popup div.titulo {
+	font-weight: bold;
+	color: #FFF;
+	letter-spacing: .2em;
+	font-family: "Arial";
+	padding: 1em;
+}
+
+.popup button {
+  margin: .5em;
+  background: #006699;
+  border: none;
+  color: #ffffff;
+  font: .7em Tahoma, Arial, sans-serif;
+  padding: .6em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid #333;
+  letter-spacing: 1px;
+  text-shadow: 0px -1px 0px #333333;
+  border-radius: 5px;
+
+  /**** Degradados ****/
+  /*  Chrome 1-9 and Safari 4-5.0  */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #8b8b8b), color-stop(0.5, #707070), color-stop(0.5, #5e5e5e), color-stop(1, #777777));
+  /*  Chrome 10+ Safari 5.1+ Mobile Safari  */
+  background-image: -webkit-linear-gradient(top, #8b8b8b, #707070 50%, #5e5e5e 50%, #777777);
+  background-image: linear-gradient(top, #8b8b8b, #707070 50%, #5e5e5e 50%, #777777);
+}
+
+.popup button:hover {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #5d5d5d), color-stop(0.5, #424242), color-stop(0.5, #383838), color-stop(1, #535353));
+  background-image: -webkit-linear-gradient(top, #5d5d5d, #424242 50%, #383838 50%, #535353);
+  background-image: linear-gradient(top, #5d5d5d, #424242 50%, #383838 50%, #535353);
+}
+.popup button:active {
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000000), color-stop(0.05, #2b2b2b), color-stop(0.5, #434343), color-stop(1, #3e3e3e));
+  background-image: -webkit-linear-gradient(top, #000000, #2b2b2b 5%, #434343 50%, #3e3e3e);
+  background-image: linear-gradient(top, #000000, #2b2b2b 5%, #434343 50%, #3e3e3e);
+}
+
 @media screen and (min-width: 650px) {
+
+	.popup {
+		width: 70%;
+		margin-left: 15%;
+		margin-top: 2.5em;
+	}
 
 	.clickDent .cerra{
 		display: none;
@@ -578,12 +686,23 @@ table.pagos td div{
 	.busca-pago{
 		display: inline-block;
 	}	
+
+	.popcancelar {
+		width: 100%;
+		height: 100%;
+	}
 	
 
 }
 
 
 @media screen and (min-width: 1030px) {
+
+	.popup {
+		width: 60%;
+		margin-left: 20%;
+		margin-top: 3.5em;
+	}
 
 	.clickDent .imgAvatar {
 		width: 120px;

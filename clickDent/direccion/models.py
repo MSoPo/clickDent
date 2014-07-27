@@ -13,9 +13,16 @@ class Estado (models.Model):
 	def __unicode__(self):
 		return self.nombre
 
-class Colonia (models.Model):
+class Municipio (models.Model):
 	nombre=models.CharField(max_length=100)
 	estado=models.ForeignKey(Estado)
+
+	def __unicode__(self):
+		return self.nombre
+
+class Colonia (models.Model):
+	nombre=models.CharField(max_length=100)
+	municipio=models.ForeignKey(Municipio)
 	cp=models.CharField(max_length=5)
 
 	def __unicode__(self):

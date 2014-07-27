@@ -3,61 +3,63 @@
 
 			<div class="tab2">
 				<div class="titulo-tab">Mi Perfil</div>
+				<form method="POST" action="/actualizarPerfil/"  enctype='multipart/form-data' id="formulario">
 				<div class="valor-conf">
 					<label>Usuario: </label>
-					<input>
+					<input value="{{usuario.username}}" name="usuario">
 				</div>
 				<div class="valor-conf">
 					<label>Correo eletronico: </label>
-					<input>
+					<input value="{{usuario.email}}" name="correo">
 				</div>
 				<div class="valor-conf">
 					<label>Avatar: </label>
-						<input type="file" id="files" name="files" />
+						<input type="file" id="files" name="file" />
 						<output id="list">
-							<img class="imgAvatar" src="{{STATIC_URL}}img/usuario.png"></img>
+							<img class="imgAvatar" {% if medico.url_imagen %} src="{{STATIC_URL}}{{medico.url_imagen}}" 
+							{% else %} src="{{STATIC_URL}}img/usuario.png"
+							{% endif %}></img>
 						</output>
+						{% csrf_token %}
 				</div>
+				</form>
 			</div>
 
 			<div class="tab">
 				<div class="titulo-tab">Cambiar Contraseña</div>
 				<div class="valor-conf">
+					<label>Contraseña Actual: </label>
+					<input id="actual" type="password">
+				</div>
+				<div class="valor-conf">
 					<label>Nueva Contraseña: </label>
-					<input>
+					<input type="password">
 				</div>
 				<div class="valor-conf">
 					<label>Confirmar Contraseña: </label>
-					<input>
+					<input id="nueva" type="password">
 				</div>
-			</div>
-
-			<div class="tab">
-				<div class="titulo-tab">Notificaciones</div>
-				<div class="valor-conf">
-					<label>Recibir notificaciones de citas: </label>
-					<div class="check"><input checked type="checkbox"><label>Web</label></div>
-					<div class="check"><input checked type="checkbox"><label>Mail</label></div>
-				</div>	
 			</div>
 
 			<div class="tab">
 				<div class="titulo-tab">Plan</div>
 				<div class="valor-conf">
 					<label>Actualizar plan: </label>
-					<div class="check"><input checked type="radio" nema="plan" value="free"><label>Gratis</label>
-					</div>
-					<div class="check"><input type="radio" nema="plan" value="mesual"><label>$500 mesuales</label>
-					</div>
-					<div class="check"><input type="radio" nema="plan" value="anual"><label>$2500 anual</label>
-					</div>
+					{% for dato in planes %}
 					
-				</div>	
+						<div class="check"><input {% if dato.id == configuracion.plan.id %} checked {% endif %}	 type="radio" name="plan" value="{{ dato.id }}"><label>{{ dato.nombre }} {% if dato.id != 1 %} - ${{ dato.precio }} - {{ dato.duracion }} dias  {% endif %}</label></div>
+											
+					
+					{% endfor %}
+				</div>
+				<div class="botones-form">
+				<button class="button" id="guardar">
+					Guardar
+				</button>
+			</div>	
 			</div>
 
 	</seccion>
-
-
 	<script type="text/javascript">
 
 	function archivo(evt) {

@@ -2,6 +2,9 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from serialize import *
 from rest_framework import viewsets
+from medico.models import *
+from direccion.models import *
+from django.contrib.auth.models import User
 
 class EspecialidadViewSet(viewsets.ModelViewSet):
     queryset = Especialidad.objects.all()
@@ -24,8 +27,17 @@ class OcupacionViewSet(viewsets.ModelViewSet):
     serializer_class = OcupacionSerializer  
 
 def configuracion(request):
-    """Vista inicial para el login"""
-    return render_to_response('configuracion.html',  RequestContext(request))
+    especialidad = Especialidad.objects.all()
+    usuario = User.objects.get(username=request.user)
+    medico = Medico.objects.get(usuario=usuario)
+    formacion = Formacion.objects.filter(medico=medico)
+    consultorio = Consultorio.objects.get(medico=medico)
+    consultorio.direccion = Direccion.objects.get(pk=consultorio.direccion.id);
+    consultorio.direccion.colonia = Colonia.objects.get(pk=consultorio.direccion.colonia.id);
+    consultorio.direccion.colonia.municipio = Municipio.objects.get(pk=consultorio.direccion.colonia.municipio.id);
+    consultorio.direccion.colonia.municipio.estado = Estado.objects.get(pk=consultorio.direccion.colonia.municipio.estado.id);
+    configuracion = Configuracion.objects.get(medico=medico)
+    return render_to_response('configuracion.html', {'configuracion' : configuracion, 'consultorio' : consultorio, 'formacion' : formacion, 'medico' : medico, 'especialidad' : especialidad}, context_instance=RequestContext(request))
 
 
 def icon(request):
@@ -34,11 +46,18 @@ def icon(request):
 
 def miperfil(request):
     """Vista inicial para el login"""
-    return render_to_response('miperfil.html',  RequestContext(request))
+    print request.user
+    usuario = User.objects.get(username=request.user)
+    medico = Medico.objects.get(usuario=usuario.id)
+    configuracion = Configuracion.objects.get(medico=medico)
+    planes = Planes.objects.all()
+
+    return render_to_response('miperfil.html', {'usuario' : usuario, 'medico' : medico, 'configuracion' : configuracion, 'planes' : planes} ,  context_instance=RequestContext(request))
 
 def paciente(request):
-    """Vista inicial para el login"""
-    return render_to_response('paciente.html',  RequestContext(request))
+    ocupacion = Ocupacion.objects.all()
+    estadoCivil = EstadoCivil.objects.all()
+    return render_to_response('paciente.html',  {'ocupacion' : ocupacion, 'estadoCivil' : estadoCivil}, context_instance=RequestContext(request))
 
 def calendario(request):
     """Vista inicial para el login"""
@@ -55,4 +74,4 @@ def pagosPendientes(request):
 
 def home(request):
     """Vista inicial para el login"""
-    return render_to_response('home.html',  RequestContext(request))    
+    return render_to_response('home.html', RequestContext(request))    

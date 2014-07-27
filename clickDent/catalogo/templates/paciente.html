@@ -60,32 +60,26 @@
 				</div>
 				<div class="valor-conf">
 					<label>Colonia: </label>
-					<select name="colonia" >
-						<option value="1">El toro</option>
-						<option value="2">Palo Solo</option>
-						<option value="3">Taxqueña</option>
-						<option value="4">El moral</option>
+					<select name="colonia" id="colonia">
 					</select>
 				</div>
 				<div class="valor-conf">
 					<label>Municipio/Delegacion: </label>
-					<select name="municipio" >
-						<option value="1">Huixquilican</option>
+					<select name="municipio" id="municipio" >
 					</select>
 				</div>
 				<div class="valor-conf">
 					<label>Estado: </label>
-					<select name="estado" >
-						<option value="1">DF</option>
+					<select name="estado" id="estado" >
 					</select>
 				</div>
 				<div class="valor-conf">
+
 					<label>Ocupacion: </label>
 					<select name="ocupacion" >
-						<option value="1">Licienciado</option>
-						<option value="2">Profesor</option>
-						<option value="3">Obrero</option>
-						<option value="4">Ama de casa</option>
+						{% for dato in ocupacion %}
+						<option value="{{ dato.id }}">{{ dato.nombre }}</option>
+						{% endfor %}
 					</select>
 				</div>
 				<div class="valor-conf">
@@ -98,88 +92,14 @@
 					</select>
 				</div>
 			</div>
-			<input type="hidden" value="1" name="direccion">
 			<input type="hidden" value="1" name="medico">
-
-			<!--<div class="tab1">
-				<div class="titulo-tab">Historial</div>
-				<div class="valor-conf">
-					<label>Duracion de consulta regular: </label>
-					<select>
-						<option>10 min</option>
-						<option>15 min</option>
-						<option>20 min</option>
-						<option>30 min</option>
-					</select>
-				</div>
-				<div class="valor-conf">
-					<label>Horario de consulta: </label>
-					<input type="time"> - <input type="time">
-				</div>
-				<div class="valor-conf">
-					<label>Horario de comida: </label>
-					<input type="time"> - <input type="time">
-				</div>
-				<div class="valor-conf">
-					<label>Confirmacion por correo: </label>
-					<input type="checkbox">
-				</div>
-				<div class="valor-conf">
-					<label>Recordatorio de cita por correo: </label>
-					<div class="check"><input type="checkbox"><label>3 horas</label></div>
-					<div class="check"><input type="checkbox"><label>6 horas</label></div>
-					<div class="check"><input type="checkbox"><label>12 horas</label></div>
-					<div class="check"><input type="checkbox"><label>1 dia</label></div>
-				</div>	
+			<div class="botones-form">
+			<button class="button" id="guardar">
+				Guardar
+			</button>
+			<button class="button" id="limpiar">
+				Limpiar
+			</button>
 			</div>
-
-			<div class="tab2">
-				<div class="titulo-tab">Diagrama Odontologico</div>
-				<div class="valor-conf">
-					<label>Nombre del consultorio: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Codigo Postal: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Calle: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Num. Exterior: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Num. Interior: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Colonia: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Municipio/Delegacion: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Estado: </label>
-					<input>
-				</div>
-				<div class="valor-conf">
-					<label>Referencia de localizacion: </label>
-					<textarea></textarea>
-				</div>-->
-
-				<div class="botones-form">
-					<button class="button" id="guardar">
-						Guardar
-					</button>
-					<button class="button" id="limpiar">
-						Limpiar
-					</button>
-
-				</div>
-			</div>
+		</div>
 	</seccion>

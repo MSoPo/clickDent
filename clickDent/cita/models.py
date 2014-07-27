@@ -6,8 +6,9 @@ from paciente.models import Paciente
 
 # Create your models here.
 class Cita (models.Model):
-	hora_inicio=models.DateTimeField()
-	hora_fin=models.DateTimeField()
+	hora_inicio=models.TimeField()
+	hora_fin=models.TimeField()
+	fecha=models.DateField()
 	recomendaciones=models.CharField(max_length=500, null=True, blank=True)
 	observaciones=models.CharField(max_length=500, null=True, blank=True)
 	tratamiento=models.ForeignKey(Tratamiento, null=True, blank=True)

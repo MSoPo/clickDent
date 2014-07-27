@@ -12,6 +12,10 @@ clickDent.Views.Menu = Backbone.View.extend({
 	initialize: function() {
 		console.log('Inicializada la vista del menu');
 		this.altoMenu = $('#menu').height();
+		templateSelect = _.template($('#option-template').html());
+		templateEscuela = _.template($('#formacion-template').html());
+		templateTratamiento = _.template($('#tratamientos-template').html());
+		templatePaciente = _.template($('#optionList-template').html());
 		this.establearAncho();
 	},
 
@@ -53,19 +57,21 @@ clickDent.Views.Menu = Backbone.View.extend({
         if (heightMenu > heightContenido){
         	 $('#contenido').height(heightMenu);
         	 $('#menu').height(heightMenu);
+        	 $('#backpopup').height(heightMenu);
         }else{
         	$('#menu').height(heightContenido);
+        	$('#backpopup').height(heightContenido);
         }
 	},
 
 	redireccionarRouter: function (id){
 
 		if(id=='configuracion'){
-			url = '/configuracion';
+			clickDent.app.navigate('configuracion/', {trigger : true });
         }else if(id=='miperfil'){
-        	url = '/miperfil';
+        	clickDent.app.navigate('miperfil/', {trigger : true });
         }else if(id=='tratamientos'){
-        	url = '/tratamientos';
+        	clickDent.app.navigate('tratamientos/', {trigger : true });
         }else if(id=='pagos'){
         	url = '/pagosPendientes';
         }else if(id=='paciente'){
@@ -74,6 +80,8 @@ clickDent.Views.Menu = Backbone.View.extend({
         	url = '/calendario';
         }else if(id=='inicio'){
         	clickDent.app.navigate('home/', {trigger : true});
+        }else if(id=='cita'){
+        	clickDent.app.navigate('cita/', {trigger : true});
         }
 
 	}

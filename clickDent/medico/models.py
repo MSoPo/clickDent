@@ -1,10 +1,10 @@
 from django.db import models
-from catalogo.models import Especialidad
+from catalogo.models import Especialidad, Planes
 from direccion.models import Direccion
 from django.contrib.auth.models import User
 
 class Medico (models.Model):
-	nombre=models.CharField(max_length=50)
+	nombre=models.CharField(max_length=50, unique=True)
 	ape_paterno=models.CharField(max_length=50)
 	ape_materno=models.CharField(max_length=50, null=True, blank=True)
 	num_cedula=models.CharField(max_length=50, null=True, blank=True)
@@ -32,13 +32,16 @@ class Consultorio(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
-class CatConfiguracion(models.Model):
-	nombre=models.CharField(max_length=100)
-
-	def __unicode__(self):
-		return self.nombre
-
 class Configuracion(models.Model):
-	cat_configuracion=models.ForeignKey(CatConfiguracion)
 	medico=models.ForeignKey(Medico)
-	valor=models.CharField(max_length=100)
+	recordatorio_cita=models.CharField(max_length=100, null=True, blank=True)
+	confirmacion_correo=models.BooleanField()
+	hora_comida_inicio=models.TimeField(null=True, blank=True)
+	hora_comida_fin=models.TimeField(null=True, blank=True)
+	hora_consulta_inicio=models.TimeField()
+	hora_consulta_fin=models.TimeField()
+	duracion_consulta=models.IntegerField()
+	notificacion_mail=models.BooleanField()
+	plan=models.ForeignKey(Planes)
+	fecha_inicio=models.DateTimeField()
+	fecha_expira=models.DateTimeField(null=True, blank=True)

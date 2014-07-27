@@ -9,19 +9,36 @@
   	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
 </head>
 <body class="clickDent" id="clickDent">
+	<div class="backpopup" id="backpopup">
+		<div class="popcancelar" id="popcancelar">
+			<div class="popup" id="popup">
+				<div class="titulo">Agregar tratamiento</div>
+				<div class="contenido">
+					<div class="campo"><label>Nombre</label><input name="nombre" placeholder="Ejemp: Endodoncia" ></div>
+			  		<div class="campo"><label>Descripcion</label><input name="descripcion" placeholder="Ejemp: Descripcion del tratamiento"  ></div>
+			  		<div class="campo"><label>Precio Sugerido</label><input name="precio_sugerido"placeholder="Ejemp: 1300"></div>
+			  		<div class="campo"><label>Precio Especial</label><input name="precio_especial"placeholder="Ejemp: 1100" ></div>
+			  		<button>Guardar</button>
+			  		<button>Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="menu" id="menu">
 		<div class="cerra icon-cancel-circle" id="cerrar-menu"></div>
 		<div class="avatar">
-			<img class="imgAvatar" src="{{STATIC_URL}}img/usuario.png"></img>
+			<img class="imgAvatar" {% if medico.url_imagen %} src="{{STATIC_URL}}{{medico.url_imagen}}" 
+							{% else %} src="{{STATIC_URL}}img/usuario.png"
+							{% endif %}></img>
 		</div>
 		<div class="datosLogin">
-			username13
+			{{usuario.username}}
 		</div>
 		<nav>
 			<ul>
-				<li id="inicio" class="itemMenu">Inicio</li>
+				<li id="inicio" class="itemMenu seleccion">Inicio</li>
 				<li class="titulo">Citas</li>
-				<li id="citas" class="itemMenu">Agrgar Cita</li>
+				<li id="cita" class="itemMenu">Agrgar Cita</li>
 				<li id="calendario" class="itemMenu">Calendario</li>
 				<li class="titulo">Pacientes</li>
 				<li id="paciente" class="itemMenu">Agregar Paciente</li>
@@ -32,7 +49,7 @@
 				<li id="receta" class="itemMenu">Receta</li>
 				<li class="titulo">Perfil</li>
 				<li id="miperfil" class="itemMenu">Mi perfil</li>
-				<li id="configuracion" class="itemMenu seleccion">Configuracion</li>
+				<li id="configuracion" class="itemMenu">Configuracion</li>
 			</ul>
 		</nav>
 	</div>
@@ -49,6 +66,7 @@
 	</div>
 
 <script src="{{STATIC_URL}}js/vendor/jquery.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script> 
 <script src="{{STATIC_URL}}js/vendor/underscore.js"></script>
 <script src="{{STATIC_URL}}js/vendor/backbone.js"></script>
 <script src="{{STATIC_URL}}js/utils/utils.js"></script>
@@ -57,16 +75,94 @@
 <script src="{{STATIC_URL}}js/models/paciente.js"></script>
 <script src="{{STATIC_URL}}js/models/direccion.js"></script>
 <script src="{{STATIC_URL}}js/models/colonia.js"></script>
+<script src="{{STATIC_URL}}js/models/municipio.js"></script>
+<script src="{{STATIC_URL}}js/models/estado.js"></script>
+<script src="{{STATIC_URL}}js/models/medico.js"></script>
+<script src="{{STATIC_URL}}js/models/configuracion.js"></script>
+<script src="{{STATIC_URL}}js/models/consultorio.js"></script>
+<script src="{{STATIC_URL}}js/models/formacion.js"></script>
+<script src="{{STATIC_URL}}js/models/preciotratamiento.js"></script>
+<script src="{{STATIC_URL}}js/collections/medicos.js"></script>
 <script src="{{STATIC_URL}}js/collections/pacientes.js"></script>
 <script src="{{STATIC_URL}}js/collections/direcciones.js"></script>
 <script src="{{STATIC_URL}}js/collections/colonias.js"></script>
+<script src="{{STATIC_URL}}js/collections/municipios.js"></script>
+<script src="{{STATIC_URL}}js/collections/estados.js"></script>
+<script src="{{STATIC_URL}}js/collections/configuraciones.js"></script>
+<script src="{{STATIC_URL}}js/collections/consultorios.js"></script>
+<script src="{{STATIC_URL}}js/collections/formaciones.js"></script>
+<script src="{{STATIC_URL}}js/collections/preciotratamientos.js"></script>
 <script src="{{STATIC_URL}}js/views/test-menu.js"></script>
 <script src="{{STATIC_URL}}js/views/test-paciente.js"></script>
 <script src="{{STATIC_URL}}js/views/test-menu.js"></script>
 <script src="{{STATIC_URL}}js/views/test-inicial.js"></script>
+<script src="{{STATIC_URL}}js/views/configuracion.js"></script>
+<script src="{{STATIC_URL}}js/views/tratamientos.js"></script>
+<script src="{{STATIC_URL}}js/views/miperfil.js"></script>
+<script src="{{STATIC_URL}}js/views/popup.js"></script>
 <script src="{{STATIC_URL}}js/routers/router.js"></script>
 <script src="{{STATIC_URL}}js/main.js"></script>
 
+<!-- Templates Tabla Tratamientos -->
+  <script id="tratamientos-template" type="text/x-handlebars-template">
+	<tr id="tratamiento_<%= id %>">
+	  <input type="hidden" value="<%= id %>" />
+	  <td class="gris" ><%= nombre %></td>
+	  <td><%= descripcion %></td> 
+	  <td class="gris"><%= precio_sugerido %></td>
+	  <td><%= precio_especial %></td>
+	  <td class="gris"><div class="icon-pencil editar"></div><div class="icon-remove borrar"></div></td>
+	</tr>	
+  </script>
 
-</body>
+<!-- Templates Formacion -->
+  <script id="formacion-template" type="text/x-handlebars-template">
+    <div class="datoEscuela">
+    	<div>
+    		<div class="contenedorEscuela">
+    			<div class="icon-cancel-circle cerraEscuela"></div>
+    		</div>
+    		<label>Escuela: </label>
+    		<input name="escuela">
+    	</div>
+    	<div>
+    		<label>Titulo Obtenido: </label>
+    		<input name="titulo">
+    	</div>
+    </div>
+  </script>
+
+<!-- Templates  option Select-->
+  <script id="option-template" type="text/x-handlebars-template">
+  	<option value="<%= id %>"><%= valor %></option>
+  </script>
+
+<!-- Templates  option Select-->
+  <script id="optionList-template" type="text/x-handlebars-template">
+  	<option value="<%= id %> <%= nombre %> <%= ape_paterno %> <%= ape_materno %>">
+  </script>
+
+<script id="popup-cita-template" type="text/x-handlebars-template">
+  	<div class="titulo">Agregar cita</div>
+	<div class="contenido">
+		<div class="campo"><label>Fecha</label><input name="fecha" type="date" placeholder="Ejemp: 12/12/2012" ></div>
+  		<div class="campo"><label>Hora de Inicio</label><input type="time" name="hora_inicio" type="date" placeholder="Ejemp: 13:00" ></div>
+  		<div class="campo"><label>Hora de Fin</label><input type="time" name="hora_fin" type="date" placeholder="Ejemp: 13:30" ></div>
+  		<div class="campo"><label>Paciente</label>
+  			<input list="pacientes" name="paciente">
+			<datalist id="pacientes">
+
+			</datalist>
+  		</div>
+  		<div class="campo"><label>Recomendaciones</label><input name="recomendaciones" placeholder="Recomendaciones para el paciente" ></div>
+  		<div class="campo"><label>Notas personales</label><input name="notas" placeholder="Notas sobre la cita" ></div>
+  		<button id="gurdar-cita">Guardar</button>
+  		<button id="cancelar">Cancelar</button>
+	</div>
+  </script>
+
+
+  </body>
+
+
 </html>

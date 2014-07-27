@@ -2,48 +2,53 @@
 
 		<div class="tab2">
 			<div class="titulo-tab">Lista de Tratamientos y precios</div>
-			<div class="buscar-cita"><button class="button">Agregar Tratamiento</button></div>
+			<div class="busqueda tratamiento">
+				<div class="buscar">
+						<input placeholder="Ingresa nombre o descripcion" name ="buscar" />
+						<div class="icon-plus avanzado" id="agregarTratamiento" ></div>
+						<div class="icon-search" id="buscarTratamiento"></div>
+				</div>	
+			</div>
 			
 			</div>
 			<table>
 				<thead>
-				  <th>Tratamiento</th>
-				  <th>Descripcion</th> 
-				  <th>Precio Sugerido</th>
-				  <th>Precio Especial</th>
-				  <th>Editar / Borrar</th>
+		    	<th>Tratamiento</th>
+				<th>Descripcion</th> 
+				<th>Precio Sugerido</th>
+				<th>Precio Especial</th>
+				<th>Editar / Borrar</th>
 				</thead>
-				<tr>
-				  <td class="gris" >Endodoncia</td>
-				  <td>Extraccion X Y y descripcion cualquiera</td> 
-				  <td class="gris">$900.00</td>
-				  <td>$600.00</td>
-				  <td class="gris"><div class="icon-pencil"></div><div class="icon-remove"></div></td>
-				</tr>
-				<tr>
-				  <td class="gris"> Endodoncia</td>
-				  <td>Extraccion X Y y descripcion cualquiera del tamaño mas largo posible</td> 
-				  <td class="gris">$1200.00</td>
-				  <td>$600.00</td>
-				  <td class="gris"><div class="icon-pencil"></div><div class="icon-remove"></div></td>
-				</tr>
-				<tr>
-				  <td class="gris">Endodoncia</td>
-				  <td>Extraccion X Y y descripcion cualquiera</td> 
-				  <td class="gris">$900.00</td>
-				  <td>$600.00</td>
-				  <td class="gris"><div class="icon-pencil"></div><div class="icon-remove"></div></td>
-				</tr>
-				<tr>
-				  <td class="gris">Endodoncia</td>
-				  <td>Extraccion X Y y descripcion cualquiera</td> 
-				  <td class="gris">$900.00</td>
-				  <td>$600.00</td>
-				  <td class="gris"><div class="icon-pencil"></div><div class="icon-remove"></div></td>
-				</tr>
+				<tbody id="tratamiento">
+					
+				</tbody>
 			</table>
 
 		</div>
 
 	</seccion>
 
+	<!-- Templates  Tratamiento Select-->
+  <script id="popup-agregarTratamiento-template" type="text/x-handlebars-template">
+  	<div class="titulo">Agregar tratamiento</div>
+	<div class="contenido">
+		<input type="hidden" name="id" />
+		<div class="campo"><label>Nombre</label><input name="nombre" placeholder="Ejemp: Endodoncia" ></div>
+  		<div class="campo"><label>Descripcion</label><input name="descripcion" placeholder="Ejemp: Descripcion del tratamiento"  ></div>
+  		<div class="campo"><label>Precio Sugerido</label><input name="precio_sugerido"placeholder="Ejemp: 1300"></div>
+  		<div class="campo"><label>Precio Especial</label><input name="precio_especial"placeholder="Ejemp: 1100" ></div>
+  		<button id="gurdar-tratamiento">Guardar</button>
+  		<button id="cancelar">Cancelar</button>
+	</div>
+  </script>
+
+  <script id="popup-eliminarTratamiento-template" type="text/x-handlebars-template">
+  	<div class="titulo">¿Seguro que deseas borrar el tratamiento?</div>
+	<div class="contenido">
+  		<button id="eliminar-tratamiento">Borrar</button>
+  		<button id="cancelar">Cancelar</button>
+	</div>
+  </script>
+
+
+  

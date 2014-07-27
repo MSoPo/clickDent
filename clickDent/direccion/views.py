@@ -8,16 +8,25 @@ from rest_framework import filters
 
 class PaisViewSet(viewsets.ModelViewSet):
     queryset = Pais.objects.all()
-    serializer_class = PaisSerializer  
+    serializer_class = PaisSerializer 
+    filter_fields = ('id',) 
 
 class EstadoViewSet(viewsets.ModelViewSet):
     queryset = Estado.objects.all()
-    serializer_class = EstadoSerializer   
+    serializer_class = EstadoSerializer 
+    filter_fields = ('id', 'pais',)  
+
+class MunicipioViewSet(viewsets.ModelViewSet):
+    queryset = Municipio.objects.all()
+    serializer_class = MunicipioSerializer
+    filter_fields = ('id', 'estado',)  
 
 class ColoniaViewSet(viewsets.ModelViewSet):
     queryset = Colonia.objects.all()
-    serializer_class = ColoniaSerializer  
-    filter_backends = (filters.DjangoFilterBackend,)
+    serializer_class = ColoniaSerializer
+    filter_backends = (filters.SearchFilter,)
+    filter_fields = ('id', 'cp',)
+    search_fields = ('id', 'cp',)
 
 class DireccionViewSet(viewsets.ModelViewSet):
     queryset = Direccion.objects.all()

@@ -1,12 +1,14 @@
 from django.conf.urls import patterns, include, url
 
-from loginClick.views import home, done, logout, createUser, validaUsuario, validaCorreo, registrarse, validaLogin
+from loginClick.views import *
 from direccion.views import *
 from medico.views import *
 from paciente.views import *
 from catalogo.views import *
-
+from tratamiento.views import *
+from cita.views import *
 from django.contrib import admin
+
 admin.autodiscover()
 
 from rest_framework import routers
@@ -20,11 +22,16 @@ router.register(r'especialidad', EstadoCivilViewSet)
 router.register(r'estatus', OcupacionViewSet)
 router.register(r'pais', PaisViewSet)
 router.register(r'estado', EstadoViewSet)
+router.register(r'municipio', MunicipioViewSet)
 router.register(r'colonia', ColoniaViewSet)
 router.register(r'direccion', DireccionViewSet)
-router.register(r'consultorio', ConsultorioViewSet)
 router.register(r'formacion', FormacionViewSet)
-router.register(r'medico', MedicoViewSet)
+router.register(r'configuracion', ConfiguracionViewSet)
+router.register(r'consultorio', ConsultorioViewSet)
+router.register(r'preciotratamiento', PrecioTratamientoViewSet)
+router.register(r'cita', CitaViewSet)
+
+
 
 
 
@@ -52,7 +59,15 @@ urlpatterns = patterns('',
     url(r'^tratamientos/', tratamientos, name="tratamientos"),
     url(r'^pagosPendientes/', pagosPendientes, name="pagosPendientes"),
     url(r'^home/', home, name="home"),
+    url(r'^actualizarFormacion/', actualizarFormacion, name="actualizarFormacion"),
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^rest/medico/$', MedicoList.as_view()),
+    url(r'^rest/medico/(?P<pk>[0-9]+)/$', MedicoDetail.as_view()),
+    url(r'^rest/formacion/$', FormacionList.as_view()),
+    url(r'^actualizarPerfil/$', actualizarPerfil),
+    url(r'^cambiarContrasena/$', cambiarContrasena),
+    url(r'^actualizarPlan/$', actualizarPlan),
+    
 )
 
