@@ -1,26 +1,31 @@
-<seccion class="tabs">
+<seccion class="tabs configuracion">
 	<div class="contenidos-tabs">
 		<div class="tab2">
 			<div class="titulo-tab">Datos Medico</div>
 			<div class="valor-conf">
 			<label>Nombre: </label>
-				<input name="nombre" value="{{ medico.nombre }}">
+				<input name="nombre" value="{{ medico.nombre }}" class="alfanumerico">
+				<div class="error">El nombre no es valido (minimo 3 letras)</div>
 			</div>
 			<div class="valor-conf">
 				<label>Apellido Paterno: </label>
-				<input name="ape_paterno" value="{{ medico.ape_paterno }}">
+				<input name="ape_paterno" value="{{ medico.ape_paterno }}" class="alfanumerico">
+				<div class="error">El apellido no es valido (minimo 3 letras)</div>
 			</div>
 			<div class="valor-conf">
 				<label>Apellido Materno: </label>
-				<input name="ape_materno" value="{{ medico.ape_materno }}">
+				<input name="ape_materno" {% if medico.ape_materno %} value="{{ medico.ape_materno }}" {% endif %} class="alfanumericonor">
+				<div class="error">El apellido no es valido </div>
 			</div>
 			<div class="valor-conf">
 				<label>Num. Cedula: </label>
-				<input name="num_cedula" value="{{ medico.num_cedula }}">
+				<input name="num_cedula" {% if medico.num_cedula %} value="{{ medico.num_cedula }}" {% endif %}  class="alfanumericonor">
+				<div class="error">El Num. Cedula no es valido (verifique simbolos)</div>
 			</div>
 			<div class="valor-conf">
 				<label>Declaracion: </label>
-				<textarea name="declaracion">{{ medico.declaracion }}</textarea>
+				<textarea class="alfanumericonor" name="declaracion" {% if medico.declaracion %} value="{{ medico.declaracion }}" {% endif %} > </textarea>
+				<div class="error">La Declaracion no es valido (verifique simbolos)</div>
 			</div>
 			<div class="valor-conf">
 				<label>Especialidad: </label>
@@ -61,10 +66,10 @@
 
 					<div class="datoEscuela">
 						<div>
-							<label>Escuela: </label><input name="escuela" > 
+							<label>Escuela: </label><input name="escuela"> 
 						</div>
 						<div>
-							<label>Titulo Obtenido: </label><input name="titulo" >
+							<label>Titulo Obtenido: </label><input name="titulo">
 						</div>
 					</div>
 
@@ -120,23 +125,39 @@
 			<div class="titulo-tab">Datos Consultorio</div>
 			<div class="valor-conf">
 				<label>Nombre del consultorio: </label>
-				<input value="{{consultorio.nombre}}" name="consultorio-nombre" />
+				<input value="{{consultorio.nombre}}" name="consultorio-nombre" class="alfanumericonor"/>
+				<div class="error">El nombre del consultorio no es valido (verifique simbolos)</div>
+			</div>
+			<!-- Pendiente en el modelo y en la BD -->
+			<div class="valor-conf">
+				<label>Num. Emergencias: </label>
+				<input name="num_emergencias" value="{{consultorio.num_emergencias}}"  class="validatelefono">
+				<div class="error">Telefono no valido ( 55-12345678 )</div>
+			</div>
+			<div class="valor-conf">
+				<label>Num. Telefono: </label>
+				<input name="num_telefono" value="{{consultorio.num_telefono}}"  class="validatelefono">
+				<div class="error">Telefono no valido ( 55-12345678 )</div>
 			</div>
 			<div class="valor-conf">
 				<label>Codigo Postal: </label>
-				<input id="cp" value="{{consultorio.direccion.colonia.cp}}">
+				<input id="cp" value="{{consultorio.direccion.colonia.cp}}" class="validaCP" name="cp">
+				<div class="error">Codigo postal no valido ( 73310 )</div>
 			</div>
 			<div class="valor-conf">
 				<label>Calle: </label>
-				<input name="calle" value="{{consultorio.direccion.calle}}">
+				<input name="calle" value="{{consultorio.direccion.calle}}"  class="alfanumerico">
+				<div class="error">La calle no es valido (verifique simbolos)</div>
 			</div>
 			<div class="valor-conf">
 				<label>Num. Exterior: </label>
-				<input name="num_exterior" value="{{consultorio.direccion.num_exterior}}">
+				<input name="num_exterior" value="{{consultorio.direccion.num_exterior}}"  class="alfanumericonor">
+				<div class="error">El Num. Exterior no es valido (verifique simbolos)</div>
 			</div>
 			<div class="valor-conf">
 				<label>Num. Interior: </label>
-				<input name="num_interior" value="{{consultorio.direccion.num_interior}}">
+				<input name="num_interior" value="{{consultorio.direccion.num_interior}}" class="alfanumericonor">
+				<div class="error">El Num. Interior no es valido (verifique simbolos)</div>
 			</div>
 			<div class="valor-conf">
 				<label>Colonia: </label>
@@ -158,7 +179,21 @@
 			</div>
 			<div class="valor-conf">
 				<label>Referencia de localizacion: </label>
-				<textarea name ="referencias">{{consultorio.direccion.referencias}}</textarea>
+				<textarea name ="referencias" class="alfanumericonor">{{consultorio.direccion.referencias}}</textarea>
+				<div class="error">La referencia no es valida (verifique simbolos)</div>
+			</div>
+
+			<div class="valor-conf">
+				<form id="formularioConsultorio" method="POST" action="/actualizarConsultorio/" > 
+					<label>Logo Consultorio: </label>
+						<input type="file" id="files" name="file" />
+						<output id="list">
+							<img class="imgConsultorio" {% if consultorio.url_imagen %} src="{{STATIC_URL}}{{consultorio.url_imagen}}" 
+							{% else %} src="{{STATIC_URL}}img/usuario.png"
+							{% endif %}></img>
+						</output>
+						{% csrf_token %}
+				</form>
 			</div>
 
 			<div class="botones-form">
@@ -168,3 +203,33 @@
 			</div>
 		</div>
 	</seccion>
+
+	<script type="text/javascript">
+
+	function archivoConsultorio(evt) {
+                  var files = evt.target.files; // FileList object
+             
+                  // Obtenemos la imagen del campo "file".
+                  for (var i = 0, f; f = files[i]; i++) {
+                    //Solo admitimos imágenes.
+                    if (!f.type.match('image.*')) {
+                        continue;
+                    }
+             
+                    var reader = new FileReader();
+             
+                    reader.onload = (function(theFile) {
+                        return function(e) {
+                          // Insertamos la imagen
+                         document.getElementById("list").innerHTML = ['<img class="imgConsultorio" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+                        };
+
+                    })(f);
+             
+                    reader.readAsDataURL(f);
+                  }
+              }
+             
+              document.getElementById('files').addEventListener('change', archivoConsultorio, false);
+
+	</script>

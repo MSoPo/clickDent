@@ -1,3 +1,4 @@
+
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import *
@@ -19,7 +20,7 @@ class FormacionSerializer(serializers.HyperlinkedModelSerializer):
 class ConsultorioSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Consultorio
-        fields = ('nombre',) 
+        fields = ('nombre','num_telefono','num_emergencias') 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

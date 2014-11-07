@@ -17,6 +17,8 @@ class Cita (models.Model):
 	medico=models.ForeignKey(Medico)
 	paciente=models.ForeignKey(Paciente)
 	origen=models.ForeignKey(Origen)
+	costo=models.DecimalField(max_digits=8, decimal_places=2)
+
 
 	def __unicode__(self):
 		return u'%s - %s' % (self.hora_inicio, self.hora_fin)

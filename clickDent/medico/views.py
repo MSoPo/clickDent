@@ -56,7 +56,9 @@ class MedicoList (mixins.ListModelMixin,
     serializer_class = MedicoSerializer
 
     def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+        queryset = Medico.objects.get(usuario = request.user)
+        serializer = MedicoSerializer(queryset)
+        return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
@@ -84,13 +86,24 @@ class ConfiguracionViewSet(viewsets.ModelViewSet):
     serializer_class = ConfiguracionSerializer
 
 
-def datosIniciales(request):
+def sistemaDental(request):
     """Vista inicial para el login"""
-    print request.user
-    usuario = User.objects.get(username=request.user)
-    medico = Medico.objects.get(usuario=usuario.id)
-    pacientes = Paciente.objects.filter(medico=medico)
-    return render_to_response('datosIniciales.html', {'pacientes' : pacientes, 'usuario' : usuario , 'medico' : medico} ,  RequestContext(request))
+
+    nuevoUsuario = False
+
+    if request.user.is_authenticated():
+        usuario = User.objects.get(username=request.user)
+
+        try:
+            medico = Medico.objects.get(usuario=usuario.id)
+            pacientes = Paciente.objects.filter(medico=medico)
+        except:
+            nuevoUsuario = True            
+            return render_to_response('datosIniciales.html', {'usuario' : usuario , 'nuevoUsuario' : nuevoUsuario} ,  RequestContext(request))
+
+        return render_to_response('datosIniciales.html', {'pacientes' : pacientes, 'usuario' : usuario , 'medico' : medico, 'nuevoUsuario' : nuevoUsuario} ,  RequestContext(request))
+    else:
+        return render_to_response('login.html', RequestContext(request))
 
 def actualizarFormacion(request):
     """Eliminar y volver a agregar las nuevas formaciones"""

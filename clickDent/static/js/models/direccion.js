@@ -1,6 +1,6 @@
 clickDent.Models.Direccion = Backbone.Model.extend({
 	defaults : {
-		id:'',
+		id: undefined,
 		colonia : '',
 		calle : '',
 		num_exterior : '',

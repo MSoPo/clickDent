@@ -24,13 +24,12 @@ class MunicipioViewSet(viewsets.ModelViewSet):
 class ColoniaViewSet(viewsets.ModelViewSet):
     queryset = Colonia.objects.all()
     serializer_class = ColoniaSerializer
-    filter_backends = (filters.SearchFilter,)
     filter_fields = ('id', 'cp',)
-    search_fields = ('id', 'cp',)
 
 class DireccionViewSet(viewsets.ModelViewSet):
     queryset = Direccion.objects.all()
     serializer_class = DireccionSerializer
+    filter_fields = ('id', )
 
 def direccion(request):
     """Vista inicial para el login"""

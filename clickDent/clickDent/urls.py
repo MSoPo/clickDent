@@ -18,8 +18,8 @@ router.register(r'paciente', PacienteViewSet)
 router.register(r'estadocivil', EspecialidadViewSet)
 router.register(r'ocupacion', EstatusViewSet)
 router.register(r'origen', OrigenViewSet)
-router.register(r'especialidad', EstadoCivilViewSet)
-router.register(r'estatus', OcupacionViewSet)
+router.register(r'estadoCivil', EstadoCivilViewSet)
+router.register(r'estatus', EstatusViewSet)
 router.register(r'pais', PaisViewSet)
 router.register(r'estado', EstadoViewSet)
 router.register(r'municipio', MunicipioViewSet)
@@ -29,7 +29,9 @@ router.register(r'formacion', FormacionViewSet)
 router.register(r'configuracion', ConfiguracionViewSet)
 router.register(r'consultorio', ConsultorioViewSet)
 router.register(r'preciotratamiento', PrecioTratamientoViewSet)
+router.register(r'tratamiento',TratamientoViewSet)
 router.register(r'cita', CitaViewSet)
+router.register(r'pago', PagoTratamientoViewSet)
 
 
 
@@ -39,8 +41,14 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'clickDent.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^$', home, name='home'),
+    
+    #URL PAGINAS ESTATISCAS
+    url(r'^$', index, name='index'),
     url(r'^registrarse/', registrarse, name='registrarse'),
+    url(r'^contactanos/', contactanos, name='contactanos'),
+    #url(r'^login/', login, name='login'),
+    url(r'^preguntas/', preguntas, name='preguntas'),
+
     url(r'^done/$', done, name='done'),
     url(r'^logout/$', logout, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
@@ -50,10 +58,11 @@ urlpatterns = patterns('',
     url(r'^validaCorreo/', validaCorreo, name="validaCorreo"),
     url(r'^validaLogin/', validaLogin, name="validaLogin"),
     url(r'^direccion/', direccion, name="direccion"),
-    url(r'^datosIniciales/', datosIniciales, name="datosIniciales"),
+    url(r'^sistemaDental/', sistemaDental, name="sistemaDental"),
     url(r'^configuracion/', configuracion, name="configuracion"),
     url(r'^icon/', icon, name="icon"),
     url(r'^miperfil/', miperfil, name="miperfil"),
+    url(r'^receta/', receta, name="receta"),
     url(r'^paciente/', paciente, name="paciente"),
     url(r'^calendario/', calendario, name="calendario"),
     url(r'^tratamientos/', tratamientos, name="tratamientos"),
@@ -65,9 +74,13 @@ urlpatterns = patterns('',
     url(r'^rest/medico/$', MedicoList.as_view()),
     url(r'^rest/medico/(?P<pk>[0-9]+)/$', MedicoDetail.as_view()),
     url(r'^rest/formacion/$', FormacionList.as_view()),
+    url(r'^rest/citasCalendario/$', CitasCalendarioList.as_view()),
     url(r'^actualizarPerfil/$', actualizarPerfil),
+    url(r'^actualizarConsultorio/$', actualizarConsultorio),
     url(r'^cambiarContrasena/$', cambiarContrasena),
     url(r'^actualizarPlan/$', actualizarPlan),
-    
+    url(r'^buscarPaciente/', buscarPaciente, name="buscarPaciente"),
+    url(r'^validarDisponibilidad/', validarDisponibilidad, name="validarDisponibilidad"),
+    url(r'^citasPorFinalizar/', citasPorFinalizar, name="citasPorFinalizar"),
 )
 

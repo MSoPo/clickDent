@@ -1,16 +1,18 @@
-<seccion class="tabs">
+<seccion class="tabs perfil">
 		<div class="contenidos-tabs">
 
 			<div class="tab2">
 				<div class="titulo-tab">Mi Perfil</div>
-				<form method="POST" action="/actualizarPerfil/"  enctype='multipart/form-data' id="formulario">
+				<form method="POST" action="/actualizarPerfil/"  id="formulario">
 				<div class="valor-conf">
 					<label>Usuario: </label>
-					<input value="{{usuario.username}}" name="usuario">
+					<input value="{{usuario.username}}" name="usuario" class="campoRequerido">
+					<div class="error">El usuario no es valido</div>
 				</div>
 				<div class="valor-conf">
 					<label>Correo eletronico: </label>
-					<input value="{{usuario.email}}" name="correo">
+					<input value="{{usuario.email}}" name="correo" class="validaCorreo">
+					<div class="error">El correo no es valido</div>
 				</div>
 				<div class="valor-conf">
 					<label>Avatar: </label>
@@ -29,15 +31,18 @@
 				<div class="titulo-tab">Cambiar Contraseña</div>
 				<div class="valor-conf">
 					<label>Contraseña Actual: </label>
-					<input id="actual" type="password">
+					<input id="actual" type="password" name="actual" class="validaCampoPass">
+					<div class="error">Contraseña incorrecta</div>
 				</div>
 				<div class="valor-conf">
 					<label>Nueva Contraseña: </label>
-					<input type="password">
+					<input type="password" name="nueva" class="validaCampoPass">
+					<div class="error">La nueva contraseña no es valiad (minimo 6 caracteres)</div>
 				</div>
 				<div class="valor-conf">
 					<label>Confirmar Contraseña: </label>
-					<input id="nueva" type="password">
+					<input id="nueva" type="password" name="confirmacion" class="validaCampoConfirm">
+					<div class="error">Laconfirmacion es incorrecta</div>
 				</div>
 			</div>
 

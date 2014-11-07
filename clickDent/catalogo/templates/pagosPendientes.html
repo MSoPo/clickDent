@@ -4,9 +4,9 @@
 			<div class="titulo-tab">Lista de Pagos</div>
 			<div class="buscar-cita">
 				<div class="busca-pago">
-				<label>Buscar participante:</label><input>
+				<label>Buscar participante:</label><input id="inputBuscar">
 				</div>
-				<button class="button">Buscar</button></div>
+				<button class="button" id="buscarPagos">Buscar</button></div>
 
 			</div>
 			<table class="pagos">
@@ -17,36 +17,30 @@
 				  <th>Detalles</th>
 				  <th>Pagar</th>
 				</thead>
-				<tr>
-				  <td class="gris" >MSOSA01</td>
-				  <td>Miguel Angel Sosa Posadas</td> 
-				  <td class="gris">$900.00</td>
-				  <td><div class="icon-search"></div></td>
-				  <td class="gris"><div class="icon-coin"></div></td>
-				</tr>
-				<tr>
-				  <td class="gris" >MSOSA01</td>
-				  <td>Miguel Angel Sosa Posadas</td> 
-				  <td class="gris">$900.00</td>
-				  <td><div class="icon-search"></div></td>
-				  <td class="gris"><div class="icon-coin"></div></td>
-				</tr>
-				<tr>
-				  <td class="gris" >MSOSA01</td>
-				  <td>Miguel Angel Sosa Posadas</td> 
-				  <td class="gris">$900.00</td>
-				  <td><div class="icon-search"></div></td>
-				  <td class="gris"><div class="icon-coin"></div></td>
-				</tr>
-				<tr>
-				  <td class="gris" >MSOSA01</td>
-				  <td>Miguel Angel Sosa Posadas</td> 
-				  <td class="gris">$900.00</td>
-				  <td><div class="icon-search"></div></td>
-				  <td class="gris"><div class="icon-coin"></div></td>
-				</tr>
+				<tbody id="listaPagos">
+					
+				</tbody>
 			</table>
 
 		</div>
 
 	</seccion>
+
+	<!-- Templates  Pagos Select-->
+	  <script id="popup-pagar-template" type="text/x-handlebars-template">
+	  	<div class="titulo">Realizar Pago</div>
+		<div class="contenido">
+			<input type="hidden" name="id" />
+			<div class="campo"><select id="lista_tratamientos">
+
+			</select></div>
+			<div class="campo"><label>Notas : </label><textarea id="notasRalizaPago" name="notas" placeholder="Ejemp: Primer abodo" class="alfanumericonor"  ></textarea>
+			<div class="error">Valide los simbolos utilazdos</div></div>
+	  		
+	  		<div class="campo"><label>Cantidad : </label><input id="pagadoRealizaPago" name="pagado" class="validaMoneda" placeholder="Ejemp: $ 0.00"  >
+	  		<div class="error">Formato de moneda no valido ($99,999.00)</div></div>
+	  		<div class="error" id="errorRealizaPago"></div>
+	  		<button id="realizar-pago">Pagar</button>
+	  		<button id="cancelar">Cancelar</button>
+		</div>
+	  </script>

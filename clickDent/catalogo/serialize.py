@@ -4,24 +4,24 @@ from .models import *
 class EspecialidadSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Especialidad
-        fields = ('nombre','descripcion',)
+        fields = ('id','nombre','descripcion',)
 
 class EstatusSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Estatus
-        fields = ('nombre',)
+        fields = ('id','nombre')
 
 class OrigenSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Origen
-        fields = ('nombre',)
+        fields = ('id','nombre',)
 
 class EstadoCivilSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = EstadoCivil
-        fields = ('nombre',)
+        fields = ('id','nombre',)
 
 class OcupacionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Ocupacion
-        fields = ('nombre',)
+        fields = ('id','nombre',)

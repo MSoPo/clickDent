@@ -5,6 +5,7 @@ clickDent.Models.PrecioTratamiento = Backbone.Model.extend({
 		descripcion : '',
 		precio_sugerido : '',
 		precio_especial : '',
+		medico : '',
 	},
 	
 	validate: function(attrs, options) {

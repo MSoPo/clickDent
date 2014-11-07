@@ -1,3 +1,9 @@
+#interaccion {
+	min-height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
 .clickDent {
 	font-family: "Open Sans", "Arial";
 }
@@ -38,6 +44,12 @@
 	margin: 0 auto;
 	display: block;
 }
+.clickDent .imgConsultorio { 
+	width: 100px;
+	height: 100px;
+	margin: 0 auto;
+	display: block;
+}
 
 .clickDent .datosLogin {
 	text-align: center;
@@ -48,10 +60,6 @@
 
 .clickDent .menu nav{
 	width: 100%;
-}
-
-.clickDent .menu nav ul{
-
 }
 
 .clickDent .menu nav ul li{
@@ -117,17 +125,26 @@
 
 .clickDent .notificaciones:hover,
 .clickDent .cont-menu:hover,
-.clickDent .cerra:hover
+.clickDent .cerra:hover,
+.clickDent .icono-acceso:hover
 {
 	opacity: .6;
 }
 
 .clickDent .notificaciones,
 .clickDent .cont-menu,
-.clickDent .cerra{
+.clickDent .cerra,
+.clickDent .icono-acceso
+{
+
 	padding: .5em;
 	cursor: pointer;
 	color: white;
+}
+
+#agregarCita
+{
+	padding-right: .9em;
 }
 
 .clickDent .cerra{
@@ -141,6 +158,10 @@
 	padding-left: 1em;
 }
 
+.clickDent .icono-acceso{
+	float: right;
+}
+
 .clickDent .cont-menu{
 	float: left;
 	border-right: solid 1px white;
@@ -149,7 +170,7 @@
 
 .busqueda {
 	text-align: center;
-	padding: 2em;
+	padding-top: 1em;
 }
 
 .busqueda label {
@@ -223,6 +244,7 @@
 
 .citap{
 	padding: 1em 0;
+	font-size: .8em;
 }
 
 .acciones {
@@ -268,6 +290,11 @@ label{
 	margin-right: 1em;
 }
 
+.notaImportante{
+	color: #888;
+	font-size: 0.7em;
+}
+
 .historial a{
 	margin-left: 1em;
 	margin-right: 1em;
@@ -296,6 +323,47 @@ label{
 	margin: 1em;
 	color: #363636;
 	font-size: 0.85em;
+}
+
+.citasPendientes {
+	font-size: 0.7em;
+	text-align: center;
+	width: 100%;
+	background: #e7ebd8 url("img/texture_cream.jpg");
+	height: 28%;
+	color: #8a9c9d;
+	position: absolute;
+	bottom: 0;
+}
+
+.citasPendientes h3 {
+	padding: .5em;
+	padding-bottom: 1em;
+	color: #0069aa;
+} 
+
+.finalizaTratamiento {
+	font-size: 0.8em;
+}
+
+.citaPendiente {
+	display: inline-block;
+	padding: .5em;
+	border-right: 1px solid #CCC;
+}
+
+.citaPendiente div{
+	margin: .3em;
+}
+
+.citasPendientes .citaPendiente:last-child {
+	border-right: none; 
+}
+
+.citasPendientes a {
+	font-size: 0.8em;
+	margin: .5em;
+  
 }
 
 .valor-conf label{
@@ -482,6 +550,15 @@ a:hover{
 	text-align: center;
 }
 
+.nocitas-calendario {
+	margin-top: 6em;
+	margin-bottom: 6em;
+}
+
+.nocitas-calendario:first-child {
+	margin-top: 4em;
+}
+
 .cita-seleccion{
 	border-bottom: 3px solid #f15d45;
 }
@@ -495,33 +572,38 @@ a:hover{
 	font-size: .8em;
 }
 
-table{
+.chico-negritas {
+	font-size: 0.9em;
+	font-weight: bold;
+}
+
+seccion.tabs table{
 	width: 90%;
 	margin: auto;
 	margin-top: 3em;
 	font-size: .8em;
 }
 
-thead{
+seccion.tabs thead{
 	font-size: .9em;
 	background-color: #22b0e6;
 	color: white;
 }
 
-tr{
+seccion.tabs tr{
 	border-bottom: 1px solid #8a9c9d;
 }
 
-td {
+seccion.tabs td {
 	padding: .5em;
 	color: #363636;
 }
 
-td.gris {
+seccion.tabs td.gris {
 	background-color: #EEE;
 }
 
-td div{
+seccion.tabs td div{
 	display: inline-block;
 	padding-left: .4em;
 	padding-right: .4em;
@@ -529,15 +611,15 @@ td div{
 	color: #005990;
 }
 
-td div:hover{
+seccion.tabs td div:hover{
 	color: gray;
 }
 
-td div:first-child{
+seccion.tabs td div:first-child{
 	border-right: 1px solid gray;
 }
 
-table.pagos td div{
+seccion.tabs table.pagos td div{
 	border-right: none;
 }
 
@@ -568,12 +650,10 @@ table.pagos td div{
 .popup {
 	width: 90%;
 	text-align: center;
-	position: fixed;
-	margin-top	: 1.5em;
+	margin-top	: 1em;
 	margin-left: 3%;
 	background-color: red;
 	border-radius: .5em;
-	padding: 1em;
 	background-color: #005990;
 	color: white;
 }
@@ -588,8 +668,9 @@ table.pagos td div{
 
 .popup div .campo {
 	display: block;
-	padding: 1em;
+	padding: .8em;
 	text-align: center;
+	overflow: hidden;
 }
 
 .popup .campo label {
@@ -600,7 +681,7 @@ table.pagos td div{
 	display: inline-block;
 }
 
-.popup .campo input, .popup .campo select{
+.popup .campo input, .popup .campo select, .popup .campo textarea{
 	width: 60%;
 	font-size: .8em;
 	color: #222 !important;
@@ -647,12 +728,189 @@ table.pagos td div{
   background-image: linear-gradient(top, #000000, #2b2b2b 5%, #434343 50%, #3e3e3e);
 }
 
+.popup .tratamientos{
+	display: none;
+}
+
+.popup #tratamiento-cita-quitar{
+	float: right;
+}
+
+.popup .campo a {
+	float: right;
+	font-size: .8em;
+	padding-right: 1em;
+	padding-bottom: .6em;
+}
+
+.popup .campo a div{
+	display: inline-block;
+	margin-left: .2em;
+}
+
+#listaPacientes td div:first-child{
+	border: none !important;
+}
+
+tr.detalle .campo {
+	display: block !important;
+	padding: 1em;
+}
+
+tr.detalle .campo label{
+	width: 40%;
+	text-align: left;
+	padding-left: 2em;
+	display: inline-block;
+	margin-right: 0 !important;
+}
+
+tr.detalle .campo div{
+	font-style: italic;
+	width: 50%;
+	text-align: left;
+	font-size: .85em;
+}
+
+tr.detalle table {
+	margin-top: 0;
+	width: 98%;
+	font-size: .85em;
+}
+
+tr.detalle thead {
+	background-color: #666;
+	color: #eee;
+}
+
+tr.detalle .tratamiento div{
+	width: 25%;
+}
+
+tr.detalle .tratamiento div:first-child{
+	width: 40%;
+}
+
+tr.detalle .tratamiento .oscuro{
+	display: block;
+	background-color: #DDD;
+	overflow: hidden;
+}
+
+tr.detalle .tratamiento .listaPagos div{
+	width: 34%;
+}
+
+tr.detalle .tratamiento .listaPagos .pagado{
+	width: 15%;
+}
+
+input[name="buscar"], 
+input#inputBuscar,
+.buscar-cita input[type="time"]{
+	font-size: .78em;
+}
+
+.valido {
+
+}
+
+.invalido {
+	border: solid 2px;
+	border-color: #f1816e;
+}
+
+span.requerido {
+	color: #4a5c5d;
+}
+
+.edicion {
+	text-align: center;
+}
+
+.edicion label{
+	width: 70%;
+}
+
+.edicion a {
+	float: left;
+	font-size: 1.3em;
+}
+
+.edicion a span{
+	font-size: .6em;
+	font-weight: bold;
+	font-family: Arial;
+	padding-left: .3em;
+}
+
+.edicion {
+	display: none;
+}
+
+#total {
+	width: 15%;
+	text-align: center;
+}
+
+#liquidacion {
+	width: 35%;
+	text-align: center;
+}
+
+.error {
+	color: #f1816e;
+	font-size: .8em;
+	font-weight: bold;
+}
+
+#errorCita{
+	display: none;
+}
+
+#campoDeuda, #campoTratamiento{
+	display: none;
+}
+
+.valor-conf .error{
+	text-align: center;
+	display: none;
+}
+
+.campo .error{
+	text-align: center;
+	display: none;
+}
+
+.remarcar {
+	font-weight: bold !important;
+	font-size: 1.1em !important;
+}
+
+.citasPendientes {
+	display: none;
+}
+
+.escritorio {
+	display: none;
+}
+
+.campoReceta input{
+	width: 100%;
+	font-size: .8em;
+	margin: .5em;
+	color: black;
+}
+
 @media screen and (min-width: 650px) {
+
+	.citasPendientes {
+		display: block;
+	}
 
 	.popup {
 		width: 70%;
 		margin-left: 15%;
-		margin-top: 2.5em;
 	}
 
 	.clickDent .cerra{
@@ -689,19 +947,24 @@ table.pagos td div{
 
 	.popcancelar {
 		width: 100%;
-		height: 100%;
 	}
-	
+
+	.nocitas-inicial {
+		margin-top: 3em;
+	}
 
 }
 
 
 @media screen and (min-width: 1030px) {
 
+	.escritorio{
+		display: inline-block;
+	}
+
 	.popup {
 		width: 60%;
 		margin-left: 20%;
-		margin-top: 3.5em;
 	}
 
 	.clickDent .imgAvatar {

@@ -9,7 +9,11 @@ var app = {
 	Models: {},
 	Views: {},
 	Collections: {},
-	Router: {}
+	Router: {},
+	Util: {
+		usuario : usuario,
+		nuevoUsuario : nuevoUsuario
+	}
 }
 
 window.clickDent = clickDent;

@@ -2,51 +2,27 @@
 
 		<div class="tab2">
 			<div class="titulo-tab">Calendario de Citas</div>
-
-			<div class="buscar-cita"><label>Fecha</label><input type="date"></div>
-			<div class="buscar-cita"><label>Hora</label><input type="time"></div>
-			<div class="buscar-cita"><button class="button">Buscar</button></div>
-
 			<div class="calendario">
 				<div class="citas-calendario">
 					<div class="fechas">
-						<div class="navegacion float-left"><a href=""><</a></div>
-						<div>Ayer</div>
-						<div class="cita-seleccion">Hoy</div>
-						<div>Mañana</div>
-						<div class="navegacion float-rigth"><a href="">></a></div>
+						<div id="atrasarFecha" class="navegacion float-left"><a href=""><</a></div>
+						<div id="fechaAnterios">Ayer</div>
+						<div  id="fechaActual" class="cita-seleccion">Hoy</div>
+						<div id="fechaSiguiente">Mañana</div>
+						<div id="adelantarFecha" class="navegacion float-rigth"><a href="">></a></div>
 					</div>
 					<div class="cita-calendario">
-						<div class="navegacion float-left"><</div>
+						<div id="atrasarCita" class="navegacion float-left"><</div>
 						<div class="cita-datos">
-							<div>
-								<div class="horario">
-								9:00 - 9:30
-								</div>
-								<div class="clavePacienet">
-									<a href="">MSOSA01</a>
-								</div>
-								<div class="nombre">Miguel Angel</div>
-								<div class="apellidos">Sosa Posadas</div>
-								<div class="historial">
-									<a href="#" >Historial</a>
-								</div>
-								<div class="observaciones">Se colocaran las observaciones pertinentes para la consulta</div>
-								<div class="recomendaciones">
-								Se debe de traer las siguientes cosas para la consulta
-								</div>
-								<div class="acciones">
-									<button class="button">Reprogramar</button>
-									<button class="button">Cancelar</button>
-									<button class="button">Editar</button>
-								</div>
+							<div id="datosCita">
+								
 							</div>
-						
+
 						</div>
-						<div  class="navegacion float-rigth"> ></div>
+						<div id="adelantarCita"  class="navegacion float-rigth"> ></div>
+					</div>
 				</div>
+
 			</div>
 
-		</div>
-
-	</seccion>
+		</seccion>

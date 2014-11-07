@@ -5,8 +5,10 @@
 	<title>ClickDent - {% block titulo %} {% endblock %} </title>
 	<title></title>
 	<link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css" />
-  	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/estilos2.css">
-  	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/estilos2.css">
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}jscal2/css/jscal2.css">
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}jscal2/css/border-radius.css">
 </head>
 <body class="clickDent" id="clickDent">
 	<div class="backpopup" id="backpopup">
@@ -15,11 +17,11 @@
 				<div class="titulo">Agregar tratamiento</div>
 				<div class="contenido">
 					<div class="campo"><label>Nombre</label><input name="nombre" placeholder="Ejemp: Endodoncia" ></div>
-			  		<div class="campo"><label>Descripcion</label><input name="descripcion" placeholder="Ejemp: Descripcion del tratamiento"  ></div>
-			  		<div class="campo"><label>Precio Sugerido</label><input name="precio_sugerido"placeholder="Ejemp: 1300"></div>
-			  		<div class="campo"><label>Precio Especial</label><input name="precio_especial"placeholder="Ejemp: 1100" ></div>
-			  		<button>Guardar</button>
-			  		<button>Cancelar</button>
+					<div class="campo"><label>Descripcion</label><input name="descripcion" placeholder="Ejemp: Descripcion del tratamiento"  ></div>
+					<div class="campo"><label>Precio Sugerido</label><input name="precio_sugerido"placeholder="Ejemp: 1300"></div>
+					<div class="campo"><label>Precio Especial</label><input name="precio_especial"placeholder="Ejemp: 1100" ></div>
+					<button>Guardar</button>
+					<button>Cancelar</button>
 				</div>
 			</div>
 		</div>
@@ -28,8 +30,8 @@
 		<div class="cerra icon-cancel-circle" id="cerrar-menu"></div>
 		<div class="avatar">
 			<img class="imgAvatar" {% if medico.url_imagen %} src="{{STATIC_URL}}{{medico.url_imagen}}" 
-							{% else %} src="{{STATIC_URL}}img/usuario.png"
-							{% endif %}></img>
+			{% else %} src="{{STATIC_URL}}img/usuario.png"
+			{% endif %}></img>
 		</div>
 		<div class="datosLogin">
 			{{usuario.username}}
@@ -38,11 +40,10 @@
 			<ul>
 				<li id="inicio" class="itemMenu seleccion">Inicio</li>
 				<li class="titulo">Citas</li>
-				<li id="cita" class="itemMenu">Agrgar Cita</li>
 				<li id="calendario" class="itemMenu">Calendario</li>
 				<li class="titulo">Pacientes</li>
 				<li id="paciente" class="itemMenu">Agregar Paciente</li>
-				<li id="paciente-consultar" class="itemMenu">Consultar Paciente</li>
+				<li id="buscarPaciente" class="itemMenu">Consultar Paciente</li>
 				<li id="pagos" class="itemMenu">Pagos Pendientes</li>
 				<li class="titulo">Consultorio</li>
 				<li id="tratamientos" class="itemMenu">Tratamientos</li>
@@ -58,6 +59,7 @@
 			<div id="btn-menu" class="cont-menu icon-menu"></div>
 			clickDent 
 			<div id="notificaciones" class="notificaciones icon-bell"></div>
+			<div id="agregarCita" class="icono-acceso icon-calendar"></div>
 		</header>
 		
 		<div id="interaccion">
@@ -65,43 +67,60 @@
 		</div>
 	</div>
 
-<script src="{{STATIC_URL}}js/vendor/jquery.js"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script> 
-<script src="{{STATIC_URL}}js/vendor/underscore.js"></script>
-<script src="{{STATIC_URL}}js/vendor/backbone.js"></script>
-<script src="{{STATIC_URL}}js/utils/utils.js"></script>
-<script src="{{STATIC_URL}}js/app.js"></script>
-<!--<script src="{{STATIC_URL}}js/models/usuario.js"></script>-->
-<script src="{{STATIC_URL}}js/models/paciente.js"></script>
-<script src="{{STATIC_URL}}js/models/direccion.js"></script>
-<script src="{{STATIC_URL}}js/models/colonia.js"></script>
-<script src="{{STATIC_URL}}js/models/municipio.js"></script>
-<script src="{{STATIC_URL}}js/models/estado.js"></script>
-<script src="{{STATIC_URL}}js/models/medico.js"></script>
-<script src="{{STATIC_URL}}js/models/configuracion.js"></script>
-<script src="{{STATIC_URL}}js/models/consultorio.js"></script>
-<script src="{{STATIC_URL}}js/models/formacion.js"></script>
-<script src="{{STATIC_URL}}js/models/preciotratamiento.js"></script>
-<script src="{{STATIC_URL}}js/collections/medicos.js"></script>
-<script src="{{STATIC_URL}}js/collections/pacientes.js"></script>
-<script src="{{STATIC_URL}}js/collections/direcciones.js"></script>
-<script src="{{STATIC_URL}}js/collections/colonias.js"></script>
-<script src="{{STATIC_URL}}js/collections/municipios.js"></script>
-<script src="{{STATIC_URL}}js/collections/estados.js"></script>
-<script src="{{STATIC_URL}}js/collections/configuraciones.js"></script>
-<script src="{{STATIC_URL}}js/collections/consultorios.js"></script>
-<script src="{{STATIC_URL}}js/collections/formaciones.js"></script>
-<script src="{{STATIC_URL}}js/collections/preciotratamientos.js"></script>
-<script src="{{STATIC_URL}}js/views/test-menu.js"></script>
-<script src="{{STATIC_URL}}js/views/test-paciente.js"></script>
-<script src="{{STATIC_URL}}js/views/test-menu.js"></script>
-<script src="{{STATIC_URL}}js/views/test-inicial.js"></script>
-<script src="{{STATIC_URL}}js/views/configuracion.js"></script>
-<script src="{{STATIC_URL}}js/views/tratamientos.js"></script>
-<script src="{{STATIC_URL}}js/views/miperfil.js"></script>
-<script src="{{STATIC_URL}}js/views/popup.js"></script>
-<script src="{{STATIC_URL}}js/routers/router.js"></script>
-<script src="{{STATIC_URL}}js/main.js"></script>
+	<script src="{{STATIC_URL}}js/vendor/jquery.js"></script>
+	<script src="{{STATIC_URL}}js/vendor/jquery.form.min.js"></script>
+	<script src="{{STATIC_URL}}js/vendor/underscore.js"></script>
+	<script src="{{STATIC_URL}}js/vendor/backbone.js"></script>
+
+	<script src="{{STATIC_URL}}jspdf/jspdf.js"></script>
+	<script src="{{STATIC_URL}}jspdf/jspdf.plugin.addimage.js"></script>
+
+	<script src="{{STATIC_URL}}jscal2/js/jscal2.js"></script>
+	<script src="{{STATIC_URL}}jscal2/js/lang/es.js"></script>
+	<script src="{{STATIC_URL}}js/utils/utils.js"></script>
+	<script src="{{STATIC_URL}}js/app.js"></script>
+	<!--<script src="{{STATIC_URL}}js/models/usuario.js"></script>-->
+	<script src="{{STATIC_URL}}js/models/paciente.js"></script>
+	<script src="{{STATIC_URL}}js/models/direccion.js"></script>
+	<script src="{{STATIC_URL}}js/models/colonia.js"></script>
+	<script src="{{STATIC_URL}}js/models/municipio.js"></script>
+	<script src="{{STATIC_URL}}js/models/estado.js"></script>
+	<script src="{{STATIC_URL}}js/models/medico.js"></script>
+	<script src="{{STATIC_URL}}js/models/configuracion.js"></script>
+	<script src="{{STATIC_URL}}js/models/consultorio.js"></script>
+	<script src="{{STATIC_URL}}js/models/formacion.js"></script>
+	<script src="{{STATIC_URL}}js/models/preciotratamiento.js"></script>
+	<script src="{{STATIC_URL}}js/models/cita.js"></script>
+	<script src="{{STATIC_URL}}js/models/tratamiento.js"></script>
+	<script src="{{STATIC_URL}}js/models/pago.js"></script>
+	<script src="{{STATIC_URL}}js/models/estatus.js"></script>
+	<script src="{{STATIC_URL}}js/collections/medicos.js"></script>
+	<script src="{{STATIC_URL}}js/collections/pacientes.js"></script>
+	<script src="{{STATIC_URL}}js/collections/direcciones.js"></script>
+	<script src="{{STATIC_URL}}js/collections/colonias.js"></script>
+	<script src="{{STATIC_URL}}js/collections/municipios.js"></script>
+	<script src="{{STATIC_URL}}js/collections/estados.js"></script>
+	<script src="{{STATIC_URL}}js/collections/configuraciones.js"></script>
+	<script src="{{STATIC_URL}}js/collections/consultorios.js"></script>
+	<script src="{{STATIC_URL}}js/collections/formaciones.js"></script>
+	<script src="{{STATIC_URL}}js/collections/preciotratamientos.js"></script>
+	<script src="{{STATIC_URL}}js/collections/citas.js"></script>
+	<script src="{{STATIC_URL}}js/collections/tratamientos.js"></script>
+	<script src="{{STATIC_URL}}js/collections/pagos.js"></script>
+	<script src="{{STATIC_URL}}js/collections/estatus.js"></script>
+	<script src="{{STATIC_URL}}js/views/menu.js"></script>
+	<script src="{{STATIC_URL}}js/views/paciente.js"></script>
+	<script src="{{STATIC_URL}}js/views/home.js"></script>
+	<script src="{{STATIC_URL}}js/views/configuracion.js"></script>
+	<script src="{{STATIC_URL}}js/views/tratamientos.js"></script>
+	<script src="{{STATIC_URL}}js/views/miperfil.js"></script>
+	<script src="{{STATIC_URL}}js/views/popup.js"></script>
+	<script src="{{STATIC_URL}}js/views/calendario.js"></script>
+	<script src="{{STATIC_URL}}js/views/pagos.js"></script>
+	<script src="{{STATIC_URL}}js/views/buscarPacientes.js"></script>
+	<script src="{{STATIC_URL}}js/views/receta.js"></script>
+	<script src="{{STATIC_URL}}js/routers/router.js"></script>
+	<script src="{{STATIC_URL}}js/main.js"></script>
 
 <!-- Templates Tabla Tratamientos -->
   <script id="tratamientos-template" type="text/x-handlebars-template">
@@ -112,6 +131,22 @@
 	  <td class="gris"><%= precio_sugerido %></td>
 	  <td><%= precio_especial %></td>
 	  <td class="gris"><div class="icon-pencil editar"></div><div class="icon-remove borrar"></div></td>
+	</tr>	
+  </script>
+
+<!-- Templates Tabla Pagos -->
+  <script id="pagos-template" type="text/x-handlebars-template">
+	<tr id="id_<%= id %>">
+	  <td class="gris" ><%= id %></td>
+	  <td><%= nombre %> <%= ape_paterno %> <%= ape_materno %></td> 
+	  <td class="gris">  $ <%= pendiente %> </td>
+	  <td><div class="icon-search"></div></td>
+	  <td class="gris"><div class="icon-coin"></div></td>
+	</tr>	
+	<tr class="detalle" style="display: none">
+		<td colspan="7">
+			
+		</td>
 	</tr>	
   </script>
 
@@ -139,24 +174,413 @@
 
 <!-- Templates  option Select-->
   <script id="optionList-template" type="text/x-handlebars-template">
-  	<option value="<%= id %> <%= nombre %> <%= ape_paterno %> <%= ape_materno %>">
+  	<option value="<%= id %> , <%= nombre %> <%= ape_paterno %> <%= ape_materno %>">
   </script>
 
 <script id="popup-cita-template" type="text/x-handlebars-template">
   	<div class="titulo">Agregar cita</div>
 	<div class="contenido">
-		<div class="campo"><label>Fecha</label><input name="fecha" type="date" placeholder="Ejemp: 12/12/2012" ></div>
-  		<div class="campo"><label>Hora de Inicio</label><input type="time" name="hora_inicio" type="date" placeholder="Ejemp: 13:00" ></div>
-  		<div class="campo"><label>Hora de Fin</label><input type="time" name="hora_fin" type="date" placeholder="Ejemp: 13:30" ></div>
-  		<div class="campo"><label>Paciente</label>
-  			<input list="pacientes" name="paciente">
-			<datalist id="pacientes">
-
-			</datalist>
+		<div class="campo">
+			<div id="calendar-container"></div>
+		</div>
+  		<div class="campo"><label>Duracion</label>
+  			<select id="duracion">
+  				<option value="10">10 min</option>
+  				<option value="20">20 min</option>
+  				<option value="30">30 min</option>
+  				<option value="45">45 min</option>
+  				<option value="60">1:00 hr</option>
+  				<option value="75">1:15 hrs</option>
+  				<option value="90">1:30 hrs</option>
+  				<option value="120">2:00 hrs</option>
+  				<option value="150">2:30 hrs</option>
+  				<option value="180">3:00 hrs</option>
+  			</select></div>
+  		<div class="campo" ><label>Paciente</label>
+  			<input list="pacientes" class="alfanumerico" placeholder="ingresa la clave del paciente" name="paciente" id="paciente-cita">
+			<datalist id="pacientes"></datalist>
+			<div class="error">Paciente incorrecto (seleccione un paciente de la lista)</div>
   		</div>
-  		<div class="campo"><label>Recomendaciones</label><input name="recomendaciones" placeholder="Recomendaciones para el paciente" ></div>
-  		<div class="campo"><label>Notas personales</label><input name="notas" placeholder="Notas sobre la cita" ></div>
+  		<div class="campo"><label>Recomendaciones</label>
+  			<textarea class="alfanumericonor" name="recomendaciones" placeholder="Recomendaciones para el paciente" ></textarea>
+  			<div class="error">Valide los simbolos utilazdos</div></div>	
+  		<div class="campo"><label>Notas personales</label>
+  			<textarea name="observaciones" class="alfanumericonor" placeholder="Notas sobre la cita" ></textarea>
+  			<div class="error">Valide los simbolos utilazdos</div></div>
+  		<div class="campo">
+  			<a href="#" id="tratamiento-cita">Tratamiento<div class="icon-aid"></div></a> 
+  			<div class="error">Seleccione un paciente</div>
+  		</div>
+  		<div class="tratamientos" id="tratmiento-cita-agregar">
+  			<a href="#" id="tratamiento-cita-quitar"><div class="icon-cancel-circle cerraEscuela"></div></a>
+	  		<div class="campo"><label>Tratamiento Actuales</label>
+	  		<select name="tratamiento" id="selectTratamiento">
+	  			<option value="-1">Seleccione un paciente</option>
+	  		</select></div>
+	  		<div class="campo"><a href="" id="nuevo-tratamiento">Nuevo Tratamiento</a>
+	  		</div>
+  		</div>
+  		<div class="tratamientos" id="tratmiento-cita-nuevo">
+  			<a href="#" id="tratamiento-cita-quitar"><div class="icon-cancel-circle cerraEscuela"></div></a>
+	  		<div class="campo"><label>Tratamiento</label>
+	  			<textarea name="descripcion" class="alfanumerico"  placeholder="Tratamiento a realizar" ></textarea>
+	  			<div class="error">Descripcion invalida para el tratamiento</div>
+	  		</div>
+	  		<!--<div class="campo"><label>Costo</label>
+	  			<input name="total_precio" value="$0.00" class="validaMoneda" placeholder="Ingrese el costo del tratamiento" />
+	  			<div class="error">Formato de moneda no valido ($99,999.00)</div>
+	  		</div>-->
+	  		<div class="campo"><a href="" id="actueles-tratamiento">Tratamientos Actueles</a></div>
+  		</div>
+  		<div class="error" id="errorCita">Ya existe una cita para esta fecha</div>
   		<button id="gurdar-cita">Guardar</button>
+  		<button id="cancelar">Cancelar</button>
+	</div>
+  </script>
+
+  <!--Template Base para la citas -->
+  <script id="principal-template" type="text/x-handlebars-template">
+		
+		<% if(cts.cita1.id) {%>
+			<div class="cita">
+				<input type="hidden" name="cita1" value="<%= cts.cita1.id %>" class="idCita" />
+				<div class="horario"><%= cts.cita1.hora_inicio %> - <%= cts.cita1.hora_fin %></div>
+				<div class="clavePaciente"><a href=""><%= cts.cita1.paciente.id %></a></div>
+				<div class="nombre"><%= cts.cita1.paciente.nombre %></div>
+				<div class="apellido"><%= cts.cita1.paciente.ape_paterno %> <%= cts.cita1.paciente.ape_materno %></div>
+				<% if (cts.cita1.paciente.ultimacita) {%>
+				<div class="ultima"><label>Ultima Cita:</label> <a href=""><%= cts.cita1.paciente.ultimacita %></a></div>
+				<% } %>
+				<% if (cts.cita1.tratamiento) {%>
+				<div class="ultimacita"><label>Tratamiento:</label> <a href=""><%= cts.cita1.tratamiento.nombre %></a>
+				<br><input class="notaImportante" type="checkbox" value="finalizar"><label class="notaImportante">Ultima cita del tratamiento</label></div>
+				<% } %>
+				<% if (cts.cita1.paciente.pago_pendiente) {%>
+				<div class="tratamientos-pendientes"><label>Pendiente:</label> <%= cts.cita1.paciente.pendiente %></div>
+				<% } %>
+				<div class="historial"><a href="#">Historial</a><a href="#" id="receta">Receta</a><a href="#" id="pagarCita">Pagar</a></div>
+				<div class="observaciones"><%= cts.cita1.observaciones %></div>
+				<div class="acciones">
+					<div class="reprogramar"><button class="button finalizarCita">Concluir</button></div>
+					<div class="reprogramar"><button class="button">Reprogramar</button></div>
+					<div class="cancelar"><button class="button">Cancelar</button></div>
+				</div>
+			</div>
+			<div class="proximas">
+				<% if(cts.cita2.id) {%>
+					<div class="citap">
+						<div class="horario"><%= cts.cita2.hora_inicio %> - <%= cts.cita2.hora_fin %></div>
+						<div class="clavePaciente"><%= cts.cita2.paciente.id %></div>
+						<div class="nombre"><%= cts.cita2.paciente.nombre %></div>
+						<div class="apellido"><%= cts.cita2.paciente.ape_paterno %> <%= cts.cita2.paciente.ape_materno %></div>
+						<div class="historial"><a href="#">Historial</a></div>
+					<!--<div class="citap">
+						<div class="horario">9:00 - 9:30</div>
+						<div class="clavePaciente"><a href="">Agregar cita</a></div>-->
+					</div>
+					<div class="citap">
+						<% if(cts.cita3.id) {%>
+							<div class="horario"><%= cts.cita3.hora_inicio %> - <%= cts.cita3.hora_fin %></div>
+							<div class="clavePaciente"><%= cts.cita3.paciente.id %></div>
+							<div class="nombre"><%= cts.cita3.paciente.nombre %></div>
+							<div class="apellido"><%= cts.cita3.paciente.ape_paterno %> <%= cts.cita2.paciente.ape_materno %></div>
+							<div class="historial"><a href="#">Historial</a></div>
+						<% } else { %>
+
+						<div class="horario"><span class="horaNuevaCita"><%= cts.cita2.hora_fin %></span> - 23:59 </div>
+						<div class=""> <a href="#" class='cargarCita'> Crear cita </a> </div>
+
+						<% } %>
+					</div>
+					<% } else { %>
+
+					<div class="horario nocitas-inicial"><span class="horaNuevaCita"><%= cts.cita1.hora_fin %></span> - 23:59 </div>
+					<div class="nocitas-inicial">No existen mas citas por hoy</div>
+					<div class="nocitas-inicial"> <a href="#" class='cargarCita'> Crear cita </a> </div>
+
+					<% } %>
+				</div>
+
+		<% } else { %>
+
+		<div class=""> No existen citas para hoy </div>
+		<div class=""> Comieza a agendar tus citas </div>
+		<div class=""> <a href="" class='cargarCita'> Crear cita </a> </div>
+
+		<% } %>
+
+		
+
+  </script>
+
+  	 <script id="calendario-template" type="text/x-handlebars-template">
+		<% if (cita.id) { %>  
+			<input type="hidden" name="cita" value="<%= cita.id %>" />	
+			<div class="horario">
+			<%= cita.hora_inicio %> - <%= cita.hora_fin %>
+			</div>
+			<div class="clavePacienet">
+				<a href=""><%= cita.paciente.id %></a>
+			</div>
+			<div class="nombre"><%= cita.paciente.nombre %></div>
+			<div class="apellidos"><%= cita.paciente.ape_paterno %> <%= cita.paciente.ape_materno %></div>
+			<div class="historial">
+				<a href="#" >Historial</a>
+			</div>
+			<% if (cita.observaciones) { %>
+			<div class="observaciones"><%= cita.observaciones %></div>
+			<% } %>
+			<% if (cita.recomendaciones) { %>
+				<div class="recomendaciones"><%= cita.recomendaciones %></div>
+			<% } %>
+			<% if (cita.tratamiento) { %>
+			<div class="tratamiento"><%= cita.tratamiento %></div>
+			<% } %>
+			<div class="tratamientos-pendientes"><label>Pendiente:</label> <%= cita.paciente.pendiente %></div>
+			<div class=""><label>Estado:</label> <%= utils.constantes.estatus[cita.estatus] %></div>
+			<div class="acciones">
+				<% if (cita.estatus != 3) { %>
+					<button class="button" id="reprogramarCalendario">Reprogramar</button>
+					<button class="button" id="cancelaCitaCalendario">Cancelar</button>
+				<% } %>
+				<button class="button" id="editarCitaCalendario">Editar</button>
+			</div>
+		<% } else { %>
+			<div class="nocitas-calendario"> No existen citas aun para esta fecha </div>
+			
+			<div class="nocitas-calendario"> <a href="#" class="cargarCita"> Crear cita </a> </div>
+			
+		<% }  %>
+	</script>
+
+	<!-- Templates Busca Pacientes -->
+  <script id="busca-pacientes-template" type="text/x-handlebars-template">
+	<tr id="id_<%= id %>">
+	  <td class="gris" ><%= id %></td>
+	  <td><%= nombre %> <%= ape_paterno %> <%= ape_materno %></td> 
+	  <td class="gris"><div class="icon-pencil"></div></td>
+	  <td><div class="icon-profile"></div></td>
+	  <td class="gris"><div class="icon-paste"></div></td>
+	  <td><div class="icon-calendar"></div></td>
+	  <td class="gris"><div class="icon-aid"></div></td>
+	</tr>
+	<tr class="detalle" style="display:none">
+		<td colspan="7">
+			
+		</td>
+	<tr>	
+  </script>
+
+	<script id="consultar-datospac-template" type="text/x-handlebars-template">
+
+		<div class="campo">
+			<label>Clave</label><div><%= id %></div>
+		</div>
+		<div class="campo">
+			<label>Nombre</label><div><%= nombre %></div>
+		</div>
+		<div class="campo">
+			<label>Apellidos</label><div><%= ape_paterno %> <%= paciente.ape_materno %></div>
+		</div>
+		<div class="campo">
+			<label>Fecha de Nacimiento</label><div><%= _.template.formatdate(fecha_nacimiento) %></div>
+		</div>
+		<div class="campo">
+			<label>Sexo</label><div><%= sexo %></div>
+		</div>
+
+		<% if (tel_casa) { %>
+    		<div class="campo">
+				<label>Telefono Casa</label><div><%= tel_casa %></div>
+			</div>
+		<% } %>
+		
+		<% if (tel_celular) { %>
+			<div class="campo">
+				<label>Telefono Celular</label><div><%= tel_celular %></div>
+			</div>
+		<% } %>
+
+		<% if (tel_otro) { %>
+			<div class="campo">
+				<label>Telefono Recados</label><div><%= tel_otro %></div>
+			</div>
+		<% } %>
+
+		<% if (correo) { %>
+			<div class="campo">
+				<label>Correo</label><div><%= correo %></div>
+			</div>
+		<% } %>
+
+		<% if (cp) { %>
+			<div class="campo">
+				<label>Direccion</label>
+				<div>
+					<%= calle %> 
+					<% if (num_exterior) { %>
+						# <%= num_exterior %> 
+					<% } %>
+					<% if (num_interior) { %>
+						<%= num_interior %>, 
+					<% } else { %>
+						,
+					<% } %>
+					<%= colonia %>, 
+					<%= municipio %>, 
+					<%= estado %>,
+					<%= cp %>
+				</div>
+			</div>
+		<% } %>
+		
+	</script>
+
+	<script id="consultar-citas-template" type="text/x-handlebars-template">
+
+		<table>
+			<thead>
+				<th>Fecha</th>
+				<th>Hora</th>
+				<th>Notas</th>
+				<th>Tratamiento</th>
+				<th>Estado</th>
+			</thead>
+			<tbody>
+				<% _.each(citas, function( cita ){ %>
+					<tr>
+						<td><%= _.template.formatdate(cita.fecha) %></td>
+						<td><%= cita.hora_inicio %></td>
+						<td><%= cita.observaciones %></td>
+						<td><%= cita.tratamiento %></td>
+						<td><%= cita.estatus %></td>
+					</tr>		 
+	            <% }); %>
+			</tbody>
+		</table>
+
+	</script>
+
+	<script id="consultar-tratamientos-template" type="text/x-handlebars-template">
+		<table>
+			<thead>
+				<th>Tratamiento</th>
+				<th>Fecha</th>
+				<th>Costo</th>
+				<th>Liquidacion</th>
+				<th>Estado</th>
+			</thead>
+			<tbody>
+				<% _.each(tratamientos, function( tratamiento ){ %>
+					<tr>
+						<td><%= tratamiento.descripcion %></td>
+						<td><%= _.template.formatdate(tratamiento.fecha_inicio) %></td>
+						<td><%= tratamiento.total_precio %></td>
+						<td><%= _.template.formatdate(tratamiento.fecha_liquidacion) %></td>
+						<td><%= tratamiento.estatus %></td>
+					</tr>		 
+	            <% }); %>
+			</tbody>
+		</table>
+
+	</script>
+
+	<script id="cita-pendientes-template" type="text/x-handlebars-template">
+
+		<h3>Citas sin finalizar</h3>
+		<% _.each(citas, function( cita, index ){ %>
+			<div <% if (index > 2) {%> class="escritorio citaPendiente" <% } else {  %> class="citaPendiente"  <% } %>  >
+				<input type="hidden" value=" <%= cita.pk %>" class="idCita"/>
+				<div class=""> <%= _.template.formatHora(cita.fields.hora_inicio) %> - <%= _.template.formatHora(cita.fields.hora_fin) %> </div>
+				<div class=""> <%= _.template.formatdate(cita.fields.fecha) %> </div>
+				<div class=""> <%= cita.fields.paciente[0] %> </div>
+				<div class=""> <%= cita.fields.paciente[1] %> <%= cita.fields.paciente[2] %> </div>
+				<% if (cita.fields.tratamiento) { %>
+				<div > <%= cita.fields.tratamiento[0] %> </div>
+				<div class="finalizaTratamiento"> <input class="chkTratamiento" type="checkbox"/> El tratamiento finalizo </div>
+				<% } %>
+				<div class=""> <a href="#" class="finalizarCitaPendiente">Realizada</a> <a href="#" class="cancelarCitaPendiente">Cancelada</a> <br> <a href="#" class="reprogramarPendientes">Reprogramar</a> </div>
+			</div>
+		<% }); %>
+
+	</script>
+
+	<script id="detalle-pagos-template" type="text/x-handlebars-template">
+
+		<div class="campo tratamiento">
+			<span class="oscuro"><div><%= tratamiento.descripcion %></div><div id="total">$ <%= tratamiento.total_precio %></div><div id="liquidacion">
+				<% if (tratamiento.fecha_liquidacion) { %>
+					Liquidacion:  <%= _.template.formatdate(tratamiento.fecha_liquidacion) %>
+				<% }else{ %>
+
+					Pendiente: $ <%= tratamiento.pendiente %>
+
+				<% } %>
+
+			</div></span>
+			<span class="listaPagos">
+			<% _.each(tratamiento.pagos, function( pago ){ %>
+				<div>Pago:  <%=  _.template.formatdateHH(pago.fecha) %></div><div><%= pago.descripcion %></div><div class="pagado">$ <%= pago.pagado %></div>			 
+	        <% }); %>
+	        </span>
+		</div>
+
+	</script>
+
+	<script id="popup-editarcita-template" type="text/x-handlebars-template">
+  	<div class="titulo">Editar cita</div>
+	<div class="contenido">
+  		<div class="campo"><label>Recomendaciones</label>
+  			<textarea class="alfanumericonor" name="recomendaciones" placeholder="Recomendaciones para el paciente" id="editarCita_recomendacions" ></textarea>
+  			<div class="error">Valide los simbolos utilazdos</div></div>	
+  		<div class="campo"><label>Notas personales</label>
+  			<textarea name="observaciones" class="alfanumericonor" placeholder="Notas sobre la cita" id="editarCita_observaciones"><%= observaciones %></textarea>
+  			<div class="error">Valide los simbolos utilazdos</div></div>
+  		
+  		<div class="tratamientos editarcita" id="tratmiento-cita-agregar">
+
+	  		<div class="campo"><label>Tratamiento Actuales</label>
+		  		<select name="tratamiento" id="editarcita_selectTratamiento">
+		  			<option value="-1" id="tratamiento">Seleccione un tratamiento</option>
+		  		</select></div>
+	  		<div class="campo"><a href="" id="nuevo-tratamiento">Nuevo Tratamiento</a>
+		  		</div>
+	  		</div>
+	  	</div>
+  		<div class="tratamientos" id="tratmiento-cita-nuevo">
+	  		<div class="campo"><label>Tratamiento</label>
+	  			<textarea name="descripcion" class="alfanumerico" id="tratamiento_descripcion"  placeholder="Tratamiento a realizar" ></textarea>
+	  			<div class="error">Descripcion invalida para el tratamiento</div>
+	  		</div>
+	  		<div class="campo"><a href="" id="actueles-tratamiento">Tratamientos Actueles</a></div>
+  		</div>
+  		<button id="editar-cita">Guardar</button>
+  		<button id="cancelar">Cancelar</button>
+	</div>
+  </script>
+
+  <script id="popup-reprogramarcita-template" type="text/x-handlebars-template">
+  	<input type="hidden" id="id_cita_reprograma" />
+  	<div class="titulo">Reprogramar cita</div>
+	<div class="contenido">
+  		<div class="campo">
+			<div id="calendar-container"></div>
+		</div>
+		<div class="campo"><label>Duracion</label>
+  			<select id="duracion-calendario">
+  				<option value="10">10 min</option>
+  				<option value="20">20 min</option>
+  				<option value="30">30 min</option>
+  				<option value="45">45 min</option>
+  				<option value="60">1:00 hr</option>
+  				<option value="75">1:15 hrs</option>
+  				<option value="90">1:30 hrs</option>
+  				<option value="120">2:00 hrs</option>
+  				<option value="150">2:30 hrs</option>
+  				<option value="180">3:00 hrs</option>
+  			</select>
+  		</div>
+  		<button id="reprogramar-cita">Guardar</button>
   		<button id="cancelar">Cancelar</button>
 	</div>
   </script>

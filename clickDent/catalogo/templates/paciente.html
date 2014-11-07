@@ -1,26 +1,41 @@
-	<seccion class="tabs">
+	<seccion class="tabs pacientes">
 		<div class="contenidos-tabs" id="section-paciente">
 
 			<div class="tab2">
 				<div class="titulo-tab">Datos del Paciente</div>
-				<div class="valor-conf">
-					<label>Nombre: </label>
-					<input name="nombre">
+				<div class="edicion valor-conf">
+					<a href="#" class="icon-undo"><span>Cancelar</span></a> <label> Clave del paciente :  <span class="requerido" id="calvePaciente">000001</span> </label>
 				</div>
 				<div class="valor-conf">
-					<label>Apellido Paterno: </label>
-					<input name="ape_paterno">
+					<label>Nombre<span class="requerido">*</span>: </label>
+					<input class="alfanumerico" name="nombre">
+					<div class="error">El nombre no es valido (minimo 3 letras)</div>
+				</div>
+				<div class="valor-conf">
+					<label>Apellido Paterno<span class="requerido">*</span>: </label>
+					<input class="alfanumerico" name="ape_paterno">
+					<div class="error">El apellido no es valido (minimo 3 letras)</div>
 				</div>	
 				<div class="valor-conf">
 					<label>Apellido Materno: </label>
-					<input name="ape_materno">
+					<input class="alfanumericonor" name="ape_materno">
+					<div class="error">El apellido no es valido </div>
 				</div>
 				<div class="valor-conf">
-					<label>Fecha de Nacimiento: </label>
-					<input name="fecha_nacimiento" type="Date">
+					<label>Fecha de Nacimiento<span class="requerido">*</span>: </label>
+					<input class="validaFecha" name="fecha_nacimiento" id="calendar-inputField" placeholder="yyyy-mm-dd" /><button id="calendar-trigger">...</button>
+					<script>
+					    Calendar.setup({
+					        trigger    : "calendar-trigger",
+					        inputField : "calendar-inputField",
+					        dateFormat : "%Y-%m-%d",
+					        onSelect   : function() { this.hide() }
+					    });
+					</script>
+					<div class="error">La fecha no es valida ( yyyy-mm-dd )</div>
 				</div>
 				<div class="valor-conf">
-					<label>Sexo: </label>
+					<label>Sexo<span class="requerido">*</span>: </label>
 					<div class="check"><input checked type="radio" name="sexo" value="M"><label>Masculino</label>
 					</div>
 					<div class="check"><input type="radio" name="sexo" value="F"><label>Femenino</label>
@@ -28,35 +43,43 @@
 				</div>
 				<div class="valor-conf">
 					<label>Telefono Casa: </label>
-					<input name="tel_casa">
+					<input name="tel_casa" placeholder="lada-numero (00-00000000)" class="validatelefono">
+					<div class="error">Telefono no valido ( 55-12345678 )</div>
 				</div>
 				<div class="valor-conf">
 					<label>Telefono Celular: </label>
-					<input name="tel_celular">
+					<input name="tel_celular" placeholder="lada-numero (00-00000000)" class="validatelefono">
+					<div class="error">Telefono no valido ( 55-12345678 )</div>
 				</div>
 				<div class="valor-conf">
 					<label>Telefono Recados: </label>
-					<input name="tel_otro">
+					<input name="tel_otro" placeholder="lada-numero (00-00000000)" class="validatelefono">
+					<div class="error">Telefono no valido ( 55-12345678 )</div>
 				</div>
 				<div class="valor-conf">
-					<label>Correo: </label>
-					<input name="correo">
+					<label>Correo<span class="requerido">*</span>: </label>
+					<input name="correo" class="validaCorreo" placeholder="correo@correo.com">
+					<div class="error">Correo no valido ( correo@correo.com )</div>
 				</div>
 				<div class="valor-conf">
-					<label>Codigo Postal: </label>
-					<input name="cp" id="cp">
+					<label>Codigo Postal<span class="requerido">*</span>: </label>
+					<input name="cp" id="cp" placeholder="73310 " class="validaCP">
+					<div class="error">Codigo postal no valido ( 73310 )</div>
 				</div>
 				<div class="valor-conf">
 					<label>Calle: </label>
-					<input name="calle">
+					<input class="alfanumericonor" name="calle">
+					<div class="error">La calle no es valido (verifique simbolos)</div>
 				</div>
 				<div class="valor-conf">
 					<label>Num. Exterior: </label>
-					<input name="num_exterior">
+					<input class="alfanumericonor" name="num_exterior">
+					<div class="error">El Num. Exterior no es valido (verifique simbolos)</div>
 				</div>
 				<div class="valor-conf">
 					<label>Num. Interior: </label>
-					<input name="num_interior">
+					<input name="num_interior" class="alfanumericonor">
+					<div class="error">El Num. Interior no es valido (verifique simbolos)</div>
 				</div>
 				<div class="valor-conf">
 					<label>Colonia: </label>
@@ -83,21 +106,20 @@
 					</select>
 				</div>
 				<div class="valor-conf">
+
 					<label>Estado Civil: </label>
 					<select name="estado_civil">
-						<option value="1">Casado</option>
-						<option value="2">Soltero</option>
-						<option value="3">Union Libre</option>
-						<option value="4">Divorsiado</option>
+						{% for dato in estadoCivil %}
+						<option value="{{ dato.id }}">{{ dato.nombre }}</option>
+						{% endfor %}
 					</select>
 				</div>
 			</div>
-			<input type="hidden" value="1" name="medico">
 			<div class="botones-form">
 			<button class="button" id="guardar">
 				Guardar
 			</button>
-			<button class="button" id="limpiar">
+			<button class="button noEdicion" id="limpiar">
 				Limpiar
 			</button>
 			</div>

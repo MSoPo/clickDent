@@ -32,11 +32,15 @@ def configuracion(request):
     medico = Medico.objects.get(usuario=usuario)
     formacion = Formacion.objects.filter(medico=medico)
     consultorio = Consultorio.objects.get(medico=medico)
-    consultorio.direccion = Direccion.objects.get(pk=consultorio.direccion.id);
-    consultorio.direccion.colonia = Colonia.objects.get(pk=consultorio.direccion.colonia.id);
-    consultorio.direccion.colonia.municipio = Municipio.objects.get(pk=consultorio.direccion.colonia.municipio.id);
-    consultorio.direccion.colonia.municipio.estado = Estado.objects.get(pk=consultorio.direccion.colonia.municipio.estado.id);
     configuracion = Configuracion.objects.get(medico=medico)
+   
+    print consultorio.direccion
+    if consultorio.direccion:
+        consultorio.direccion = Direccion.objects.get(pk=consultorio.direccion.id);
+        consultorio.direccion.colonia = Colonia.objects.get(pk=consultorio.direccion.colonia.id);
+        consultorio.direccion.colonia.municipio = Municipio.objects.get(pk=consultorio.direccion.colonia.municipio.id);
+        consultorio.direccion.colonia.municipio.estado = Estado.objects.get(pk=consultorio.direccion.colonia.municipio.estado.id);
+    
     return render_to_response('configuracion.html', {'configuracion' : configuracion, 'consultorio' : consultorio, 'formacion' : formacion, 'medico' : medico, 'especialidad' : especialidad}, context_instance=RequestContext(request))
 
 
@@ -74,4 +78,12 @@ def pagosPendientes(request):
 
 def home(request):
     """Vista inicial para el login"""
-    return render_to_response('home.html', RequestContext(request))    
+    return render_to_response('home.html', RequestContext(request))  
+
+def buscarPaciente(request):
+  """Vista inicial para el login"""
+  return render_to_response('buscarPaciente.html', RequestContext(request)) 
+
+def receta(request):
+  """Vista inicial para el login"""
+  return render_to_response('receta.html', RequestContext(request)) 

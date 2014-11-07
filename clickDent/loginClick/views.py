@@ -9,7 +9,7 @@ from django.utils import simplejson
 from medico.models import *
 import time
 from django.conf import settings
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 
 from social_auth import __version__ as version
 
@@ -24,6 +24,19 @@ def home(request):
 def registrarse(request):
     """Vista inicial para el login"""
     return render_to_response('registrarte.html', {'version': version}, RequestContext(request))
+
+def index(request):
+    """Vista inicial para el login"""
+    return render_to_response('index.html', {'version': version}, RequestContext(request))
+
+def contactanos(request):
+    """Vista inicial para el login"""
+    return render_to_response('contactanos.html', {'version': version}, RequestContext(request))
+
+def preguntas(request):
+    """Vista inicial para el login"""
+    return render_to_response('preguntas.html', {'version': version}, RequestContext(request))
+
 
 @login_required
 def done(request):
@@ -50,9 +63,33 @@ def createUser(request):
 	user.save()
 	acceso = loginUser(usuario, password, request)
 	if acceso:
-		return HttpResponseRedirect('/done/')
+		medico = Medico()
+		medico.nombre = "--"
+		medico.ape_paterno = "--"
+		medico.usuario = user
+		medico.especialidad = Especialidad.objects.get(id=1)
+		medico.save()
+
+		configuracion = Configuracion()
+		configuracion.medico= medico
+		configuracion.hora_consulta_inicio='7:00'
+		configuracion.hora_consulta_fin='22:00'
+		configuracion.duracion_consulta='15'
+		configuracion.notificacion_mail=True
+		configuracion.plan= Planes.objects.get(id=1)
+		configuracion.fecha_inicio= datetime.now()
+		configuracion.confirmacion_correo = True
+		configuracion.recordatorio_cita = "3,"
+		configuracion.save()
+		
+		consultorio = Consultorio()
+		consultorio.nombre = '--'
+		consultorio.medico = medico
+		consultorio.save()		
+
+		return HttpResponseRedirect('/sistemaDental/')
 	else:
-		return HttpResponseRedirect('/home/')
+		return HttpResponseRedirect('/registrarse/')
 
 def validaLogin(request):
 	usuario = request.GET['usuario']
@@ -139,6 +176,24 @@ def handle_uploaded_file(f):
 			destination.write(chunk)
 
 	return rutaRelatica
+
+def actualizarConsultorio(request):
+	medico = Medico.objects.get(usuario=request.user)
+	consultorio = Consultorio.objects.get(medico=medico)
+
+	if request.FILES:
+		imagenPath = handle_uploaded_file(request.FILES['file'])
+		imagen = imagenPath
+		consultorio.url_imagen = imagen
+		consultorio.save()
+
+
+	json = {
+   		'validacion': 'ok',
+   		'url' : consultorio.url_imagen
+	}
+	data = simplejson.dumps(json)
+	return HttpResponse(data, mimetype='application/json')
 
 def actualizarPerfil(request):
 	correo = request.POST['correo']

@@ -27,7 +27,10 @@ class Formacion(models.Model):
 class Consultorio(models.Model):
 	nombre=models.CharField(max_length=100, null=True, blank=True)
 	medico=models.ForeignKey(Medico)
-	direccion=models.ForeignKey(Direccion)
+	direccion=models.ForeignKey(Direccion, null=True, blank=True)
+	url_imagen=models.CharField(max_length=500, null=True, blank=True)
+	num_telefono=models.CharField(max_length=12, null=True, blank=True)
+	num_emergencias=models.CharField(max_length=12, null=True, blank=True)
 
 	def __unicode__(self):
 		return self.nombre

@@ -1,5 +1,6 @@
 clickDent.Models.Paciente = Backbone.Model.extend({
 	defaults : {
+		id : undefined,
 		nombre : '',
 		ape_paterno : '',
 		ape_materno : '',

@@ -30,17 +30,8 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-pencil:before {
-	content: "\e613";
-}
-.icon-coin:before {
-	content: "\e60b";
-}
 .icon-phone:before {
 	content: "\e600";
-}
-.icon-bell:before {
-	content: "\e60e";
 }
 .icon-undo:before {
 	content: "\e601";
@@ -48,32 +39,11 @@
 .icon-user:before {
 	content: "\e602";
 }
-.icon-search:before {
-	content: "\e610";
-}
 .icon-key:before {
 	content: "\e603";
 }
-.icon-remove:before {
-	content: "\e612";
-}
-.icon-menu:before {
-	content: "\e6068";
-}
 .icon-point-right:before {
 	content: "\e604";
-}
-.icon-cancel-circle:before {
-	content: "\e60c";
-}
-.icon-checkmark-circle:before {
-	content: "\e60d";
-}
-.icon-spam:before {
-	content: "\e60f";
-}
-.icon-plus:before {
-	content: "\e611";
 }
 .icon-arrow-right:before {
 	content: "\e605";
@@ -92,4 +62,46 @@
 }
 .icon-help:before {
 	content: "\e60a";
+}
+.icon-coin:before {
+	content: "\e60b";
+}
+.icon-cancel-circle:before {
+	content: "\e60c";
+}
+.icon-checkmark-circle:before {
+	content: "\e60d";
+}
+.icon-bell:before {
+	content: "\e60e";
+}
+.icon-spam:before {
+	content: "\e60f";
+}
+.icon-search:before {
+	content: "\e610";
+}
+.icon-plus:before {
+	content: "\e611";
+}
+.icon-remove:before {
+	content: "\e612";
+}
+.icon-pencil:before {
+	content: "\e613";
+}
+.icon-menu:before {
+	content: "\e6068";
+}
+.icon-profile:before {
+	content: "\e614";
+}
+.icon-paste:before {
+	content: "\e615";
+}
+.icon-calendar:before {
+	content: "\e616";
+}
+.icon-aid:before {
+	content: "\e617";
 }

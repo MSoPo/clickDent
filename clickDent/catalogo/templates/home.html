@@ -1,42 +1,59 @@
 <section id="home">
-			<div class="busqueda">
-				<label for="buscar">Buscar Paciente: </label>
+	<div class="busqueda">
+		<label for="buscar">Buscar Paciente: </label>
+		<div class="buscar">
+			<input placeholder="Ingresa clave o nombre del paciente" name ="buscar" />
+			<div class="icon-plus avanzado"></div>
+			<div class="icon-search"></div>
+		</div>
 
-				<div class="buscar">
-					<input placeholder="Ingresa clave o nombre" name ="buscar" />
-					<div class="icon-plus avanzado"></div>
-					<div class="icon-search"></div>
-				</div>
+	</div>
 
-			</div>
+	<div id="citas" class="citas">
+		
+	</div>
 
-			<div class="citas">
-				<div class="cita">
-					<div class="horario">9:00 - 9:30</div>
-					<div class="clavePaciente"><a href="">MSOSA01</a></div>
-					<div class="nombre">Miguel Angel</div>
-					<div class="apellido">Sosa Posadas</div>
-					<div class="ultima"><label>Ultima Cita:</label> 05 Mayo 2011</div>
-					<div class="tratamientos-pendientes"><label>Pendiente:</label> $2598.00</div>
-					<div class="historial"><a href="#">Historial</a><a href="#">Receta</a><a href="#">Pagar</a></div>
-					<div class="observaciones">Se creara una carilla en el diente canino inferior derecho</div>
-					<div class="acciones">
-						<div class="reprogramar"><button class="button">Reprogramar</button></div>
-						<div class="cancelar"><button class="button">Cancelar</button></div>
-					</div>
-				</div>
-				<div class="proximas">
-					<div class="citap">
-						<div class="horario">9:00 - 9:30</div>
-						<div class="clavePaciente"><a href="">Agregar cita</a></div>
-					</div>
-					<div class="citap">
-						<div class="horario">13:00 - 14:30</div>
-						<div class="clavePaciente">MSOSA01</div>
-						<div class="nombre">Miguel Angel</div>
-						<div class="apellido">Sosa Posadas</div>
-						<div class="historial"><a href="#">Historial</a></div>
-					</div>
-				</div>
-			</div>
-		</section>
+</section>
+
+
+	<div id="citasPendientes" class="citasPendientes">
+		<h3>Citas sin finalizar</h3>
+		
+	</div>
+
+<script id="popup-pagarConsulta-template" type="text/x-handlebars-template">
+  	<div class="titulo">Pagar</div>
+	<div class="contenido">
+		<input type="hidden" name="id" />
+		<div class="campo"><label>Precio Consulta</label><input class="sumarTotal validaMoneda" id="popupCosto" name="costo" value="$0.00" ><div class="error">Formato de moneda no valido ($99,999.00)</div></div>
+  		<div class="campo" id="campoTratamiento"><label>Precio Tratamiento</label><input  class=" sumarTotal validaMoneda" id="popupPrecioTratamiento" name="precio" value="$0.00"><div class="error">Formato de moneda no valido ($99,999.00)</div> </div>
+  		<div class="campo chico-negritas" id="campoDeuda"><label>Deuda</label><input name="deuda" id="popupDeuda" value="$0.00"  readonly="readonly"> </div>
+  		<div class="campo chico-negritas"><label>Total</label><input name="total" id="popupTotal" value="$0.00" readonly="readonly" class="validaMoneda"></div>
+  		<br>
+  		<div class="campo"><label>Pagado</label><input id="popupPagado" value="$0.00" class="validaMoneda" name="pagado" value=""> <div class="error">Formato de moneda no valido ($99,999.00)</div> </div>
+  		<button id="gurdar-pago">Pagar</button>
+  		<button id="cancelar">Cancelar</button>
+	</div>
+</script>
+
+<script id="popup-receta-template" type="text/x-handlebars-template">
+  	<div class="titulo">Receta</div>
+	<div class="contenido">
+		<input type="hidden" name="id" />
+		<div class="campoReceta"><input class="" id="" name="" placeholder="(1)  Medicamente y dosis"></input></div>
+		<div class="campoReceta"><input class="" id="" name="" placeholder="(2)  Medicamente y dosis"></input></div>
+		<div class="campoReceta"><input class="" id="" name="" placeholder="(3)  Medicamente y dosis"></input></div>
+		<div class="campoReceta"><input class="" id="" name="" placeholder="(4)  Medicamente y dosis"></input></div>
+		<div class="campoReceta"><input class="" id="" name="" placeholder="(5)  Medicamente y dosis"></input></div>
+  		<button id="crear-receta">Crear</button>
+  		<button id="cancelar">Cancelar</button>
+	</div>
+</script>
+
+<script id="popup-pagado-template" type="text/x-handlebars-template">
+  	<div class="titulo">Pago Realizao</div>
+	<div class="contenido">
+	<div class="campo chico-negritas"><div> Se realizo el pago. La dedua del paciente es <label id="deudaNueva" class="remarcar">$0.00</label> </div></div>
+  		<button id="cancelar">Ok</button>
+	</div>
+</script>

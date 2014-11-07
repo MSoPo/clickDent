@@ -9,14 +9,15 @@ clickDent.Views.Tratamientos = Backbone.View.extend({
 	},
 
 	initialize: function() {
-		app.Views.popup.render('popup-agregarTratamiento-template');
-		this.crearListaTratamientos();
-		
 	},
 
 	render: function(datos) {
-		$('#tratamiento').html('');
-		this.collection.forEach(this.addOne ,this);
+		self = this;
+		app.Views.popup.render('popup-agregarTratamiento-template');
+		this.crearListaTratamientos(function(){
+			$('#tratamiento').html('');
+			self.collection.forEach(self.addOne ,this);
+		});
 	},
 
 
@@ -25,12 +26,12 @@ clickDent.Views.Tratamientos = Backbone.View.extend({
 		$('#tratamiento').append(templateTratamiento(tratamiento.toJSON()));
 	},
 
-	crearListaTratamientos : function(datos) {
+	crearListaTratamientos : function(callback) {
 		self = this;
-		this.collection.fetch({ data: datos ,
+		this.collection.fetch({ data: {medico : app.Models.medico.get('id') } ,
 				success:function(data){
 					console.log('Success fetch');
-					self.render();
+					callback();
 		        }
 		    });
 	},
@@ -66,7 +67,6 @@ clickDent.Views.Tratamientos = Backbone.View.extend({
 		this.collection.fetch({ data: datos ,
 				success:function(data){
 					console.log('Success fetch');
-					self.render();
 		        }
 		    });
 

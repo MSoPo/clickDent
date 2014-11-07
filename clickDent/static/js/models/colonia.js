@@ -2,7 +2,7 @@ clickDent.Models.Colonia = Backbone.Model.extend({
 	defaults : {
 		id : '',
 		nombre : '',
-		estado : '',
+		municipio : '',
 		cp : '',
 	},
 	

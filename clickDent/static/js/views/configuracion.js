@@ -7,21 +7,36 @@ clickDent.Views.Configuracion = Backbone.View.extend({
 		'change #cp' : 'consultarColonia',
 		'change #colonia' : 'consultarMunicipio',
 		'change #municipio' : 'consultarEstado',
-		'click #guardar' : 'guardar',
+		'click .configuracion #guardar' : 'guardar',
+		'submit #formularioConsultorio' : 'submit',
 	},
 
 	initialize: function() {
-		console.log("Inicializando Paciente View");	
+		
+		optionsConsultorio = { 
+	        beforeSubmit:   function(formData, jqForm) {
+							        console.log(JSON.stringify(formData));
+							        return true;
+							    } , 
+	        success:       function(responseText, statusText)  {
+							       console.log(responseText);
+							    } , 
+	        url:       "/actualizarConsultorio/"        
+	    }; 
+	},
+
+	submit :  function() {
+	  $('#formularioConsultorio').ajaxSubmit(optionsConsultorio); 
+        return false; 
+	},
+
+	render: function() {
 		var recordatorio = $('#recordatorio').val();
 		var rec = recordatorio.split(',');
 		for( var i in rec ){
 			console.log(rec[i]);
 			$('input[id='+ rec[i] +']').prop('checked', true);
 		}
-	},
-
-	render: function() {
-
 	},
 
 	agregarEscuela: function() {
@@ -95,6 +110,11 @@ clickDent.Views.Configuracion = Backbone.View.extend({
 	},
 
 	guardar :function() {
+
+		if(!this.validarDatos()){
+			console.log("Ocurrio error en la validacion");
+			return false;
+		}
 		app.Models.medico = formToModel(this.$el, this.model);
 		app.Models.medico.sync("update", app.Models.medico, {
   			beforeSend: sendAuthentication 
@@ -137,11 +157,160 @@ clickDent.Views.Configuracion = Backbone.View.extend({
   			beforeSend: sendAuthentication 
  		});
 
- 		
+ 		$('#formularioConsultorio').submit();
 
  		console.log(app.Collections.formaciones.toJSON());
 
 
 
-	}
+	},
+
+	validarDatos : function(){
+		var campo = this.$el.find('input[name=nombre]');
+		var resultado = true;
+		if(validaAlfanumerico(campo.val()) && validaRequerido(campo.val(), 2))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('input[name=ape_paterno]');
+		if(validaAlfanumerico(campo.val()) && validaRequerido(campo.val(), 2))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('input[name=ape_materno]');
+		if(validaAlfanumerico(campo.val()))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('input[name=num_cedula]');
+		if(validaAlfanumerico(campo.val()))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('textarea[name=declaracion]');
+		if(validaAlfanumerico(campo.val()))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('input[name=consultorio-nombre]');
+		if(validaAlfanumerico(campo.val()))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('input[name=cp]');
+		if(validaCP(campo.val()) && validaRequerido(campo.val()))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('input[name=calle]');
+		if(validaAlfanumerico(campo.val()) && validaRequerido(campo.val()))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('input[name=num_interior]');
+		if(validaAlfanumerico(campo.val()))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('input[name=num_exterior]');
+		if(validaAlfanumerico(campo.val()))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+		campo = this.$el.find('textarea[name=referencias]');
+		if(validaAlfanumerico(campo.val()))
+		{
+			campo.removeClass('invalido');
+			campo.addClass('valido');
+			campo.parent().find('.error').hide();
+		}else{
+			campo.removeClass('valido');
+			campo.addClass('invalido');
+			campo.parent().find('.error').show();
+			resultado = false;
+		}
+
+
+		return resultado;
+	},
 });
