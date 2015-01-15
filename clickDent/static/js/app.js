@@ -12,7 +12,8 @@ var app = {
 	Router: {},
 	Util: {
 		usuario : usuario,
-		nuevoUsuario : nuevoUsuario
+		nuevoUsuario : nuevoUsuario,
+		correo : correo,
 	}
 }
 

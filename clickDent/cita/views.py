@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.core import serializers
 from itertools import chain
 from rest_framework import generics
+import time
 
 class CitaViewSet(viewsets.ModelViewSet):
     queryset = Cita.objects.all()
@@ -36,15 +37,23 @@ def validarDisponibilidad(request):
 	fecha = request.GET['fecha']
 	hora_inicio = request.GET['hora_inicio']
 	hora_fin = request.GET['hora_fin']
+	idCita = request.GET.get('idCita', 0)
+
+
 	usuario = User.objects.get(username=request.user)
 	medico = Medico.objects.get(usuario=usuario)
 
-	cita = Cita.objects.filter(fecha=fecha, hora_inicio__gte=hora_inicio,hora_inicio__lte=hora_fin,medico=medico)
+	cita = Cita.objects.filter(fecha=fecha, hora_inicio__gte=hora_inicio,hora_inicio__lte=hora_fin,medico=medico).exclude(pk=idCita)
 
 	print(cita.count())
-
 	if(cita.count() == 0):
-		cita = Cita.objects.filter(fecha=fecha, hora_fin__gte=hora_inicio, hora_fin__lte=hora_fin,medico=medico)
+		cita = Cita.objects.filter(fecha=fecha, hora_fin__gte=hora_inicio, hora_fin__lte=hora_fin,medico=medico).exclude(pk=idCita)
+		print(cita.count())
+		print('Validacion 2')
+
+		if(cita.count() == 0):
+			cita = Cita.objects.filter(fecha=fecha, hora_inicio__lte=hora_inicio, hora_fin__gte=hora_fin, medico=medico).exclude(pk=idCita)
+			print(cita.count())
 
 	if (cita.count() == 0):
 		json = {

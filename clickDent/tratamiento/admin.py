@@ -1,10 +1,8 @@
 from django.contrib import admin
-
-
 from models import *
 
 class TratmientoAdmin(admin.ModelAdmin):
-	list_display = ('descripcion', 'total_precio', 'fecha_liquidacion', 'fecha_inicio', 'estatus', 'paciente')
+	list_display = ('descripcion', 'total_precio', 'fecha_liquidacion', 'fecha_inicio', 'estatus', 'paciente', 'historial')
 
 class PagoTratmientoAdmin(admin.ModelAdmin):
 	list_display = ('fecha', 'descripcion', 'pagado', 'tratamiento')

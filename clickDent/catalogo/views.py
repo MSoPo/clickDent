@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 class EspecialidadViewSet(viewsets.ModelViewSet):
     queryset = Especialidad.objects.all()
     serializer_class = EspecialidadSerializer  
+    filter_fields = ('id', ) 
 
 class EstatusViewSet(viewsets.ModelViewSet):
     queryset = Estatus.objects.all()
@@ -62,6 +63,9 @@ def paciente(request):
     ocupacion = Ocupacion.objects.all()
     estadoCivil = EstadoCivil.objects.all()
     return render_to_response('paciente.html',  {'ocupacion' : ocupacion, 'estadoCivil' : estadoCivil}, context_instance=RequestContext(request))
+
+def historial(request):
+    return render_to_response('historial.html', {}, context_instance=RequestContext(request));
 
 def calendario(request):
     """Vista inicial para el login"""

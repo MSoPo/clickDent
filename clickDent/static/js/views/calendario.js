@@ -13,6 +13,7 @@ clickDent.Views.Calendario = Backbone.View.extend({
 
 	initialize: function() {
 		indice = 0;
+		longitud = 0;
 		actual = new Date();
 		anterior = new Date();
 		siguiente = new Date();
@@ -25,7 +26,8 @@ clickDent.Views.Calendario = Backbone.View.extend({
 		app.Collections.citasCalendario.url = "/rest/citasCalendario/";
 		app.Collections.citasCalendario.fetch({ data : { fecha : consultaDateYYYY(new Date()) }, 
 			success : function(data){
-				console.log(data);
+				indice = app.Collections.citasCalendario.length-1;
+            	longitud = app.Collections.citasCalendario.length-1;
 				app.Collections.citasCalendario.forEach(self.cambiarCita, self);
 			}
 
@@ -50,8 +52,8 @@ clickDent.Views.Calendario = Backbone.View.extend({
 		app.Collections.citasCalendario.fetch({ data: { fecha : consultaDateYYYY(actual) } ,
             success:function(data){
             	indice = app.Collections.citasCalendario.length-1;
+            	longitud = app.Collections.citasCalendario.length-1;
             	citaActual = app.Collections.citasCalendario.at(app.Collections.citasCalendario.length-1);
-            	//self.preparaCitaRender();
             	self.render();
             }
         });
@@ -67,8 +69,8 @@ clickDent.Views.Calendario = Backbone.View.extend({
 		app.Collections.citasCalendario.fetch({ data: { fecha : consultaDateYYYY(actual) } ,
             success:function(data){
             	indice = app.Collections.citasCalendario.length-1;
+            	longitud = app.Collections.citasCalendario.length-1;
             	citaActual = app.Collections.citasCalendario.at(app.Collections.citasCalendario.length-1);
-            	//self.preparaCitaRender();
             	self.render();
             }
         });
@@ -109,6 +111,18 @@ clickDent.Views.Calendario = Backbone.View.extend({
 	preparaCitaRender : function(callback) {
 		citaRender = {};
 		if(citaActual){
+			$('#adelantarCita').show();
+			$('#atrasarCita').show();
+
+
+			if(indice == 0){
+				$('#adelantarCita').hide();
+			}
+
+			if(indice == longitud){
+				$('#atrasarCita').hide();
+			}
+
 			if(citaActual.get('tratamiento')){
 				var tratamientosCita = new clickDent.Collections.Tratamientos();
 				tratamientosCita.fetch({ data: { id : citaActual.get('tratamiento') } ,
@@ -169,8 +183,14 @@ clickDent.Views.Calendario = Backbone.View.extend({
 		var citaListUpdate = new clickDent.Collections.Citas();
 		citaListUpdate.fetch({ data: { id : parseInt(citaActual.get('id')) } ,
 			success:function(data){
-				citaListUpdate.at(0).set('estatus', utils.constantes.estatus.cancelada);
-				citaListUpdate.at(0).save();
+				app.Views.popup.render('popup-cancelarCita-template');
+				app.Views.popup.mostrar();
+				citaActual = data.at(0);
+				for (var i = 0; i > app.Collections.citasCalendario.size(); i++) {
+					if(app.Collections.citasCalendario.at(i).get('id') == citaActual.get('id')){
+						app.Collections.citasCalendario.at(i) = citaActual;
+					}	
+				};
 			},
 		});
 	},
@@ -222,22 +242,17 @@ clickDent.Views.Calendario = Backbone.View.extend({
 
 		 var inicio = horaNuevaCita;
 
-		horaNuevaCita = citaActual.get('hora_fin');
+		var hhI = citaActual.get('hora_inicio').substring(0,2);
+		var mmI = citaActual.get('hora_inicio').substring(3,5);
+		var horaInicio = parseInt(mmI) + (parseInt(hhI) * 60);
 
-		if(horaNuevaCita){
-		 	horaNuevaCita = $.trim(horaNuevaCita);
-		 	horaNuevaCita = horaNuevaCita.replace(":", "");
-		 	if(parseInt(horaNuevaCita.substring(2,4)) > 59 ){
-		 		horaNuevaCita = parseInt(horaNuevaCita) + 100;
-		 	}else{
-		 		horaNuevaCita = parseInt(horaNuevaCita);
-		 	}
-		 }
+		var hhF = citaActual.get('hora_fin').substring(0,2);
+		var mmF = citaActual.get('hora_fin').substring(3,5);
+		var horaFin = parseInt(mmF) + (parseInt(hhF) * 60);
 
-		 var fin = horaNuevaCita;
 
-		 var duracion = fin - inicio;
-		 console.log(duracion);
+		var duracion = horaFin -horaInicio;
+		console.log(duracion);
 
 
 		app.Views.popup.render('popup-reprogramarcita-template', 'cita', inicio, citaActual.get('fecha'));

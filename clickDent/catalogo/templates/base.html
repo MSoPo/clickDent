@@ -11,6 +11,9 @@
 	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}jscal2/css/border-radius.css">
 </head>
 <body class="clickDent" id="clickDent">
+	<div id="cargando">
+		<img src="{{STATIC_URL}}img/loader.gif" id="imgCargando">
+	</div>
 	<div class="backpopup" id="backpopup">
 		<div class="popcancelar" id="popcancelar">
 			<div class="popup" id="popup">
@@ -51,6 +54,7 @@
 				<li class="titulo">Perfil</li>
 				<li id="miperfil" class="itemMenu">Mi perfil</li>
 				<li id="configuracion" class="itemMenu">Configuracion</li>
+				<li id="historial" class="itemMenu">Historial</li>
 			</ul>
 		</nav>
 	</div>
@@ -58,8 +62,10 @@
 		<header id="header">
 			<div id="btn-menu" class="cont-menu icon-menu"></div>
 			clickDent 
-			<div id="notificaciones" class="notificaciones icon-bell"></div>
+			<div id="logout" class="notificaciones icon-exit"></div>
+			<!--<div id="notificaciones" class="notificaciones icon-bell"></div>-->
 			<div id="agregarCita" class="icono-acceso icon-calendar"></div>
+
 		</header>
 		
 		<div id="interaccion">
@@ -74,6 +80,7 @@
 
 	<script src="{{STATIC_URL}}jspdf/jspdf.js"></script>
 	<script src="{{STATIC_URL}}jspdf/jspdf.plugin.addimage.js"></script>
+	<script src="{{STATIC_URL}}jspdf/FileSaver.min.js"></script>
 
 	<script src="{{STATIC_URL}}jscal2/js/jscal2.js"></script>
 	<script src="{{STATIC_URL}}jscal2/js/lang/es.js"></script>
@@ -94,6 +101,9 @@
 	<script src="{{STATIC_URL}}js/models/tratamiento.js"></script>
 	<script src="{{STATIC_URL}}js/models/pago.js"></script>
 	<script src="{{STATIC_URL}}js/models/estatus.js"></script>
+	<script src="{{STATIC_URL}}js/models/especialidad.js"></script>
+	<script src="{{STATIC_URL}}js/models/historial.js"></script>
+	<script src="{{STATIC_URL}}js/models/odontodiagrama.js"></script>
 	<script src="{{STATIC_URL}}js/collections/medicos.js"></script>
 	<script src="{{STATIC_URL}}js/collections/pacientes.js"></script>
 	<script src="{{STATIC_URL}}js/collections/direcciones.js"></script>
@@ -108,6 +118,9 @@
 	<script src="{{STATIC_URL}}js/collections/tratamientos.js"></script>
 	<script src="{{STATIC_URL}}js/collections/pagos.js"></script>
 	<script src="{{STATIC_URL}}js/collections/estatus.js"></script>
+	<script src="{{STATIC_URL}}js/collections/especialidades.js"></script>
+	<script src="{{STATIC_URL}}js/collections/historial.js"></script>
+	<script src="{{STATIC_URL}}js/collections/odontodiagramas.js"></script>
 	<script src="{{STATIC_URL}}js/views/menu.js"></script>
 	<script src="{{STATIC_URL}}js/views/paciente.js"></script>
 	<script src="{{STATIC_URL}}js/views/home.js"></script>
@@ -119,6 +132,7 @@
 	<script src="{{STATIC_URL}}js/views/pagos.js"></script>
 	<script src="{{STATIC_URL}}js/views/buscarPacientes.js"></script>
 	<script src="{{STATIC_URL}}js/views/receta.js"></script>
+	<script src="{{STATIC_URL}}js/views/historial.js"></script>
 	<script src="{{STATIC_URL}}js/routers/router.js"></script>
 	<script src="{{STATIC_URL}}js/main.js"></script>
 
@@ -245,25 +259,25 @@
 			<div class="cita">
 				<input type="hidden" name="cita1" value="<%= cts.cita1.id %>" class="idCita" />
 				<div class="horario"><%= cts.cita1.hora_inicio %> - <%= cts.cita1.hora_fin %></div>
-				<div class="clavePaciente"><a href=""><%= cts.cita1.paciente.id %></a></div>
+				<div class="clavePaciente"><a href="" class="clavePacienteHome"><%= cts.cita1.paciente.id %></a></div>
 				<div class="nombre"><%= cts.cita1.paciente.nombre %></div>
 				<div class="apellido"><%= cts.cita1.paciente.ape_paterno %> <%= cts.cita1.paciente.ape_materno %></div>
 				<% if (cts.cita1.paciente.ultimacita) {%>
-				<div class="ultima"><label>Ultima Cita:</label> <a href=""><%= cts.cita1.paciente.ultimacita %></a></div>
+				<div class="ultima"><label>Ultima Cita:</label> <a href="" class="citasAnterioresHome"><%= cts.cita1.paciente.ultimacita %></a></div>
 				<% } %>
 				<% if (cts.cita1.tratamiento) {%>
 				<div class="ultimacita"><label>Tratamiento:</label> <a href=""><%= cts.cita1.tratamiento.nombre %></a>
-				<br><input class="notaImportante" type="checkbox" value="finalizar"><label class="notaImportante">Ultima cita del tratamiento</label></div>
+				<br><input class="notaImportante chkTratamiento" type="checkbox" value="finalizar"><label class="notaImportante">Ultima cita del tratamiento</label></div>
 				<% } %>
 				<% if (cts.cita1.paciente.pago_pendiente) {%>
 				<div class="tratamientos-pendientes"><label>Pendiente:</label> <%= cts.cita1.paciente.pendiente %></div>
 				<% } %>
-				<div class="historial"><a href="#">Historial</a><a href="#" id="receta">Receta</a><a href="#" id="pagarCita">Pagar</a></div>
+				<div class="historial"><a href="#" class="historialHome" id="historialHome">Historial</a><a href="#" id="receta">Receta</a><a href="#" id="pagarCita">Pagar</a></div>
 				<div class="observaciones"><%= cts.cita1.observaciones %></div>
 				<div class="acciones">
-					<div class="reprogramar"><button class="button finalizarCita">Concluir</button></div>
-					<div class="reprogramar"><button class="button">Reprogramar</button></div>
-					<div class="cancelar"><button class="button">Cancelar</button></div>
+					<button class="button finalizarCita">Concluir</button>
+					<button class="button reprogramarPendientes">Reprogramar</button>
+					<button class="button cancelarCita">Cancelar</button>
 				</div>
 			</div>
 			<div class="proximas">
@@ -273,7 +287,7 @@
 						<div class="clavePaciente"><%= cts.cita2.paciente.id %></div>
 						<div class="nombre"><%= cts.cita2.paciente.nombre %></div>
 						<div class="apellido"><%= cts.cita2.paciente.ape_paterno %> <%= cts.cita2.paciente.ape_materno %></div>
-						<div class="historial"><a href="#">Historial</a></div>
+						<div class="historial"><a href="#" class="historialHome">Historial</a></div>
 					<!--<div class="citap">
 						<div class="horario">9:00 - 9:30</div>
 						<div class="clavePaciente"><a href="">Agregar cita</a></div>-->
@@ -284,7 +298,7 @@
 							<div class="clavePaciente"><%= cts.cita3.paciente.id %></div>
 							<div class="nombre"><%= cts.cita3.paciente.nombre %></div>
 							<div class="apellido"><%= cts.cita3.paciente.ape_paterno %> <%= cts.cita2.paciente.ape_materno %></div>
-							<div class="historial"><a href="#">Historial</a></div>
+							<div class="historial"><a href="#" class="historialHome">Historial</a></div>
 						<% } else { %>
 
 						<div class="horario"><span class="horaNuevaCita"><%= cts.cita2.hora_fin %></span> - 23:59 </div>
@@ -319,13 +333,13 @@
 			<div class="horario">
 			<%= cita.hora_inicio %> - <%= cita.hora_fin %>
 			</div>
-			<div class="clavePacienet">
+			<div class="clavePacienteHome">
 				<a href=""><%= cita.paciente.id %></a>
 			</div>
 			<div class="nombre"><%= cita.paciente.nombre %></div>
 			<div class="apellidos"><%= cita.paciente.ape_paterno %> <%= cita.paciente.ape_materno %></div>
 			<div class="historial">
-				<a href="#" >Historial</a>
+				<a href="#" class="historialHome">Historial</a>
 			</div>
 			<% if (cita.observaciones) { %>
 			<div class="observaciones"><%= cita.observaciones %></div>
@@ -358,11 +372,11 @@
 	<tr id="id_<%= id %>">
 	  <td class="gris" ><%= id %></td>
 	  <td><%= nombre %> <%= ape_paterno %> <%= ape_materno %></td> 
-	  <td class="gris"><div class="icon-pencil"></div></td>
-	  <td><div class="icon-profile"></div></td>
-	  <td class="gris"><div class="icon-paste"></div></td>
-	  <td><div class="icon-calendar"></div></td>
-	  <td class="gris"><div class="icon-aid"></div></td>
+	  <td class="gris"><div class="icon-pencil busqueda"></div></td>
+	  <td><div class="icon-profile busqueda"></div></td>
+	  <td class="gris"><div class="icon-paste busqueda"></div></td>
+	  <td><div class="icon-calendar busqueda"></div></td>
+	  <td class="gris"><div class="icon-aid busqueda"></div></td>
 	</tr>
 	<tr class="detalle" style="display:none">
 		<td colspan="7">
@@ -380,7 +394,7 @@
 			<label>Nombre</label><div><%= nombre %></div>
 		</div>
 		<div class="campo">
-			<label>Apellidos</label><div><%= ape_paterno %> <%= paciente.ape_materno %></div>
+			<label>Apellidos</label><div><%= ape_paterno %> <%= ape_materno %></div>
 		</div>
 		<div class="campo">
 			<label>Fecha de Nacimiento</label><div><%= _.template.formatdate(fecha_nacimiento) %></div>
@@ -433,6 +447,483 @@
 				</div>
 			</div>
 		<% } %>
+		
+	</script>
+
+	<script id="consultar-historial-template" type="text/x-handlebars-template">
+
+		<div class="campo">
+			<label>Ultima actualizacion</label><div><%= _.template.formatdate(fecha_actualizacion) %></div>
+		</div>
+
+		<% if (embarazo == 'S') { %>
+			<div class="campo">
+				<label>Embarazada</label><div>Si</div>
+			</div>
+
+			<div class="campo">
+				<label>Tiempo de embarazo</label><div><%= embarazo_detalle %></div>
+			</div>
+
+		<% } %>
+
+		<% if (estado_salud == 'S') { %>
+
+			<div class="campo">
+				<label>Mal estado de salud</label><div>Si</div>
+			</div>
+
+			<div class="campo">
+				<label>¿Por que?</label><div><%= estado_salud_detalle %></div>
+			</div>
+
+		<% } %>
+
+		<% if (alergia == 'S') { %>
+
+			<div class="campo">
+				<label>Alergia a medicamentos</label><div>Si</div>
+			</div>
+
+			<div class="campo">
+				<label>¿Cuales?</label><div><%= alergia_detalle %></div>
+			</div>
+
+		<% } %>
+
+		<% if (anestecia == 'S') { %>
+
+			<div class="campo">
+				<label>Problemas con anestesicos locales</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (respiracion == 'S') { %>
+
+			<div class="campo">
+				<label>Respira por la boca</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (masticar == 'S') { %>
+
+			<div class="campo">
+				<label>Dificultad para masticar</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (encias == 'S') { %>
+
+			<div class="campo">
+				<label>Sangran las encias con facilidad</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (aliento == 'S') { %>
+
+			<div class="campo">
+				<label>Mal aliento</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (rechinar == 'S') { %>
+
+			<div class="campo">
+				<label>Rechina dientes</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (dolor_boca == 'S') { %>
+
+			<div class="campo">
+				<label>Dolor al lavarse la boca</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (comida_dientes == 'S') { %>
+
+			<div class="campo">
+				<label>Se le queda comida entre los dientes</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (cepillar == 'S') { %>
+
+			<div class="campo">
+				<label>Cepillado 3 veces al dia</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (cepillar == 'S') { %>
+
+			<div class="campo">
+				<label>Uso de hilo dental</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (cepillo) { %>
+
+		<div class="campo">
+			<label>Cepillo usado</label><div><%= cepillo %></div>
+		</div>
+
+		<% } %>
+
+		<% if (visita_dentista) { %>
+
+		<div class="campo">
+			<label>Ultima visita el dentista</label><div><%= visita_dentista %></div>
+		</div>
+
+		<% } %>
+
+		<% if (digestivo == 'S') { %>
+	
+					<div class="campo">
+				<label>Problemas del aparato digestivo</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (respiratorio == 'S') { %>
+			
+			<div class="campo">
+				<label>Problemas del aparato respiratorio</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (cardiaco == 'S') { %>
+			
+			<div class="campo">
+				<label>Problemas Cardiacos</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (renal == 'S') { %>
+			
+			<div class="campo">
+				<label>Padeciminetos Renales</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (rinon == 'S') { %>
+			
+			<div class="campo">
+				<label>Problemas de riñon</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (nehurologico == 'S') { %>
+			
+			<div class="campo">
+				<label>Problemas Nurologicos</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (coagulacion == 'S') { %>
+			
+			<div class="campo">
+				<label>Problemas de coagulacion</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (tiroides == 'S') { %>
+			
+			<div class="campo">
+				<label>Problemas de tiroides</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (sanguineo == 'S') { %>
+			
+			<div class="campo">
+				<label>Problemas sanguineos</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (presion == 'S') { %>
+			
+			<div class="campo">
+				<label>Presión arterial alta o baja</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (diabetes == 'S') { %>
+			
+			<div class="campo">
+				<label>Diabetes</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (cancer == 'S') { %>
+			
+			<div class="campo">
+				<label>Cancer o tumores</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (hepatitis == 'S') { %>
+			
+			<div class="campo">
+				<label>Hepatitis</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (vih == 'S') { %>
+			
+			<div class="campo">
+				<label>VIH</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (anemia == 'S') { %>
+			
+			<div class="campo">
+				<label>Anemia</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (venerea == 'S') { %>
+			
+			<div class="campo">
+				<label>Enfermedad Venerea</label><div>Si</div>
+			</div>
+
+		<% } %>
+
+		<% if (epilepcia == 'S') { %>
+			
+			<div class="campo">
+				<label>Epilepsia o convulsiones</label><div>Si</div>
+			</div>
+
+		<% } %>
+		<div class="simbologia">
+					<table>
+						<thead>
+							<tr>
+								<th colspan="2">Simbologia</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Diente ausente</td><td class="ausente"></td></tr>
+							<tr><td>Diente a extraer</td><td class="extraer"></td></tr>
+							<tr><td>Caries</td><td class="caries"></td></tr>
+							<tr><td>Obturación</td><td class="obturacion"></td></tr>
+							<tr><td>Corona</td><td class="corona"></td></tr>
+							<tr><td>Tramo</td><td class="tramo"></td></tr>
+						</tbody>
+					</table>
+		</div>
+		<div>
+			<div class="dienteBloque">
+						<div class="dienteCompleto">
+							<img id="d017"  src="{{STATIC_URL}}img/dcd/d017.png" class="dienteView" />
+							<img id="d017a"  src="{{STATIC_URL}}img/dcd/d017a.png" class="dienteAuxiliarView" />
+							<img id="d017b"  src="{{STATIC_URL}}img/dcd/d017b.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d018"  src="{{STATIC_URL}}img/dcd/d018.png" class="dienteView" />
+							<img id="d018a"  src="{{STATIC_URL}}img/dcd/d018a.png" class="dienteAuxiliarView" />
+							<img id="d018b"  src="{{STATIC_URL}}img/dcd/d018b.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d019"  src="{{STATIC_URL}}img/dcd/d019.png" class="dienteView" />
+							<img id="d019a"  src="{{STATIC_URL}}img/dcd/d019a.png" class="dienteAuxiliarView" />
+							<img id="d019b"  src="{{STATIC_URL}}img/dcd/d019b.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d020"  src="{{STATIC_URL}}img/dcd/d020.png" class="dienteView" />
+							<img id="d020a"  src="{{STATIC_URL}}img/dcd/d020a.png" class="dienteAuxiliarView" />
+							<img id="d020b"  src="{{STATIC_URL}}img/dcd/d020b.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d021"  src="{{STATIC_URL}}img/dcd/d021.png" class="dienteView" />
+							<img id="d021a"  src="{{STATIC_URL}}img/dcd/d021a.png" class="dienteAuxiliarView" />
+							<img id="d021b"  src="{{STATIC_URL}}img/dcd/d021b.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d022"  src="{{STATIC_URL}}img/dcd/d022.png" class="dienteView" />
+							<img id="d022a"  src="{{STATIC_URL}}img/dcd/d022a.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d023"  src="{{STATIC_URL}}img/dcd/d023.png" class="dienteView" />
+							<img id="d023a"  src="{{STATIC_URL}}img/dcd/d023a.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d024"  src="{{STATIC_URL}}img/dcd/d024.png" class="dienteView" />
+							<img id="d024a"  src="{{STATIC_URL}}img/dcd/d024a.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d025"  src="{{STATIC_URL}}img/dcd/d025.png" class="dienteView" />
+							<img id="d025a"  src="{{STATIC_URL}}img/dcd/d025a.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d026"  src="{{STATIC_URL}}img/dcd/d026.png" class="dienteView" />
+							<img id="d026a"  src="{{STATIC_URL}}img/dcd/d026a.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d027"  src="{{STATIC_URL}}img/dcd/d027.png" class="dienteView" />
+							<img id="d027a"  src="{{STATIC_URL}}img/dcd/d027a.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d028"  src="{{STATIC_URL}}img/dcd/d028.png" class="dienteView" />
+							<img id="d028a"  src="{{STATIC_URL}}img/dcd/d028a.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d029"  src="{{STATIC_URL}}img/dcd/d029.png" class="dienteView" />
+							<img id="d029a"  src="{{STATIC_URL}}img/dcd/d029a.png" class="dienteAuxiliarView" />
+							<img id="d029b"  src="{{STATIC_URL}}img/dcd/d029b.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d030"  src="{{STATIC_URL}}img/dcd/d030.png" class="dienteView" />
+							<img id="d030a"  src="{{STATIC_URL}}img/dcd/d030a.png" class="dienteAuxiliarView" />
+							<img id="d030b"  src="{{STATIC_URL}}img/dcd/d030b.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d031"  src="{{STATIC_URL}}img/dcd/d031.png" class="dienteView" />
+							<img id="d031a"  src="{{STATIC_URL}}img/dcd/d031a.png" class="dienteAuxiliarView" />
+							<img id="d031b"  src="{{STATIC_URL}}img/dcd/d031b.png" class="dienteAuxiliarView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d032"  src="{{STATIC_URL}}img/dcd/d032.png" class="dienteView" />
+							<img id="d032a"  src="{{STATIC_URL}}img/dcd/d032a.png" class="dienteAuxiliarView" />
+							<img id="d032b"  src="{{STATIC_URL}}img/dcd/d032b.png" class="dienteAuxiliarView" />
+						</div>
+			</div>
+			<div class="dienteBloque">
+						<div class="dienteCompleto">
+							<img id="d001b"  src="{{STATIC_URL}}img/dcd/d001b.png" class="dienteAuxiliarView" />
+							<img id="d001a"  src="{{STATIC_URL}}img/dcd/d001a.png" class="dienteAuxiliarView" />
+							<img id="d001"  src="{{STATIC_URL}}img/dcd/d001.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d002b"  src="{{STATIC_URL}}img/dcd/d002b.png" class="dienteAuxiliarView" />
+							<img id="d002a"  src="{{STATIC_URL}}img/dcd/d002a.png" class="dienteAuxiliarView" />
+							<img id="d002"  src="{{STATIC_URL}}img/dcd/d002.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d003b"  src="{{STATIC_URL}}img/dcd/d003b.png" class="dienteAuxiliarView" />
+							<img id="d003a"  src="{{STATIC_URL}}img/dcd/d003a.png" class="dienteAuxiliarView" />
+							<img id="d003"  src="{{STATIC_URL}}img/dcd/d003.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d004b"  src="{{STATIC_URL}}img/dcd/d004b.png" class="dienteAuxiliarView" />
+							<img id="d004a"  src="{{STATIC_URL}}img/dcd/d004a.png" class="dienteAuxiliarView" />
+							<img id="d004"  src="{{STATIC_URL}}img/dcd/d004.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d005b"  src="{{STATIC_URL}}img/dcd/d005b.png" class="dienteAuxiliarView" />
+							<img id="d005a"  src="{{STATIC_URL}}img/dcd/d005a.png" class="dienteAuxiliarView" />
+							<img id="d005"  src="{{STATIC_URL}}img/dcd/d005.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d006a"  src="{{STATIC_URL}}img/dcd/d006a.png" class="dienteAuxiliarView" />
+							<img id="d006"  src="{{STATIC_URL}}img/dcd/d006.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d007a"  src="{{STATIC_URL}}img/dcd/d007a.png" class="dienteAuxiliarView" />
+							<img id="d007"  src="{{STATIC_URL}}img/dcd/d007.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d008a"  src="{{STATIC_URL}}img/dcd/d008a.png" class="dienteAuxiliarView" />
+							<img id="d008"  src="{{STATIC_URL}}img/dcd/d008.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d009a"  src="{{STATIC_URL}}img/dcd/d009a.png" class="dienteAuxiliarView" />
+							<img id="d009"  src="{{STATIC_URL}}img/dcd/d009.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d010a"  src="{{STATIC_URL}}img/dcd/d010a.png" class="dienteAuxiliarView" />
+							<img id="d010"  src="{{STATIC_URL}}img/dcd/d010.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d011a"  src="{{STATIC_URL}}img/dcd/d011a.png" class="dienteAuxiliarView" />
+							<img id="d011"  src="{{STATIC_URL}}img/dcd/d011.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d012a"  src="{{STATIC_URL}}img/dcd/d012a.png" class="dienteAuxiliarView" />
+							<img id="d012"  src="{{STATIC_URL}}img/dcd/d012.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d013b"  src="{{STATIC_URL}}img/dcd/d013b.png" class="dienteAuxiliarView" />
+							<img id="d013a"  src="{{STATIC_URL}}img/dcd/d013a.png" class="dienteAuxiliarView" />
+							<img id="d013"  src="{{STATIC_URL}}img/dcd/d013.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d014b"  src="{{STATIC_URL}}img/dcd/d014b.png" class="dienteAuxiliarView" />
+							<img id="d014a"  src="{{STATIC_URL}}img/dcd/d014a.png" class="dienteAuxiliarView" />
+							<img id="d014"  src="{{STATIC_URL}}img/dcd/d014.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d015b"  src="{{STATIC_URL}}img/dcd/d015b.png" class="dienteAuxiliarView" />
+							<img id="d015a"  src="{{STATIC_URL}}img/dcd/d015a.png" class="dienteAuxiliarView" />
+							<img id="d015"  src="{{STATIC_URL}}img/dcd/d015.png" class="dienteView" />
+						</div>
+						<div class="dienteCompleto">
+							<img id="d016b"  src="{{STATIC_URL}}img/dcd/d016b.png" class="dienteAuxiliarView" />
+							<img id="d016a"  src="{{STATIC_URL}}img/dcd/d016a.png" class="dienteAuxiliarView" />
+							<img id="d016"  src="{{STATIC_URL}}img/dcd/d016.png" class="dienteView" />
+						</div>
+				</div>
+
+				<% if (diagnostico) { %>
+
+					<div class="campo">
+						<label>Diagnostico </label><div><%= diagnostico %></div>
+					</div>
+
+				<% } %>
+
+				<% if (tratamientos) { %>
+
+					<table>
+						<thead>
+							<tr>
+								<th>Tratamiento</th>
+								<th>Fecha</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(var dato in tratamientos) { %>
+								<tr>
+									<td><%= tratamientos[dato].descripcion %></td>
+									<td><%= _.template.formatdate(tratamientos[dato].fecha_inicio) %></td>
+								</tr>
+						    <% } %>
+						</tbody>
+					<table>
+
+			    <% } %>
+   					
+
+
+			</div>
+
 		
 	</script>
 
@@ -528,36 +1019,38 @@
 	</script>
 
 	<script id="popup-editarcita-template" type="text/x-handlebars-template">
-  	<div class="titulo">Editar cita</div>
-	<div class="contenido">
-  		<div class="campo"><label>Recomendaciones</label>
-  			<textarea class="alfanumericonor" name="recomendaciones" placeholder="Recomendaciones para el paciente" id="editarCita_recomendacions" ></textarea>
-  			<div class="error">Valide los simbolos utilazdos</div></div>	
-  		<div class="campo"><label>Notas personales</label>
-  			<textarea name="observaciones" class="alfanumericonor" placeholder="Notas sobre la cita" id="editarCita_observaciones"><%= observaciones %></textarea>
-  			<div class="error">Valide los simbolos utilazdos</div></div>
-  		
-  		<div class="tratamientos editarcita" id="tratmiento-cita-agregar">
+	  	<div class="titulo">Editar cita</div>
+		<div class="contenido">
+	  		<div class="campo"><label>Recomendaciones</label>
+	  			<textarea class="alfanumericonor" name="recomendaciones" placeholder="Recomendaciones para el paciente" id="editarCita_recomendacions" ></textarea>
+	  			<div class="error">Valide los simbolos utilazdos</div></div>	
+	  		<div class="campo"><label>Notas personales</label>
+	  			<textarea name="observaciones" class="alfanumericonor" placeholder="Notas sobre la cita" id="editarCita_observaciones"><%= observaciones %></textarea>
+	  			<div class="error">Valide los simbolos utilazdos</div></div>
+	  		
+	  		<div class="tratamientos editarcita" id="tratmiento-cita-agregar">
 
-	  		<div class="campo"><label>Tratamiento Actuales</label>
-		  		<select name="tratamiento" id="editarcita_selectTratamiento">
-		  			<option value="-1" id="tratamiento">Seleccione un tratamiento</option>
-		  		</select></div>
-	  		<div class="campo"><a href="" id="nuevo-tratamiento">Nuevo Tratamiento</a>
+		  		<div class="campo"><label>Tratamiento Actuales</label>
+			  		<select name="tratamiento" id="editarcita_selectTratamiento">
+			  			<option value="-1" id="tratamiento">Seleccione un tratamiento</option>
+			  		</select></div>
+		  		<div class="campo"><a href="" id="nuevo-tratamiento">Nuevo Tratamiento</a>
+			  		</div>
 		  		</div>
+		  	</div>
+	  		<div class="tratamientos" id="tratmiento-cita-nuevo">
+		  		<div class="campo"><label>Tratamiento</label>
+		  			<textarea name="descripcion" class="alfanumerico" id="tratamiento_descripcion"  placeholder="Tratamiento a realizar" ></textarea>
+		  			<div class="error">Descripcion invalida para el tratamiento</div>
+		  		</div>
+		  		<div class="campo"><a href="" id="actueles-tratamiento">Tratamientos Actueles</a></div>
 	  		</div>
-	  	</div>
-  		<div class="tratamientos" id="tratmiento-cita-nuevo">
-	  		<div class="campo"><label>Tratamiento</label>
-	  			<textarea name="descripcion" class="alfanumerico" id="tratamiento_descripcion"  placeholder="Tratamiento a realizar" ></textarea>
-	  			<div class="error">Descripcion invalida para el tratamiento</div>
+	  		<div>
+		  		<button id="editar-cita">Guardar</button>
+		  		<button id="cancelar">Cancelar</button>
 	  		</div>
-	  		<div class="campo"><a href="" id="actueles-tratamiento">Tratamientos Actueles</a></div>
-  		</div>
-  		<button id="editar-cita">Guardar</button>
-  		<button id="cancelar">Cancelar</button>
-	</div>
-  </script>
+		</div>
+  	</script>
 
   <script id="popup-reprogramarcita-template" type="text/x-handlebars-template">
   	<input type="hidden" id="id_cita_reprograma" />
@@ -580,6 +1073,7 @@
   				<option value="180">3:00 hrs</option>
   			</select>
   		</div>
+  		<div class="error" id="errorCita">Ya existe una cita para esta fecha</div>
   		<button id="reprogramar-cita">Guardar</button>
   		<button id="cancelar">Cancelar</button>
 	</div>

@@ -40,11 +40,11 @@
   	<div class="titulo">Receta</div>
 	<div class="contenido">
 		<input type="hidden" name="id" />
-		<div class="campoReceta"><input class="" id="" name="" placeholder="(1)  Medicamente y dosis"></input></div>
-		<div class="campoReceta"><input class="" id="" name="" placeholder="(2)  Medicamente y dosis"></input></div>
-		<div class="campoReceta"><input class="" id="" name="" placeholder="(3)  Medicamente y dosis"></input></div>
-		<div class="campoReceta"><input class="" id="" name="" placeholder="(4)  Medicamente y dosis"></input></div>
-		<div class="campoReceta"><input class="" id="" name="" placeholder="(5)  Medicamente y dosis"></input></div>
+		<div class="campoReceta"><input class="inputReceta" id="" name="" placeholder="(1)  Medicamente y dosis"></input></div>
+		<div class="campoReceta"><input class="inputReceta" id="" name="" placeholder="(2)  Medicamente y dosis"></input></div>
+		<div class="campoReceta"><input class="inputReceta" id="" name="" placeholder="(3)  Medicamente y dosis"></input></div>
+		<div class="campoReceta"><input class="inputReceta" id="" name="" placeholder="(4)  Medicamente y dosis"></input></div>
+		<div class="campoReceta"><input class="inputReceta" id="" name="" placeholder="(5)  Medicamente y dosis"></input></div>
   		<button id="crear-receta">Crear</button>
   		<button id="cancelar">Cancelar</button>
 	</div>
@@ -55,5 +55,27 @@
 	<div class="contenido">
 	<div class="campo chico-negritas"><div> Se realizo el pago. La dedua del paciente es <label id="deudaNueva" class="remarcar">$0.00</label> </div></div>
   		<button id="cancelar">Ok</button>
+	</div>
+</script>
+
+<script id="popup-cancelarCita-template" type="text/x-handlebars-template">
+  	<div class="titulo">Cancelar Cita</div>
+	<div class="contenido">
+	<input id="popup-cancelar-chkTratamiento" type="hidden"/>
+	<input id="popup-cancelar-idcita" type="hidden"/>
+	<div class="campo chico-negritas"><div> ¿ Seguro que deseas continuar con la canelacion de la cita ? </div>
+  		<button id="cancela-cita">Si</button>
+  		<button id="cancelar">No</button>
+	</div>
+</script>
+
+<script id="popup-concluirCita-template" type="text/x-handlebars-template">
+  	<div class="titulo">Cancelar Cita</div>
+	<div class="contenido">
+	<input id="popup-cancelar-chkTratamiento" type="hidden"/>
+	<input id="popup-cancelar-idcita" type="hidden"/>
+	<div class="campo chico-negritas"><div> ¿ Seguro que la cita termino ? </div>
+  		<button id="concluir-cita">Si</button>
+  		<button id="cancelar">No</button>
 	</div>
 </script>

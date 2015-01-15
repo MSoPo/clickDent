@@ -3,10 +3,11 @@ clickDent.Views.Paciente = Backbone.View.extend({
 
 	events: {
 		'click .pacientes #guardar' : "guardarPaciente",
-		'change #cp' : 'consultarColonia',
-		'change #colonia' : 'consultarMunicipio',
-		'change #municipio' : 'consultarEstado',
-		'click .edicion .icon-undo' : 'regresarConsulta'
+		'change #cpPac' : 'consultarColonia',
+		'change #coloniaPac' : 'consultarMunicipio',
+		'change #municipioPac' : 'consultarEstado',
+		'click .edicion .icon-undo.edit' : 'regresarConsulta',
+		'click .edicion .icon-paste.edit' : 'editarHistorial',
 	},
 
 	initialize: function() {
@@ -57,13 +58,18 @@ clickDent.Views.Paciente = Backbone.View.extend({
 				}
 			}); 
 
+		}else{
+			this.model = new clickDent.Models.Paciente();
+			app.Models.paciente = undefined;
+			this.edicion = false;
+
 		}
 
 	},
 
 	consultarColonia : function(callback){
 		/***********************************/
-		var cp = $('#cp').val();
+		var cp = $('#cpPac').val();
 		app.Collections.colonias = new clickDent.Collections.Colonias();
 		app.Collections.colonias.fetch({ data: { cp: cp, format: 'json'} ,
 				success:function(data){
@@ -75,7 +81,8 @@ clickDent.Views.Paciente = Backbone.View.extend({
 		        			valor : data.at(i).get('nombre') 
 		        		});
 		        	}
-		        	$('#colonia').html(template);
+		        	$('#coloniaPac').html(template);
+		        	$('#coloniaPac').change();
 
 		   			if(typeof callback == 'function'){
 						callback();
@@ -88,31 +95,37 @@ clickDent.Views.Paciente = Backbone.View.extend({
 	},
 
 	consultarMunicipio : function(callback){
-		var id = $('#colonia').val();
-		var colonia = app.Collections.colonias.get(id);
-		app.Collections.municipios = new clickDent.Collections.Municipios();
-		app.Collections.municipios.fetch({ data: { id: colonia.get('municipio'), format: 'json'} ,
-				success:function(data){
-		        	console.log('Municipios actualizdas');
-		        	var template = "";
-		        	for(var i = 0; i < data.length; i++){
-		        		template += templateSelect({
-		        			id : data.at(i).get('id'), 
-		        			valor : data.at(i).get('nombre') 
-		        		});
-		        	}
-		        	$('#municipio').html(template);
-		        	if(typeof callback == 'function'){
-						callback();
-					}
-		        }
-		    });
+		var id = $('#coloniaPac').val();
+		if(id){
+			var colonia = app.Collections.colonias.get(id);
+			app.Collections.municipios = new clickDent.Collections.Municipios();
+			app.Collections.municipios.fetch({ data: { id: colonia.get('municipio'), format: 'json'} ,
+					success:function(data){
+			        	console.log('Municipios actualizdas');
+			        	var template = "";
+			        	for(var i = 0; i < data.length; i++){
+			        		template += templateSelect({
+			        			id : data.at(i).get('id'), 
+			        			valor : data.at(i).get('nombre') 
+			        		});
+			        	}
+			        	$('#municipioPac').html(template);
+			        	$('#municipioPac').change();
+
+			        	if(typeof callback == 'function'){
+							callback();
+						}
+			        }
+			    });
+		}else {
+			console.log('colonia no encotrada');
+		}
 
 	},
 
 	consultarEstado : function(callback){
 		/***********************************/
-		var id = $('#municipio').val();
+		var id = $('#municipioPac').val();
 		var municipio = app.Collections.municipios.get(id);
 		app.Collections.estados = new clickDent.Collections.Estados();
 		app.Collections.estados.fetch({ data: { id: municipio.get('estado'), format: 'json'} ,
@@ -125,7 +138,9 @@ clickDent.Views.Paciente = Backbone.View.extend({
 		        			valor : data.at(i).get('nombre') 
 		        		});
 		        	}
-		        	$('#estado').html(template);
+		        	$('#estadoPac').html(template);
+		        	//$('#estado').change;
+
 		        	if(typeof callback == 'function'){
 						callback();
 					}
@@ -161,7 +176,31 @@ clickDent.Views.Paciente = Backbone.View.extend({
 	        	self.model.set('medico', app.Models.medico.get('id'));
 	        	self.model.save({}, {  // se genera POST /usuarios  - contenido: {nombre:'Alfonso'}
 		    		success:function(){
-		        	alert("Usuario guardado con exito");
+		    			if(!this.edicion){
+			        		//Crear historial odontodiagrama y desplegar pantalla.
+			        		console.log(self.model.get('id'));
+			        		app.Models.paciente = self.model;
+			        		app.Collections.historial = new clickDent.Collections.Historial();
+			        		app.Collections.historial.add(new clickDent.Models.Historial());
+			        		app.Collections.historial.at(0).set('paciente', app.Models.paciente.get('id'));
+			        		app.Collections.historial.at(0).set('medico', app.Models.medico.get('id'));
+			        		app.Collections.historial.at(0).set('fecha_actualizacion', formatFecha(new Date()));
+			        		app.Collections.historial.at(0).save({}, {
+			        			success: function(){
+			        				var idHistorial = app.Collections.historial.at(0).get('id');
+			        				app.Collections.odontodiagrama = new clickDent.Collections.Odontodiagrama();
+			        				app.Collections.odontodiagrama.add(new clickDent.Models.Odontodiagrama());
+			        				app.Collections.odontodiagrama.at(0).set('historial', idHistorial);
+			        				app.Collections.odontodiagrama.at(0).save({}, {
+			        					success: function(){
+			        						console.log(app.Collections.odontodiagrama.at(0).get('id'));
+			        						clickDent.app.navigate('historial/', {trigger : true});
+											window.scroll(0,0)
+			        					}
+			        				});
+			        			}
+			        		});
+		        		}
 		    		}
 				});
 	    		}
@@ -338,6 +377,14 @@ clickDent.Views.Paciente = Backbone.View.extend({
 		});
 
 		return false;
+	},
+
+	editarHistorial : function(){
+		$('#interaccion').load('/historial/', function(data){
+      		app.Views.historial.render();
+      		app.Views.historial.activarEdicion();
+      		app.Views.menuView.establearAncho();
+    	});
 	}
 
 	

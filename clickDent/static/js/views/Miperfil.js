@@ -44,6 +44,7 @@ clickDent.Views.Miperfil = Backbone.View.extend({
 		var contrasenaNueva = $('#nueva').val();
 		if(contrasenaActual && contrasenaNueva)
 			$.ajax({
+			  global: true,
 			  type: "POST",
 			  url: "/cambiarContrasena/",
 			  data: { actual : contrasenaActual, nueva : contrasenaNueva },

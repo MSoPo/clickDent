@@ -1,0 +1,440 @@
+	<seccion class="tabs pacientes">
+		<div class="contenidos-tabs">
+
+			<div class="tab2">
+				<div class="titulo-tab">Historia Clinica</div>
+				<div class="edicion valor-conf">
+					<a href="#" class="icon-undo edit"><span>Cancelar</span></a> <label> Clave del paciente :  <span class="requerido" id="calvePaciente">000001</span> </label><a href="#" class="icon-profile edit"><span>Datos</span></a>
+				</div>
+				<div class="valor-conf">
+					<label> Ultima actualizacion :  <span class="requerido" id="historial_actualizacion">23-Nov-2014</span> </label>
+				</div>
+				<div class="valor-conf separador campo_detalle">
+					<label>¿Esta embarazada?</label>
+					<div class="check-inline no-margin"><input type="radio" name="embarazo" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="embarazo" value="N"><label>No</label></div>
+					<div class="datos_detalle">
+						<label>¿Cuantas semanas tiene?</label>
+						<input  name="embarazo_detalle"  />
+					</div>
+				</div>
+				<div class="valor-conf separador campo_detalle">
+					<label>¿Se encuentra en mal estado de salud?</label>
+					<div class="check-inline no-margin"><input type="radio" name="estado_salud" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="estado_salud" value="N"><label>No</label></div>
+					<div class="datos_detalle">
+						<label>¿Por que?</label>
+						<input name="estado_salud_detalle" />
+					</div>
+				</div>
+				<div class="valor-conf separador campo_detalle">
+					<label>¿Es alegico a algun medicamento?</label>
+					<div class="check-inline no-margin"><input type="radio" name="alergia" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="alergia" value="N"><label>No</label></div>
+					<div class="datos_detalle">
+						<label>¿Cuales?</label>
+						<input name="alergia_detalle" />
+					</div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Ha tenido problema con anestesicos locales?</label>
+					<div class="check-inline no-margin"><input type="radio" name="anestecia" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="anestecia" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Respira por la boca y no por la nariz?</label>
+					<div class="check-inline no-margin"><input type="radio" name="respiracion" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="respiracion" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Tiene dificultad al masticar?</label>
+					<div class="check-inline no-margin"><input type="radio" name="masticar" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="masticar" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Le sangran las encias con facilidad?</label>
+					<div class="check-inline no-margin"><input type="radio" name="encias" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="encias" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Concidera que tiene mal aliento?</label>
+					<div class="check-inline no-margin"><input type="radio" name="aliento" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="aliento" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Rechina los dientes?</label>
+					<div class="check-inline no-margin"><input type="radio" name="rechinar" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="rechinar" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Le duele la boca al lavarse?</label>
+					<div class="check-inline no-margin"><input type="radio" name="dolor_boca" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="dolor_boca" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Se le queda comida entre los dientes?</label>
+					<div class="check-inline no-margin"><input type="radio" name="comida_dientes" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="comida_dientes" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Se cepilla 3 veces al dia?</label>
+					<div class="check-inline no-margin"><input type="radio" name="cepillar" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="cepillar" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>¿Usa hilo dental?</label>
+					<div class="check-inline no-margin"><input type="radio" name="hilo_dental" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="hilo_dental" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf">
+					<label>¿Que clase de cepillo usa?</label>
+					<input name="cepillo" />
+				</div>
+				<div class="valor-conf">
+					<label>¿Cuando fue la ultima vez que visito al dentista?</label>
+					<input name="visita_dentista">
+				</div>
+			</div>
+			<div class="tab">
+				<div class="titulo-tab">¿Padece alguna de las siguientes enfermedades?</div>
+				<div class="valor-conf separador">
+					<label>Problemas del aparato digestivo</label>
+					<div class="check-inline no-margin"><input type="radio" name="digestivo" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="digestivo" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Problemas del aparato respiratorio</label>
+					<div class="check-inline no-margin"><input type="radio" name="respiratorio" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="respiratorio" value="N"><label>No</label></div>
+				</div>	
+				<div class="valor-conf separador">
+					<label>Problemas Cardiacos</label>
+					<div class="check-inline no-margin"><input type="radio" name="cardiaco" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="cardiaco" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Padeciminetos Renales </label>
+					<div class="check-inline no-margin"><input type="radio" name="renal" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="renal" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Problemas de riñon </label>
+					<div class="check-inline no-margin"><input type="radio" name="rinon" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="rinon" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Problemas Nurologicos </label>
+					<div class="check-inline no-margin"><input type="radio" name="nehurologico" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="nehurologico" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Problemas de coagulacion</label>
+					<div class="check-inline no-margin"><input type="radio" name="coagulacion" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="coagulacion" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Problemas de tiroides</label>
+					<div class="check-inline no-margin"><input type="radio" name="tiroides" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="tiroides" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Problemas sanguineos</label>
+					<div class="check-inline no-margin"><input type="radio" name="sanguineo" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="sanguineo" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Presión arterial alta o baja</label>
+					<div class="check-inline no-margin"><input type="radio" name="presion" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="presion" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Diabetes</label>
+					<div class="check-inline no-margin"><input type="radio" name="diabetes" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="diabetes" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Cancer o tumores</label>
+					<div class="check-inline no-margin"><input type="radio" name="cancer" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="cancer" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Hepatitis</label>
+					<div class="check-inline no-margin"><input type="radio" name="hepatitis" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="hepatitis" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>VIH</label>
+					<div class="check-inline no-margin"><input type="radio" name="vih" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="vih" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Anemia </label>
+					<div class="check-inline no-margin"><input type="radio" name="anemia" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="anemia" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf separador">
+					<label>Enfermedad Venerea </label>
+					<div class="check-inline no-margin"><input type="radio" name="venerea" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="venerea" value="N"><label>No</label></div>
+				</div>
+				<div class="valor-conf">
+					<label>Epilepsia o convulsiones </label>
+					<div class="check-inline no-margin"><input type="radio" name="epilepcia" value="S"><label>Si</label></div>
+					<div class="check-inline no-margin"><input type="radio" name="epilepcia" value="N"><label>No</label></div>
+				</div>
+			</div>
+			<div class="tab centrado">
+				<div class="titulo-tab">Diagrama Odontológico</div>
+				<div class="simbologia">
+					<table>
+						<thead>
+							<tr>
+								<th colspan="2">Simbologia</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr><td>Diente ausente</td><td class="ausente"></td></tr>
+							<tr><td>Diente a extraer</td><td class="extraer"></td></tr>
+							<tr><td>Caries</td><td class="caries"></td></tr>
+							<tr><td>Obturación</td><td class="obturacion"></td></tr>
+							<tr><td>Corona</td><td class="corona"></td></tr>
+							<tr><td>Tramo</td><td class="tramo"></td></tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="dienteBloque">
+					<div class="dienteCompleto">
+						<img id="d017"  src="{{STATIC_URL}}img/dcd/d017.png" class="diente" />
+						<img id="d017a"  src="{{STATIC_URL}}img/dcd/d017a.png" class="dienteAuxiliar" />
+						<img id="d017b"  src="{{STATIC_URL}}img/dcd/d017b.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d018"  src="{{STATIC_URL}}img/dcd/d018.png" class="diente" />
+						<img id="d018a"  src="{{STATIC_URL}}img/dcd/d018a.png" class="dienteAuxiliar" />
+						<img id="d018b"  src="{{STATIC_URL}}img/dcd/d018b.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d019"  src="{{STATIC_URL}}img/dcd/d019.png" class="diente" />
+						<img id="d019a"  src="{{STATIC_URL}}img/dcd/d019a.png" class="dienteAuxiliar" />
+						<img id="d019b"  src="{{STATIC_URL}}img/dcd/d019b.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d020"  src="{{STATIC_URL}}img/dcd/d020.png" class="diente" />
+						<img id="d020a"  src="{{STATIC_URL}}img/dcd/d020a.png" class="dienteAuxiliar" />
+						<img id="d020b"  src="{{STATIC_URL}}img/dcd/d020b.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d021"  src="{{STATIC_URL}}img/dcd/d021.png" class="diente" />
+						<img id="d021a"  src="{{STATIC_URL}}img/dcd/d021a.png" class="dienteAuxiliar" />
+						<img id="d021b"  src="{{STATIC_URL}}img/dcd/d021b.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d022"  src="{{STATIC_URL}}img/dcd/d022.png" class="diente" />
+						<img id="d022a"  src="{{STATIC_URL}}img/dcd/d022a.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d023"  src="{{STATIC_URL}}img/dcd/d023.png" class="diente" />
+						<img id="d023a"  src="{{STATIC_URL}}img/dcd/d023a.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d024"  src="{{STATIC_URL}}img/dcd/d024.png" class="diente" />
+						<img id="d024a"  src="{{STATIC_URL}}img/dcd/d024a.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d025"  src="{{STATIC_URL}}img/dcd/d025.png" class="diente" />
+						<img id="d025a"  src="{{STATIC_URL}}img/dcd/d025a.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d026"  src="{{STATIC_URL}}img/dcd/d026.png" class="diente" />
+						<img id="d026a"  src="{{STATIC_URL}}img/dcd/d026a.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d027"  src="{{STATIC_URL}}img/dcd/d027.png" class="diente" />
+						<img id="d027a"  src="{{STATIC_URL}}img/dcd/d027a.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d028"  src="{{STATIC_URL}}img/dcd/d028.png" class="diente" />
+						<img id="d028a"  src="{{STATIC_URL}}img/dcd/d028a.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d029"  src="{{STATIC_URL}}img/dcd/d029.png" class="diente" />
+						<img id="d029a"  src="{{STATIC_URL}}img/dcd/d029a.png" class="dienteAuxiliar" />
+						<img id="d029b"  src="{{STATIC_URL}}img/dcd/d029b.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d030"  src="{{STATIC_URL}}img/dcd/d030.png" class="diente" />
+						<img id="d030a"  src="{{STATIC_URL}}img/dcd/d030a.png" class="dienteAuxiliar" />
+						<img id="d030b"  src="{{STATIC_URL}}img/dcd/d030b.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d031"  src="{{STATIC_URL}}img/dcd/d031.png" class="diente" />
+						<img id="d031a"  src="{{STATIC_URL}}img/dcd/d031a.png" class="dienteAuxiliar" />
+						<img id="d031b"  src="{{STATIC_URL}}img/dcd/d031b.png" class="dienteAuxiliar" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d032"  src="{{STATIC_URL}}img/dcd/d032.png" class="diente" />
+						<img id="d032a"  src="{{STATIC_URL}}img/dcd/d032a.png" class="dienteAuxiliar" />
+						<img id="d032b"  src="{{STATIC_URL}}img/dcd/d032b.png" class="dienteAuxiliar" />
+					</div>
+				</div>
+				<div class="dienteBloque">
+					<div class="dienteCompleto">
+						<img id="d001b"  src="{{STATIC_URL}}img/dcd/d001b.png" class="dienteAuxiliar" />
+						<img id="d001a"  src="{{STATIC_URL}}img/dcd/d001a.png" class="dienteAuxiliar" />
+						<img id="d001"  src="{{STATIC_URL}}img/dcd/d001.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d002b"  src="{{STATIC_URL}}img/dcd/d002b.png" class="dienteAuxiliar" />
+						<img id="d002a"  src="{{STATIC_URL}}img/dcd/d002a.png" class="dienteAuxiliar" />
+						<img id="d002"  src="{{STATIC_URL}}img/dcd/d002.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d003b"  src="{{STATIC_URL}}img/dcd/d003b.png" class="dienteAuxiliar" />
+						<img id="d003a"  src="{{STATIC_URL}}img/dcd/d003a.png" class="dienteAuxiliar" />
+						<img id="d003"  src="{{STATIC_URL}}img/dcd/d003.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d004b"  src="{{STATIC_URL}}img/dcd/d004b.png" class="dienteAuxiliar" />
+						<img id="d004a"  src="{{STATIC_URL}}img/dcd/d004a.png" class="dienteAuxiliar" />
+						<img id="d004"  src="{{STATIC_URL}}img/dcd/d004.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d005b"  src="{{STATIC_URL}}img/dcd/d005b.png" class="dienteAuxiliar" />
+						<img id="d005a"  src="{{STATIC_URL}}img/dcd/d005a.png" class="dienteAuxiliar" />
+						<img id="d005"  src="{{STATIC_URL}}img/dcd/d005.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d006a"  src="{{STATIC_URL}}img/dcd/d006a.png" class="dienteAuxiliar" />
+						<img id="d006"  src="{{STATIC_URL}}img/dcd/d006.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d007a"  src="{{STATIC_URL}}img/dcd/d007a.png" class="dienteAuxiliar" />
+						<img id="d007"  src="{{STATIC_URL}}img/dcd/d007.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d008a"  src="{{STATIC_URL}}img/dcd/d008a.png" class="dienteAuxiliar" />
+						<img id="d008"  src="{{STATIC_URL}}img/dcd/d008.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d009a"  src="{{STATIC_URL}}img/dcd/d009a.png" class="dienteAuxiliar" />
+						<img id="d009"  src="{{STATIC_URL}}img/dcd/d009.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d010a"  src="{{STATIC_URL}}img/dcd/d010a.png" class="dienteAuxiliar" />
+						<img id="d010"  src="{{STATIC_URL}}img/dcd/d010.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d011a"  src="{{STATIC_URL}}img/dcd/d011a.png" class="dienteAuxiliar" />
+						<img id="d011"  src="{{STATIC_URL}}img/dcd/d011.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d012a"  src="{{STATIC_URL}}img/dcd/d012a.png" class="dienteAuxiliar" />
+						<img id="d012"  src="{{STATIC_URL}}img/dcd/d012.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d013b"  src="{{STATIC_URL}}img/dcd/d013b.png" class="dienteAuxiliar" />
+						<img id="d013a"  src="{{STATIC_URL}}img/dcd/d013a.png" class="dienteAuxiliar" />
+						<img id="d013"  src="{{STATIC_URL}}img/dcd/d013.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d014b"  src="{{STATIC_URL}}img/dcd/d014b.png" class="dienteAuxiliar" />
+						<img id="d014a"  src="{{STATIC_URL}}img/dcd/d014a.png" class="dienteAuxiliar" />
+						<img id="d014"  src="{{STATIC_URL}}img/dcd/d014.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d015b"  src="{{STATIC_URL}}img/dcd/d015b.png" class="dienteAuxiliar" />
+						<img id="d015a"  src="{{STATIC_URL}}img/dcd/d015a.png" class="dienteAuxiliar" />
+						<img id="d015"  src="{{STATIC_URL}}img/dcd/d015.png" class="diente" />
+					</div>
+					<div class="dienteCompleto">
+						<img id="d016b"  src="{{STATIC_URL}}img/dcd/d016b.png" class="dienteAuxiliar" />
+						<img id="d016a"  src="{{STATIC_URL}}img/dcd/d016a.png" class="dienteAuxiliar" />
+						<img id="d016"  src="{{STATIC_URL}}img/dcd/d016.png" class="diente" />
+					</div>
+				</div>
+			</div>
+			<div class="tab">
+				<div class="titulo-tab">Diagnostico y plan de tratamiento</div>
+				<div class="valor-conf separador">
+					<label>Diagnostico</label>
+					<textarea name="diagnostico"></textarea>
+				</div>
+				<div class="planTratamientos">
+					<table>
+						<thead>
+							<th>Tratamiento</th>
+							<th>Fecha</th>
+						</thead>
+						<tbody>
+							<tr>
+								<input type="hidden" class="idPlanTratamiento" />
+								<td class="tratamientoDescripcion"><input/></td><td class="calendarioPlanTratamiento"><input placeholder="aaaa-mm-dd" id="calendar-plan1"/><button id="calendar-triggerPlan1">...</button>
+								<script>
+								    Calendar.setup({
+								        trigger    : "calendar-triggerPlan1",
+								        inputField : "calendar-plan1",
+								        dateFormat : "%Y-%m-%d",
+								        onSelect   : function() { this.hide() }
+								    });
+								</script></td>
+							</tr>
+							<tr>
+								<input type="hidden" class="idPlanTratamiento" />
+								<td class="tratamientoDescripcion"><input/></td><td class="calendarioPlanTratamiento"><input placeholder="aaaa-mm-dd" id="calendar-plan2"/><button id="calendar-triggerPlan2">...</button>
+								<script>
+								    Calendar.setup({
+								        trigger    : "calendar-triggerPlan2",
+								        inputField : "calendar-plan2",
+								        dateFormat : "%Y-%m-%d",
+								        onSelect   : function() { this.hide() }
+								    });
+								</script></td>
+							</tr>
+							<tr>
+								<input type="hidden" class="idPlanTratamiento" />
+								<td class="tratamientoDescripcion"><input/></td><td class="calendarioPlanTratamiento"><input placeholder="aaaa-mm-dd" id="calendar-plan3"/><button id="calendar-triggerPlan3">...</button>
+								<script>
+								    Calendar.setup({
+								        trigger    : "calendar-triggerPlan3",
+								        inputField : "calendar-plan3",
+								        dateFormat : "%Y-%m-%d",
+								        onSelect   : function() { this.hide() }
+								    });
+								</script></td>
+							</tr>
+							<tr>
+								<input type="hidden" class="idPlanTratamiento" />
+								<td class="tratamientoDescripcion"><input/></td><td class="calendarioPlanTratamiento"><input placeholder="aaaa-mm-dd" id="calendar-plan4"/><button id="calendar-triggerPlan4">...</button>
+								<script>
+								    Calendar.setup({
+								        trigger    : "calendar-triggerPlan4",
+								        inputField : "calendar-plan4",
+								        dateFormat : "%Y-%m-%d",
+								        onSelect   : function() { this.hide() }
+								    });
+								</script></td>
+							</tr>
+							<tr>
+								<input type="hidden" class="idPlanTratamiento" />
+								<td class="tratamientoDescripcion"><input/></td><td class="calendarioPlanTratamiento"><input placeholder="aaaa-mm-dd" id="calendar-plan5"/><button id="calendar-triggerPlan5">...</button>
+								<script>
+								    Calendar.setup({
+								        trigger    : "calendar-triggerPlan5",
+								        inputField : "calendar-plan5",
+								        dateFormat : "%Y-%m-%d",
+								        onSelect   : function() { this.hide() }
+								    });
+								</script></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="botones-form">
+			<button class="button" id="guardar_historial">
+				Guardar
+			</button>
+			</div>
+		</div>
+	</seccion>

@@ -119,19 +119,11 @@ clickDent.Views.Configuracion = Backbone.View.extend({
 		app.Models.medico.sync("update", app.Models.medico, {
   			beforeSend: sendAuthentication 
  		});
- 		app.Models.configuracion = new clickDent.Models.Configuracion();
+
  		app.Models.configuracion = formToModel(this.$el, app.Models.configuracion, 'configuracion',  ['id']);
  		app.Collections.configuraciones = new clickDent.Collections.Configuraciones();
  		app.Collections.configuraciones.add(app.Models.configuracion);
  		app.Models.configuracion.sync("update", app.Models.configuracion, {
-  			beforeSend: sendAuthentication 
- 		});
-
- 		app.Models.consultorio = new clickDent.Models.Consultorio();
- 		app.Models.consultorio = formToModel(this.$el, app.Models.consultorio, 'consultorio',  ['id','nombre']);
- 		app.Collections.consultorios = new clickDent.Collections.Consultorios();
- 		app.Collections.consultorios.add(app.Models.consultorio);
- 		app.Models.consultorio.sync("update", app.Models.consultorio, {
   			beforeSend: sendAuthentication 
  		});
 
@@ -141,6 +133,18 @@ clickDent.Views.Configuracion = Backbone.View.extend({
  		app.Collections.direcciones.add(app.Models.direccion);
  		app.Models.direccion.sync("update", app.Models.direccion, {
   			beforeSend: sendAuthentication 
+ 		});
+
+ 		app.Models.consultorio = formToModel(this.$el, app.Models.consultorio, 'consultorio',  ['id','nombre']);
+ 		app.Models.consultorio.set('direccion', app.Models.direccion.get('id'));
+ 		app.Collections.consultorios = new clickDent.Collections.Consultorios();
+ 		app.Collections.consultorios.add(app.Models.consultorio);
+ 		app.Models.consultorio.sync("update", app.Models.consultorio, {
+  			beforeSend: sendAuthentication,
+  			success: function(data){
+  				console.log(data);
+  				$('#formularioConsultorio').submit();
+  			}
  		});
 
  		app.Collections.formaciones = new clickDent.Collections.Formaciones();
@@ -157,7 +161,7 @@ clickDent.Views.Configuracion = Backbone.View.extend({
   			beforeSend: sendAuthentication 
  		});
 
- 		$('#formularioConsultorio').submit();
+ 		
 
  		console.log(app.Collections.formaciones.toJSON());
 

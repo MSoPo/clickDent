@@ -3,11 +3,11 @@ clickDent.Views.BuscarPaciente = Backbone.View.extend({
 
 	events: {
 		'click #buscarPaciente' : 'buscarPaciente',
-		'click .icon-profile' : 'datosPaciente',
-		'click .icon-paste' : 'datosPaciente',
-		'click .icon-calendar' : 'buscarCitas',
-		'click .icon-aid' : 'tratamientosCitas',
-		'click .icon-pencil' : 'editarPaciente',
+		'click .icon-profile.busqueda' : 'datosPaciente',
+		'click .icon-paste.busqueda' : 'datosHistorial',
+		'click .icon-calendar.busqueda' : 'buscarCitas',
+		'click .icon-aid.busqueda' : 'tratamientosCitas',
+		'click .icon-pencil.busqueda' : 'editarPaciente',
 	},
 
 	initialize: function() {
@@ -79,8 +79,8 @@ clickDent.Views.BuscarPaciente = Backbone.View.extend({
 											cp : colonia.at(0).get('cp'),
 											});
 
-										trSec.next().show();
 										trSec.next().find('td').html(templateConsultarDatosPac(app.Models.paciente.toJSON()));
+										trSec.next().show();
 									} 
 						});
 							} 
@@ -91,6 +91,49 @@ clickDent.Views.BuscarPaciente = Backbone.View.extend({
 		});  
 	},
 
+	datosHistorial : function(ev){
+		$('.detalle').hide();
+		$('.detalle td').html('');
+		
+		var trSec = $(ev.target).parent().parent();
+		var id = parseInt(trSec.attr('id').split('_')[1]);
+
+		var historial = new clickDent.Collections.Historial();
+
+		historial.fetch({ data: { paciente : id, medico : app.Models.medico.get('id') } ,
+	      success:function(data){
+
+	      	var tratamientos = new clickDent.Collections.Tratamientos();
+	      	tratamientos.fetch({ data: {historial : data.at(0).get('id'), 'ordering' : 'fecha_inicio' },
+	      		success:function(trats){
+	      			data.at(0).set('tratamientos', trats.toJSON());
+	      			trSec.next().find('td').html(templateConsultaHistorial(data.at(0).toJSON()));
+			        trSec.next().show();
+
+			        var idHistorial = data.at(0).get('id');
+
+			        app.Collections.odontodiagrama = new clickDent.Collections.Odontodiagrama();
+
+						app.Collections.odontodiagrama.fetch( { data : { 'historial' : idHistorial },
+							success : function(data){
+								app.Models.odontodiagrama = data.at(0);
+
+								for( var atr in app.Models.odontodiagrama.attributes ) { 
+									var valor = app.Models.odontodiagrama.get(atr);
+									if(valor !=  "N"){
+										$('#' + atr).addClass(utils.constantes.coloresBD[valor]);
+									}
+								} 
+
+							}
+						});
+	      		}
+	      	});
+	      }
+	    });
+		
+	},
+
 	buscarCitas : function(ev) {
 		$('.detalle').hide();
 		var trSec = $(ev.target).parent().parent();
@@ -98,7 +141,7 @@ clickDent.Views.BuscarPaciente = Backbone.View.extend({
 
 		var citasPaciente = new clickDent.Collections.Citas();
 
-		citasPaciente.fetch({ data: { paciente : id, medico : app.Models.medico.get('id'), ordering : 'fecha,hora_fin' } ,
+		citasPaciente.fetch({ data: { paciente : id, medico : app.Models.medico.get('id'), ordering : '-fecha,-hora_fin' } ,
 	      success:function(data){
 	      	if(citasPaciente.length > 0){
 		      	citasPaciente.forEach(function(cita){

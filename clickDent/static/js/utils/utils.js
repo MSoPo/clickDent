@@ -53,9 +53,18 @@ function modelToForm(form, model){
     for (var atr in model.attributes ){     
         var campo = form.find('input[name=' + (atr) + ']');
         if (campo.length > 0)
-            campo.val(model.get(atr));
+
+            if(campo.length > 1){
+                campo.val([model.get(atr)]);
+            }else{
+                campo.val(model.get(atr));
+            }
         else{
             campo = form.find('select[name=' + (atr) + ']').val(model.get(atr));
+        }
+
+        if (campo.length == 0) {
+            campo = form.find('textarea[name=' + (atr) + ']').val(model.get(atr));
         }
     }
         
@@ -157,7 +166,7 @@ function comparaHora(hora_fin){
     var minutoActual = fechaActual.getMinutes();
 
     hf = parseInt(hf);
-    var ha = horaAcutal + "" + minutoActual;
+    var ha = horaAcutal + "" + rellenarCaracter("0", 2, minutoActual);
     ha = parseInt(ha);
 
     if(hf > ha){
@@ -364,6 +373,13 @@ function convertirADecimal(valor){
     return valor;
 }
 
+function calcularEdad(fechaNacimiento){
+    var fecha = new Date(fechaNacimiento);
+    var hoy = new Date();
+    var ed = parseInt((hoy -fecha)/365/24/60/60/1000);
+    return ed;
+}
+
 utils = {
     constantes :  {
         estatus : {
@@ -389,7 +405,28 @@ utils = {
             9 : "Pagada",
             10 : "Tratamiento activo",
             11 : "Tratamineto finalizado",
-        }
+        },
+
+        colores : ['caries', 'obturacion', 'ausente', 'extraer', 'corona', 'tramo'],
+
+        coloresBD :  {
+                DA : 'ausente',
+                DE : 'extraer',
+                DC : 'caries',
+                O  : 'obturacion',
+                C  : 'corona',
+                T  : 'tramo',
+            },
+
+        coloresJS :  {
+                N           : 'N',
+                ausente     : 'DA',
+                extraer     : 'DE',
+                caries      : 'DC',
+                obturacion  : 'O',
+                corona      : 'C',
+                tramo       : 'T',
+            }
 
     }
 }

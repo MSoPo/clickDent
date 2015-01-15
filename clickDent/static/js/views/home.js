@@ -8,24 +8,26 @@ clickDent.Views.Home = Backbone.View.extend({
 		'click #pagarCita' : 'pagarCita',
 		'click #receta' : 'receta',
 		'click .finalizarCita' : 'finalizarCita',
+		'click .cancelarCita' : 'cancelarCita',
 		'click .finalizarCitaPendiente' : 'finalizarCitaPendiente',
 		'click .cancelarCitaPendiente' : 'cancelarCitaPendiente',
 		'click .reprogramarPendientes' : 'reprogramarPendientes',
+		'click .historialHome' : 'historial',
+		'click .clavePacienteHome' : 'clavePacienteHome',
+		'click .citasAnterioresHome' : 'citasAnterioresHome',
 	},
 
 	initialize : function(){
-
+	
 	},
 
 	actualizarCitas : function() {
-		indice = -1;
 		var self = this;
 		app.Collections.citasInicio = new clickDent.Collections.Citas();
 		app.Collections.citasInicio.fetch({ data: {estatus : 1, fecha : consultaDate(new Date()), ordering : 'hora_fin' } ,
 			success:function(data){
-
+				indice = -1;
 				app.Collections.citasInicio.forEach(self.cambiarCita, this);
-
 
 				var ct1 = app.Collections.citasInicio.at(indice);
 				var ct2 = app.Collections.citasInicio.at(indice+1);
@@ -87,7 +89,7 @@ clickDent.Views.Home = Backbone.View.extend({
 					citaAnteriores.fetch({ data: { paciente : pc1.get('id') , ordering :  '-fecha,-hora_inicio'} ,
 						success:function(data){
 							if(citaAnteriores.length > 1){
-								citas.cita1.paciente.ultimacita = convertDate(citaAnteriores.at(1).get('fecha'));
+								citas.cita1.paciente.ultimacita = convertDate(citaAnteriores.at(1).get('fecha') + ' 00:00:00');
 							}
 
 							if(citas.cita1.tratamiento){
@@ -199,12 +201,69 @@ clickDent.Views.Home = Backbone.View.extend({
 		return false;
 	},
 
+	historial : function(ev){
+		var buscar = $(ev.target).parent().parent().find('.clavePaciente a').html();
+		clickDent.app.navigate('paciente/');
+	    $('#interaccion').load('/buscarPaciente/', function(data){
+			app.Views.buscarPaciente.render(buscar);
+	      	$('td .icon-paste').click();
+	      	$('.itemMenu').removeClass('seleccion');
+			$('#buscarPaciente').addClass('seleccion');
+	    });
+		return false;
+	},
+
+	clavePacienteHome : function(ev){
+		var buscar = $(ev.target).parent().parent().find('.clavePaciente a').html();
+		clickDent.app.navigate('paciente/');
+	    $('#interaccion').load('/buscarPaciente/', function(data){
+			app.Views.buscarPaciente.render(buscar);
+	      	$('td .icon-profile').click();
+	      	$('.itemMenu').removeClass('seleccion');
+			$('#buscarPaciente').addClass('seleccion');
+	    });
+		return false;
+	},
+
+	citasAnterioresHome : function(ev) {
+		var buscar = $(ev.target).parent().parent().find('.clavePaciente a').html();
+		clickDent.app.navigate('paciente/');
+	    $('#interaccion').load('/buscarPaciente/', function(data){
+			app.Views.buscarPaciente.render(buscar);
+	      	$('td .icon-calendar').click();
+	      	$('.itemMenu').removeClass('seleccion');
+			$('#buscarPaciente').addClass('seleccion');
+	    });
+		return false;
+	},
+
 	finalizarCita : function(ev){
-		console.log('finalizar Cita');
+		app.Views.popup.render('popup-concluirCita-template');
+		app.Views.popup.mostrar();
+		var chkTratamineto = $(ev.target).parent().parent().find('.chkTratamiento').is(':checked');
+		var idCita = $(ev.target).parent().parent().parent().find('.idCita').val();
+		$('#popup-cancelar-chkTratamiento').val(chkTratamineto ? 1 : 0);
+		$('#popup-cancelar-idcita').val(idCita);
+
+		/*console.log('finalizar Cita');
+		var chkTratamineto = $(ev.target).parent().parent().find('.chkTratamiento').is(':checked');
 		var idCita = $(ev.target).parent().parent().parent().find('.idCita').val();
 		var cita = app.Collections.citasInicio.findWhere({ id : parseInt(idCita) });
-		cita.set('estatus', 3)
-		cita.save();
+		cita.set('estatus', utils.constantes.estatus.realizada)
+		cita.save({}, {  
+			    		success:function(){
+			    			if(chkTratamineto){
+								var lstTratamiento = new clickDent.Collections.Tratamientos();
+								lstTratamiento.fetch({ data: {id : cita.get('tratamiento')},
+					        		success : function(data){
+					        			data.at(0).set('estatus', utils.constantes.estatus.tratamientoFinalizado);
+					        			data.at(0).save();
+					        		}
+					        	});
+							}
+							app.Views.menuView.refrescarPantalla();	
+						}
+					});*/
 	},
 
 	finalizarCitaPendiente : function(ev){
@@ -216,7 +275,11 @@ clickDent.Views.Home = Backbone.View.extend({
 			success:function(data){
 				console.log(data);
 				citalist.at(0).set('estatus',  utils.constantes.estatus.realizada);
-				citalist.at(0).save();
+				citalist.at(0).save({}, {
+					success: function(ev) {
+						app.Views.menuView.refrescarPantalla();
+					}
+				});
 				if(chkTratamineto){
 					var lstTratamiento = new clickDent.Collections.Tratamientos();
 					lstTratamiento.fetch({ data: {id : data.at(0).get('tratamiento')},
@@ -232,6 +295,17 @@ clickDent.Views.Home = Backbone.View.extend({
 		return false;
 	},
 
+	cancelarCita : function(ev){
+		app.Views.popup.render('popup-cancelarCita-template');
+		app.Views.popup.mostrar();
+		var chkTratamineto = $(ev.target).parent().parent().find('.chkTratamiento').is(':checked');
+		var idCita = $(ev.target).parent().parent().parent().find('.idCita').val();
+		$('#popup-cancelar-chkTratamiento').val(chkTratamineto ? 1 : 0);
+		$('#popup-cancelar-idcita').val(idCita);
+		
+		
+	},
+
 	cancelarCitaPendiente : function(ev){
 		console.log('finalizar Pendiente Cita');
 		var idCita = $(ev.target).parent().parent().find('.idCita').val();
@@ -241,7 +315,11 @@ clickDent.Views.Home = Backbone.View.extend({
 			success:function(data){
 				console.log(data);
 				data.at(0).set('estatus', utils.constantes.estatus.cancelada);
-				data.at(0).save();
+				data.at(0).save({}, {
+					success: function(ev) {
+						app.Views.menuView.refrescarPantalla();
+					}
+				});
 				if(chkTratamineto){
 					var lstTratamiento = new clickDent.Collections.Tratamientos();
 					lstTratamiento.fetch({ data: {id : data.at(0).get('tratamiento')},

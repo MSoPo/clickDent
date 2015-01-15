@@ -12,9 +12,10 @@ class TratamientoSerializer(serializers.HyperlinkedModelSerializer):
 	paciente = serializers.PrimaryKeyRelatedField(many=False)
 	estatus = serializers.PrimaryKeyRelatedField(many=False)
 	estatus_pago = serializers.PrimaryKeyRelatedField(many=False)
+	historial = serializers.PrimaryKeyRelatedField(many=False)
 	class Meta:
 		model = Tratamiento
-		fields = ('id','descripcion','total_precio','fecha_liquidacion','fecha_inicio', 'estatus', 'estatus_pago', 'paciente', 'medico')
+		fields = ('id','descripcion','total_precio','fecha_liquidacion','fecha_inicio', 'estatus', 'estatus_pago', 'paciente', 'medico', 'historial')
 
 class PagoTratamientoSerializer(serializers.HyperlinkedModelSerializer):
 	tratamiento = serializers.PrimaryKeyRelatedField(many=False)

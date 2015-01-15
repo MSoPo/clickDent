@@ -5,6 +5,7 @@ from direccion.views import *
 from medico.views import *
 from paciente.views import *
 from catalogo.views import *
+from historial.views import *
 from tratamiento.views import *
 from cita.views import *
 from django.contrib import admin
@@ -15,10 +16,10 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'paciente', PacienteViewSet)
-router.register(r'estadocivil', EspecialidadViewSet)
+router.register(r'especialidad', EspecialidadViewSet)
 router.register(r'ocupacion', EstatusViewSet)
 router.register(r'origen', OrigenViewSet)
-router.register(r'estadoCivil', EstadoCivilViewSet)
+router.register(r'estadocivil', EstadoCivilViewSet)
 router.register(r'estatus', EstatusViewSet)
 router.register(r'pais', PaisViewSet)
 router.register(r'estado', EstadoViewSet)
@@ -32,6 +33,8 @@ router.register(r'preciotratamiento', PrecioTratamientoViewSet)
 router.register(r'tratamiento',TratamientoViewSet)
 router.register(r'cita', CitaViewSet)
 router.register(r'pago', PagoTratamientoViewSet)
+router.register(r'historial', HistorialViewSet)
+router.register(r'odontodiagrama', OdontodiagramaViewSet)
 
 
 
@@ -64,6 +67,7 @@ urlpatterns = patterns('',
     url(r'^miperfil/', miperfil, name="miperfil"),
     url(r'^receta/', receta, name="receta"),
     url(r'^paciente/', paciente, name="paciente"),
+    url(r'^historial/', historial, name="historial"),
     url(r'^calendario/', calendario, name="calendario"),
     url(r'^tratamientos/', tratamientos, name="tratamientos"),
     url(r'^pagosPendientes/', pagosPendientes, name="pagosPendientes"),

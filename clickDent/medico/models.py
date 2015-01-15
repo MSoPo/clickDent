@@ -45,6 +45,9 @@ class Configuracion(models.Model):
 	hora_consulta_fin=models.TimeField()
 	duracion_consulta=models.IntegerField()
 	notificacion_mail=models.BooleanField()
+	receta=models.IntegerField()
+
+class Plan(models.Model):
 	plan=models.ForeignKey(Planes)
 	fecha_inicio=models.DateTimeField()
 	fecha_expira=models.DateTimeField(null=True, blank=True)

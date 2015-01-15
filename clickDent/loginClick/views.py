@@ -51,7 +51,7 @@ def done(request):
 def logout(request):
     """Deslogear"""
     auth_logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/sistemaDental')
 
 def createUser(request):
 	"""Crear el usuario y redirigirlo a la aplicacion"""

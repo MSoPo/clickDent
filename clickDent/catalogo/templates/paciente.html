@@ -4,7 +4,7 @@
 			<div class="tab2">
 				<div class="titulo-tab">Datos del Paciente</div>
 				<div class="edicion valor-conf">
-					<a href="#" class="icon-undo"><span>Cancelar</span></a> <label> Clave del paciente :  <span class="requerido" id="calvePaciente">000001</span> </label>
+					<a href="#" class="icon-undo edit"><span>Cancelar</span></a> <label> Clave del paciente :  <span class="requerido" id="calvePaciente">000001</span> </label><a href="#" class="icon-paste edit"><span>Historial</span></a>
 				</div>
 				<div class="valor-conf">
 					<label>Nombre<span class="requerido">*</span>: </label>
@@ -23,7 +23,7 @@
 				</div>
 				<div class="valor-conf">
 					<label>Fecha de Nacimiento<span class="requerido">*</span>: </label>
-					<input class="validaFecha" name="fecha_nacimiento" id="calendar-inputField" placeholder="yyyy-mm-dd" /><button id="calendar-trigger">...</button>
+					<input class="validaFecha" name="fecha_nacimiento" id="calendar-inputField" placeholder="aaaa-mm-dd" /><button id="calendar-trigger">...</button>
 					<script>
 					    Calendar.setup({
 					        trigger    : "calendar-trigger",
@@ -32,7 +32,7 @@
 					        onSelect   : function() { this.hide() }
 					    });
 					</script>
-					<div class="error">La fecha no es valida ( yyyy-mm-dd )</div>
+					<div class="error">La fecha no es valida ( aaaa-mm-dd )</div>
 				</div>
 				<div class="valor-conf">
 					<label>Sexo<span class="requerido">*</span>: </label>
@@ -63,7 +63,7 @@
 				</div>
 				<div class="valor-conf">
 					<label>Codigo Postal<span class="requerido">*</span>: </label>
-					<input name="cp" id="cp" placeholder="73310 " class="validaCP">
+					<input name="cp" id="cpPac" placeholder="73310 " class="validaCP">
 					<div class="error">Codigo postal no valido ( 73310 )</div>
 				</div>
 				<div class="valor-conf">
@@ -83,17 +83,17 @@
 				</div>
 				<div class="valor-conf">
 					<label>Colonia: </label>
-					<select name="colonia" id="colonia">
+					<select name="colonia" id="coloniaPac">
 					</select>
 				</div>
 				<div class="valor-conf">
 					<label>Municipio/Delegacion: </label>
-					<select name="municipio" id="municipio" >
+					<select name="municipio" id="municipioPac" >
 					</select>
 				</div>
 				<div class="valor-conf">
 					<label>Estado: </label>
-					<select name="estado" id="estado" >
+					<select name="estado" id="estadoPac" >
 					</select>
 				</div>
 				<div class="valor-conf">

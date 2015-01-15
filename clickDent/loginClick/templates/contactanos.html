@@ -18,17 +18,16 @@
       </h1>
       <nav class = "nav">
         <ul>
-          <li><a href=""> Registrate </a></li><li li class="menu"><a href="" id="btn-menu"><span class="icon-menu"></span></a></li><li><a href="" class = "desktop"> Conoce mas </a></li><li><a href="" class = "desktop"> Preguntas Frecuentes </a></li><li><a href="" class = "desktop"> Planes </a></li><li><a href="" class = "desktop"> Iniciar Sesion </a></li>
+          <li class="tablet-men"><a href="/registrarse"> Registrate </a></li><li li class="menu"><a href="" id="btn-menu"><span class="icon-menu"></span></a></li><li><a href="/" class = "desktop"> Inicio </a></li><li><a href="/registrarse" class = "desktop"> Registrate </a></li><li><a href="/preguntas" class = "desktop"> Preguntas Frecuentes </a></li><li><a href="/sistemaDental" class = "desktop"> Iniciar Sesión </a></li>
 
         </ul>
       </nav>
     </div>
     <nav class="nav-oculto" id="nav-oculto">
       <ul>
-        <li><a href="">Conoce mas de clickDent</a></li>
-        <li><a href="">Preguntas Frecuentes</a></li>
-        <li><a href="">Registrarse</a></li>
-        <li><a href="">Nuestros Planes</a></li>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/preguntas">Preguntas Frecuentes</a></li>
+        <li><a href="/sistemaDental">Iniciar Sesión</a></li>
       </ul>
     </nav>
   </header>
@@ -37,12 +36,12 @@
     <div class="seccion-blanca">
   	<article class="principal preguntas-frecuentes">
   		<div class="btn-div"> 
-  			<div><a href="" class="bnt-regresar"><span class="flecha"></span>Regresar</a> </div>
+  			<div><a href="/" class="bnt-regresar"><span class="flecha"></span>Regresar</a> </div>
   		</div>
   		<h2>
   			<div class="icon4-mail"></div>
   			Contactanos
-  			<div class="chico">Dejanos tu duda y obtendras una <br/> respuesta casi inmediata a tu correo electronico</div>
+  			<div class="chico">Dejanos tu duda y obtendras una <br/> respuesta casi inmediata a tu correo electronico.</div>
   		</h2>
   		<form class="form-contactanos">
         <input placeholder = "Tu correo">
@@ -76,7 +75,7 @@
     </div>
   </footer>
 
-  <script src="js/vendor/jquery.js"></script>
+  <script src="{{STATIC_URL}}js/vendor/jquery.js"></script>
   <script type="text/javascript">
     $('#btn-menu').on('click', function(ev) {
       $('#nav-oculto').slideToggle();

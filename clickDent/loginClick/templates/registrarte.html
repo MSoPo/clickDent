@@ -7,28 +7,31 @@
   <link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css" />
   <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/estilos.css">
   <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
+  <script>
+    nuevoUsuario = false;
+    usuario = "";
+    correo = "";
+  </script>
 </head>
 <body>
 
   <header>
     <div class="hd-visible">
       <h1 class = "logo">
-        <figure></figure>
-        <span>clickDent</span>
+        <figure><img src="{{STATIC_URL}}img/ico.png"></figure>
       </h1>
       <nav class = "nav">
         <ul>
-          <li li class="menu"><a href="" id="btn-menu"><span class="icon-menu"></span></a></li><li><a href="" class = "desktop"> Inicio </a></li><li><a href="" class = "desktop"> Contactanos </a></li><li><a href="" class = "desktop"> Perguntas Frecuentes </a></li><li><a href="" class = "desktop"> Iniciar Sesion </a></li>
+           <li class="tablet-men"><a href="/sistemaDental"> Iniciar Sesión </a></li><li li class="menu"><a href="" id="btn-menu"><span class="icon-menu"></span></a></li><li><a href="/" class = "desktop"> Inicio </a></li><li><a href="/contactanos" class = "desktop"> Contactanos </a></li><li><a href="/preguntas" class = "desktop"> Perguntas Frecuentes </a></li><li><a href="/sistemaDental" class = "desktop"> Iniciar Sesión </a></li>
 
         </ul>
       </nav>
     </div>
     <nav class="nav-oculto" id="nav-oculto">
       <ul>
-        <li><a href="">Conoce mas de clickDent</a></li>
-        <li><a href="">Preguntas Frecuentes</a></li>
-        <li><a href="">Registrarse</a></li>
-        <li><a href="">Nuestros Planes</a></li>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/contactanos">Contactanos</a></li>
+        <li><a href="/preguntas">Perguntas Frecuentes</a></li>
       </ul>
     </nav>
   </header>
@@ -62,12 +65,12 @@
         </div>
 
       <div class="boton">
-          <a href="#" class="button" id="registrarse">Registrarse</a>
+          <a href="#" class="button" id="registrarse">Crear cuenta</a>
         </div>
 
       </div>
 
-      <p class="chico">Coloca en esta zona un mensaje sobre la polita de privacioada que ofresera el sitio, Coloca en esta zona un mensaje sobre la polita de privacioada que ofresera el sitio, Coloca en esta zona un mensaje sobre la polita de privacioada que ofresera el sitio</p>
+      <p class="chico link-azul-claro">Al hacer clic en "Crear cuenta" o al registrarte con facebook o twitter, aceptas las <a href="">Condiciones</a> y la <a href="">Política de uso de datos</a> de clickDent.</p>
 
   	</article>
   </section>
@@ -108,7 +111,6 @@
       $('#nav-oculto').slideToggle();
       return false;
     });
-
     var registroView = new clickDent.Views.RegistarUsuario({model : new clickDent.Models.Usuario()});
 
   </script>

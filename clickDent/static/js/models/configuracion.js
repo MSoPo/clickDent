@@ -9,6 +9,7 @@ clickDent.Models.Configuracion = Backbone.Model.extend({
 		hora_consulta_fin : '',
 		duracion_consulta : '',
 		notificacion_mail : '',
+		receta : '',
 	},
 	
 	validate: function(attrs, options) {

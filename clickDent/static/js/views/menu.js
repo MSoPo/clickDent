@@ -8,6 +8,7 @@ clickDent.Views.Menu = Backbone.View.extend({
 		'click #cerrar-menu' : 'toogleMenu',
 		'click .itemMenu' : 'redireccionar',
 		'click #agregarCita' : 'agregarCita',
+		'click #logout' : 'logout',
 				////VALIDACIONES DE FORMULARIOS////
 		'blur .alfanumerico' : 'validarAlfanumerico',
 		'blur .alfanumericonor' : 'validarAlfanumericoNoRequerido',
@@ -30,6 +31,7 @@ clickDent.Views.Menu = Backbone.View.extend({
 		templateCalendario = _.template($('#calendario-template').html()); 
 		templatePagos = _.template($('#pagos-template').html());
 		templateBuscaPacienete = _.template($('#busca-pacientes-template').html());
+		templateConsultaHistorial = _.template($('#consultar-historial-template').html());
 		templateConsultarDatosPac = _.template($('#consultar-datospac-template').html());
 		templateConsultarCitasPac = _.template($('#consultar-citas-template').html());
 		templateConsultarTratamientosPac = _.template($('#consultar-tratamientos-template').html());
@@ -77,9 +79,12 @@ clickDent.Views.Menu = Backbone.View.extend({
 			$('#contenido').height(heightMenu);
 			$('#menu').height(heightMenu);
 			$('#backpopup').height(heightMenu);
+			$('#cargando').height(heightMenu);
+
 		}else{
 			$('#menu').height(heightContenido);
 			$('#backpopup').height(heightContenido);
+			$('#cargando').height(heightContenido);
 		}
 	},
 
@@ -114,11 +119,21 @@ clickDent.Views.Menu = Backbone.View.extend({
 			window.scroll(0,0)
 		}
 
+		/**************** Pruebas *********************/
+		else if(id=='historial'){
+			clickDent.app.navigate('historial/', {trigger : true});
+			window.scroll(0,0)
+		}
+
 	},
 
 	agregarCita: function () {
 		app.Views.popup.render('popup-cita-template', 'cita');
 		app.Views.popup.cargarPacientes();
+	},
+
+	logout: function () {
+		 window.location = "/logout";
 	},
 
 	validarAlfanumerico: function(ev){
@@ -270,6 +285,16 @@ clickDent.Views.Menu = Backbone.View.extend({
 			campo.parent().find('.error').show();
 		}
 		campo.val(valor);
+	},
+
+	refrescarPantalla : function(ev){
+		if($('#inicio').hasClass('seleccion')){
+			app.Views.home.actualizarCitas();
+		}
+
+		else if($('#calendario').hasClass('seleccion')){
+			app.Views.calendario.render();
+		}
 	}
 
 });

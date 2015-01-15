@@ -4,8 +4,97 @@
 	overflow: hidden;
 }
 
+#cargando {
+	width: 100%;
+	display: none;
+	position: absolute;
+	background-color: rgba(227,227,227,.5);
+	height: 100%;
+	text-align: center;
+	z-index: 3;
+}
+
+#imgCargando {
+	position: fixed;
+	top: 45%;
+}
+
 .clickDent {
 	font-family: "Open Sans", "Arial";
+}
+
+.centrado {
+	text-align: center;
+}
+
+.dienteAuxiliar, .dienteAuxiliarView {
+	height: 25px;
+	width: 100%;
+	display: block;
+	margin: 0 !important
+}
+
+.diente, .dienteView {
+	width: 100%;
+	height: 43px;
+}
+
+.dienteAuxiliar, .diente {
+	cursor: pointer;
+}
+.dienteAuxiliarView, .dienteView {
+	cursor: default !important;
+}
+
+.dienteCompleto{
+	width: 5%;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	display: inline-block;
+	cursor: default !important;
+}
+
+.dienteBloque {
+	margin-top: 1.5em;
+	margin-bottom: 1em;
+	cursor: default !important;
+}
+
+.simbologia {
+	margin-left: 25%;
+	width: 50%;
+	text-align: center;
+	font-size: .8em;
+	display: block !important; 
+	cursor: default !important;
+}
+
+.simbologia td{
+	padding: .2em !important;
+}
+
+.caries {
+	background-color: blue;
+}
+
+.obturacion {
+	background-color: red;
+}
+
+.ausente {
+	background-color: black;
+}
+
+.extraer {
+	background-color: gray;
+}
+
+.corona {
+	background-color: yellow;
+}
+
+.tramo {
+	background-color: green;
 }
 
 .clickDent header{
@@ -281,6 +370,23 @@
 .button:hover {
   background-color: #f1816e;
   border: #f15d45 solid 2px;
+}
+
+.planTratamientos table td:first-child {
+	width: 60%;
+}
+
+.planTratamientos table td input {
+	font-size: .8em;
+	width: 100%;
+}
+
+.calendarioPlanTratamiento input {
+	width: auto !important;
+}
+
+.calendarioPlanTratamiento button {
+	font-size: .8em;
 }
 
 label{
@@ -662,7 +768,7 @@ seccion.tabs table.pagos td div{
 	width: 100%;
 	position: absolute;
 	background-color: rgba(0,0,0,.8); /*rgba(92,148,199,.3)*/
-	z-index: 1;
+	z-index: 2;
 	display: none;
 }
 
@@ -848,6 +954,10 @@ span.requerido {
 	display: none;
 }
 
+.edicion .icon-paste, .edicion .icon-profile {
+	float: right;
+}
+
 #total {
 	width: 15%;
 	text-align: center;
@@ -902,7 +1012,35 @@ span.requerido {
 	color: black;
 }
 
+.check-inline {
+	display: inline-block;
+}
+
+.no-margin {
+	margin: 0 !important;
+}
+
+.separador {
+	border-bottom: 1px solid #EEE;
+}
+
 @media screen and (min-width: 650px) {
+
+	.planTratamientos table {
+		width: 70% !important;
+	}
+
+	.simbologia {
+		margin-left: 30%;
+		width: 40%;
+	}
+	.dienteAuxiliar, .dienteAuxiliarView {
+		height: 25px;
+	}
+
+	.diente, .dienteView {
+		height: 43px;
+	}
 
 	.citasPendientes {
 		display: block;
@@ -958,8 +1096,26 @@ span.requerido {
 
 @media screen and (min-width: 1030px) {
 
+	.simbologia {
+		margin-left: 35%;
+		width: 30%;
+	}
+
 	.escritorio{
 		display: inline-block;
+	}
+
+	.dienteAuxiliar, .dienteAuxiliarView {
+		height: 35px;
+	}
+
+	.dienteCompleto{
+		width: 4%;
+		display: inline-block;
+	}
+
+	.diente, .dienteView {
+		height: 50px;
 	}
 
 	.popup {

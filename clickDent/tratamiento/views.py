@@ -19,7 +19,7 @@ class TratamientoViewSet(viewsets.ModelViewSet):
     queryset = Tratamiento.objects.all()
     serializer_class = TratamientoSerializer 
     filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter)
-    filter_fields = ('id', 'paciente','medico', 'estatus') 
+    filter_fields = ('id', 'paciente','medico', 'estatus', 'historial') 
     ordering_fields = ('descripcion', 'paciente', 'fecha_inicio' )
 
 class PagoTratamientoViewSet(viewsets.ModelViewSet):

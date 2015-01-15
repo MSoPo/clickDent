@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'paciente',
     'tratamiento',
     'cita',
+    'historial',
 )
 
 MIDDLEWARE_CLASSES = (

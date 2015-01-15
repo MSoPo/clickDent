@@ -2,6 +2,7 @@ from django.db import models
 from catalogo.models import Estatus
 from paciente.models import Paciente
 from medico.models import Medico
+from historial.models import Historial
 
 # Create your models here.
 class Tratamiento (models.Model):
@@ -15,6 +16,7 @@ class Tratamiento (models.Model):
 	estatus_pago=models.ForeignKey(Estatus, related_name='+')
 	paciente=models.ForeignKey(Paciente)
 	medico=models.ForeignKey(Medico)
+	historial=models.ForeignKey(Historial)
 
 	def natural_key(self):
 		return (self.descripcion, self.total_precio)

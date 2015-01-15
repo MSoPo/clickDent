@@ -18,16 +18,17 @@ class FormacionSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id','escuela','titulo','medico')
 
 class ConsultorioSerializer(serializers.HyperlinkedModelSerializer):
+    direccion = serializers.PrimaryKeyRelatedField(many=False)
     class Meta:
         model = Consultorio
-        fields = ('nombre','num_telefono','num_emergencias') 
+        fields = ('id', 'nombre','num_telefono','num_emergencias','direccion','url_imagen') 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'groups')    
+        fields = ('id', 'url', 'username', 'email', 'groups')    
 
 class ConfiguracionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Configuracion
-        fields = ('recordatorio_cita', 'confirmacion_correo', 'hora_comida_inicio', 'hora_comida_fin', 'hora_consulta_inicio', 'hora_consulta_fin', 'duracion_consulta', 'notificacion_mail')
+        fields = ('id', 'recordatorio_cita', 'confirmacion_correo', 'hora_comida_inicio', 'hora_comida_fin', 'hora_consulta_inicio', 'hora_consulta_fin', 'duracion_consulta', 'notificacion_mail', 'receta')

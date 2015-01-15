@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css" />
   <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/estilos.css">
   <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css">
+  <script>
+    nuevoUsuario = false;
+    usuario = "";
+    correo = "";
+  </script>
 </head>
 <body>
 
@@ -18,17 +23,16 @@
       </h1>
       <nav class = "nav">
         <ul>
-          <li><a href=""> Inicio </a></li><li li class="menu"><a href="" id="btn-menu"><span class="icon-menu"></span></a></li><li><a href="" class = "desktop"> Contactanos </a></li><li><a href="" class = "desktop"> Preguntas Frecuentes </a></li><li><a href="" class = "desktop"> Registrate </a></li>
+          <li class="tablet-men"><a href="/registrarse"> Registrate </a></li><li li class="menu"><a href="" id="btn-menu"><span class="icon-menu"></span></a></li><li><a href="/" class = "desktop"> Inicio </a></li><li><a href="/registrarse" class = "desktop"> Registrate </a></li><li><a href="/preguntas" class = "desktop"> Preguntas Frecuentes </a></li><li><a href="/sistemaDental" class = "desktop"> Contactanos </a></li>
 
         </ul>
       </nav>
     </div>
     <nav class="nav-oculto" id="nav-oculto">
       <ul>
-        <li><a href="">Conoce mas de clickDent</a></li>
-        <li><a href="">Preguntas Frecuentes</a></li>
-        <li><a href="">Registrarse</a></li>
-        <li><a href="">Nuestros Planes</a></li>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/preguntas">Preguntas Frecuentes</a></li>
+        <li><a href="/sistemaDental">Contactanos</a></li>
       </ul>
     </nav>
   </header>
@@ -55,6 +59,7 @@
           <div class="registro" id="form-password">
             <div class="icon-key linea"></div><input type="password" name="password" placeholder = "Contraseña" id="password">
           </div>
+          <div class="link-azul-claro chico"><a href="">¿olvidaste tu contraseña?</a></div>
         </form>
 
         <div class="error"> 
@@ -68,7 +73,7 @@
 
       </div>
 
-      <p class="chico">Texto para alguan nota importante en el sistema para mostrar </p>
+      <!-- <p class="chico">Texto para alguan nota importante en el sistema para mostrar </p> -->
 
   	</article>
   </section>

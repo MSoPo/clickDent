@@ -45,6 +45,7 @@ class FormacionViewSet(viewsets.ModelViewSet):
 class ConsultorioViewSet(viewsets.ModelViewSet):
     queryset = Consultorio.objects.all()
     serializer_class = ConsultorioSerializer
+    filter_fields = ('id', 'medico',)
 
 class MedicoList (mixins.ListModelMixin,
                   mixins.CreateModelMixin,
@@ -84,6 +85,7 @@ class MedicoDetail(mixins.RetrieveModelMixin,
 class ConfiguracionViewSet(viewsets.ModelViewSet):
     queryset = Configuracion.objects.all()
     serializer_class = ConfiguracionSerializer
+    filter_fields = ('id', 'medico',)
 
 
 def sistemaDental(request):
@@ -93,6 +95,7 @@ def sistemaDental(request):
 
     if request.user.is_authenticated():
         usuario = User.objects.get(username=request.user)
+        print(usuario.email);
 
         try:
             medico = Medico.objects.get(usuario=usuario.id)
