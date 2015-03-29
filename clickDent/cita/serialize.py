@@ -2,12 +2,12 @@ from rest_framework import serializers
 from .models import *
 
 class CitaSerializer(serializers.HyperlinkedModelSerializer):
-	paciente = serializers.PrimaryKeyRelatedField(many=False)
-	medico = serializers.PrimaryKeyRelatedField(many=False)
-	consultorio = serializers.PrimaryKeyRelatedField(many=False)
-	tratamiento = serializers.PrimaryKeyRelatedField(many=False,  blank=True)
-	estatus = serializers.PrimaryKeyRelatedField(many=False)
-	origen = serializers.PrimaryKeyRelatedField(many=False)
+	paciente = serializers.PrimaryKeyRelatedField(queryset=Paciente.objects.all())
+	medico = serializers.PrimaryKeyRelatedField(queryset=Medico.objects.all())
+	consultorio = serializers.PrimaryKeyRelatedField(queryset=Consultorio.objects.all())
+	tratamiento = serializers.PrimaryKeyRelatedField(queryset=Tratamiento.objects.all(),  allow_null=True)
+	estatus = serializers.PrimaryKeyRelatedField(queryset=Estatus.objects.all())
+	origen = serializers.PrimaryKeyRelatedField(queryset=Origen.objects.all())
 
 	class Meta:
 		model = Cita

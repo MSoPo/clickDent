@@ -13,7 +13,8 @@ clickDent.Models.Paciente = Backbone.Model.extend({
 		ocupacion : '',
 		direccion : '',
 		estado_civil : '',
-		medico : ''
+		medico : '',
+		clave_paciente : '',
 	},
 	
 	validate: function(attrs, options) {

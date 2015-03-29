@@ -2,10 +2,10 @@ from rest_framework import serializers
 from .models import *
 
 class PacienteSerializer(serializers.HyperlinkedModelSerializer):
-	estado_civil = serializers.PrimaryKeyRelatedField(many=False)
-	ocupacion = serializers.PrimaryKeyRelatedField(many=False)
-	medico = serializers.PrimaryKeyRelatedField(many=False)
-	direccion = serializers.PrimaryKeyRelatedField(many=False)
+	estado_civil = serializers.PrimaryKeyRelatedField(queryset=EstadoCivil.objects.all())
+	ocupacion = serializers.PrimaryKeyRelatedField(queryset=Ocupacion.objects.all())
+	medico = serializers.PrimaryKeyRelatedField(queryset=Medico.objects.all())
+	direccion = serializers.PrimaryKeyRelatedField(queryset=Direccion.objects.all())
 
 	class Meta:
 		model = Paciente

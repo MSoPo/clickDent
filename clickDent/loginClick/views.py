@@ -80,6 +80,7 @@ def createUser(request):
 		configuracion.fecha_inicio= datetime.now()
 		configuracion.confirmacion_correo = True
 		configuracion.recordatorio_cita = "3,"
+		configuracion.receta = 1
 		configuracion.save()
 		
 		consultorio = Consultorio()

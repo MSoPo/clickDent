@@ -244,26 +244,6 @@ clickDent.Views.Home = Backbone.View.extend({
 		var idCita = $(ev.target).parent().parent().parent().find('.idCita').val();
 		$('#popup-cancelar-chkTratamiento').val(chkTratamineto ? 1 : 0);
 		$('#popup-cancelar-idcita').val(idCita);
-
-		/*console.log('finalizar Cita');
-		var chkTratamineto = $(ev.target).parent().parent().find('.chkTratamiento').is(':checked');
-		var idCita = $(ev.target).parent().parent().parent().find('.idCita').val();
-		var cita = app.Collections.citasInicio.findWhere({ id : parseInt(idCita) });
-		cita.set('estatus', utils.constantes.estatus.realizada)
-		cita.save({}, {  
-			    		success:function(){
-			    			if(chkTratamineto){
-								var lstTratamiento = new clickDent.Collections.Tratamientos();
-								lstTratamiento.fetch({ data: {id : cita.get('tratamiento')},
-					        		success : function(data){
-					        			data.at(0).set('estatus', utils.constantes.estatus.tratamientoFinalizado);
-					        			data.at(0).save();
-					        		}
-					        	});
-							}
-							app.Views.menuView.refrescarPantalla();	
-						}
-					});*/
 	},
 
 	finalizarCitaPendiente : function(ev){
@@ -276,6 +256,7 @@ clickDent.Views.Home = Backbone.View.extend({
 				console.log(data);
 				citalist.at(0).set('estatus',  utils.constantes.estatus.realizada);
 				citalist.at(0).save({}, {
+					beforeSend: sendAuthentication,
 					success: function(ev) {
 						app.Views.menuView.refrescarPantalla();
 					}
@@ -285,7 +266,7 @@ clickDent.Views.Home = Backbone.View.extend({
 					lstTratamiento.fetch({ data: {id : data.at(0).get('tratamiento')},
 		        		success : function(data){
 		        			data.at(0).set('estatus', utils.constantes.estatus.tratamientoFinalizado);
-		        			data.at(0).save();
+		        			data.at(0).save({}, {beforeSend: sendAuthentication });
 		        		}
 		        	});
 				}
@@ -316,6 +297,7 @@ clickDent.Views.Home = Backbone.View.extend({
 				console.log(data);
 				data.at(0).set('estatus', utils.constantes.estatus.cancelada);
 				data.at(0).save({}, {
+					beforeSend: sendAuthentication,
 					success: function(ev) {
 						app.Views.menuView.refrescarPantalla();
 					}
@@ -325,7 +307,7 @@ clickDent.Views.Home = Backbone.View.extend({
 					lstTratamiento.fetch({ data: {id : data.at(0).get('tratamiento')},
 		        		success : function(data){
 		        			data.at(0).set('estatus', utils.constantes.estatus.tratamientoFinalizado);
-		        			data.at(0).save();
+		        			data.at(0).save({}, {beforeSend: sendAuthentication });
 		        		}
 		        	});
 				}

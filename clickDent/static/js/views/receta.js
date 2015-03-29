@@ -17,7 +17,7 @@ clickDent.Views.Receta = Backbone.View.extend({
 	cambiarModelo: function(ev) {
 		$('.preview-pane').attr('src', this.crearReceta([], false, $('#modeloReceta').val()));
 		app.Models.configuracion.set('receta', $('#modeloReceta').val());
-		app.Models.configuracion.save();
+		app.Models.configuracion.save({},{beforeSend: sendAuthentication });
 	},
 
 	crearReceta: function(tratamientos, descargar, modelo) {

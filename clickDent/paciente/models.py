@@ -23,6 +23,7 @@ class Paciente (models.Model):
 	direccion=models.ForeignKey(Direccion)
 	estado_civil=models.ForeignKey(EstadoCivil, null=True, blank=True)
 	medico=models.ForeignKey(Medico)
+	#clave_paciente=models.CharField(max_length=50,  null=True, blank=True)
 
 	def natural_key(self):
 		return (self.id, self.nombre, self.ape_paterno)

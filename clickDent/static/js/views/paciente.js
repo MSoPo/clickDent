@@ -170,14 +170,16 @@ clickDent.Views.Paciente = Backbone.View.extend({
 		app.Models.direccion = formToModel(this.$el, app.Models.direccion);
 		app.Collections.direcciones.add(app.Models.direccion);
 		
-		app.Models.direccion.save({}, {  // se genera POST /usuarios  - contenido: {nombre:'Alfonso'}
+		app.Models.direccion.save({}, { 
+				beforeSend: sendAuthentication ,
 	    		success:function(){
 	        	self.model.set('direccion', app.Models.direccion.get('id'));
 	        	self.model.set('medico', app.Models.medico.get('id'));
-	        	self.model.save({}, {  // se genera POST /usuarios  - contenido: {nombre:'Alfonso'}
+	        	//self.model.set('clave_paciente', );
+	        	self.model.save({}, {  
+	        		beforeSend: sendAuthentication,
 		    		success:function(){
 		    			if(!this.edicion){
-			        		//Crear historial odontodiagrama y desplegar pantalla.
 			        		console.log(self.model.get('id'));
 			        		app.Models.paciente = self.model;
 			        		app.Collections.historial = new clickDent.Collections.Historial();
@@ -186,12 +188,14 @@ clickDent.Views.Paciente = Backbone.View.extend({
 			        		app.Collections.historial.at(0).set('medico', app.Models.medico.get('id'));
 			        		app.Collections.historial.at(0).set('fecha_actualizacion', formatFecha(new Date()));
 			        		app.Collections.historial.at(0).save({}, {
+			        			beforeSend: sendAuthentication,
 			        			success: function(){
 			        				var idHistorial = app.Collections.historial.at(0).get('id');
 			        				app.Collections.odontodiagrama = new clickDent.Collections.Odontodiagrama();
 			        				app.Collections.odontodiagrama.add(new clickDent.Models.Odontodiagrama());
 			        				app.Collections.odontodiagrama.at(0).set('historial', idHistorial);
 			        				app.Collections.odontodiagrama.at(0).save({}, {
+			        					beforeSend: sendAuthentication,
 			        					success: function(){
 			        						console.log(app.Collections.odontodiagrama.at(0).get('id'));
 			        						clickDent.app.navigate('historial/', {trigger : true});
@@ -203,10 +207,8 @@ clickDent.Views.Paciente = Backbone.View.extend({
 		        		}
 		    		}
 				});
-	    		}
-			});
-			
-
+	    	}
+		});	
 	},
 
 	validarDatos : function() {

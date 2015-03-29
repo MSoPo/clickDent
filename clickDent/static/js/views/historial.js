@@ -83,7 +83,9 @@ clickDent.Views.Historial = Backbone.View.extend({
 	guardarHistorial: function(ev){
 		app.Models.historial = formToModel(this.$el, app.Models.historial);
 		app.Models.historial.set('fecha_actualizacion', formatFecha(new Date()));
-		app.Models.historial.save();
+		app.Models.historial.save({},{
+			beforeSend: sendAuthentication 
+		});
 
 		for( var atr in app.Models.odontodiagrama.attributes) { 
 			var color = 'N';
@@ -98,7 +100,9 @@ clickDent.Views.Historial = Backbone.View.extend({
 		}
 
 		console.log(app.Models.odontodiagrama);
-		app.Models.odontodiagrama.save();
+		app.Models.odontodiagrama.save({},{
+			beforeSend: sendAuthentication 
+		});
 
 		$('.planTratamientos tbody tr').each(function( index ) {
 			var id = $(this).find('.idPlanTratamiento').val();
@@ -108,8 +112,9 @@ clickDent.Views.Historial = Backbone.View.extend({
   			if(id){
   				var tratamiento = app.Collections.tratamientos.findWhere({id : parseInt(id)});
   				tratamiento.set('fecha_inicio', fecha + ' 00:00');
+  				tratamiento.set('fecha_liquidacion', null);
   				tratamiento.set('descripcion', descripcion);
-  				tratamiento.save();
+  				tratamiento.save({}, {beforeSend: sendAuthentication });
 
   			}else if(descripcion && fecha){
   				var tratamiento = new clickDent.Models.Tratamiento({ descripcion : descripcion, fecha_inicio : (fecha  + ' 00:00')});
@@ -119,8 +124,9 @@ clickDent.Views.Historial = Backbone.View.extend({
 				tratamiento.set('paciente',  app.Models.historial.get('paciente'));
 				tratamiento.set('medico', app.Models.medico.get('id'));
 				tratamiento.set('historial',  app.Models.historial.get('id'))
+				tratamiento.set('fecha_liquidacion', null);
   				app.Collections.tratamientos.add(tratamiento);
-  				tratamiento.save();
+  				tratamiento.save({}, {beforeSend: sendAuthentication });
   			}
 
 		});

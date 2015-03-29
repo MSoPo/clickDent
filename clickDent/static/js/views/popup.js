@@ -104,13 +104,14 @@ clickDent.Views.Popup = Backbone.View.extend({
 		
 		
 		app.Models.precioTratamiento.save(
-			{}, {  // se genera POST /usuarios  - contenido: {nombre:'Alfonso'}
-		    		success:function(){
-		        		console.log("Usuario guardado con exito");
-		        		app.Views.popup.limpiarValores();
-		        		app.Views.tratamientosView.render();
-		    			},
-		    		});
+			{}, {
+		    	beforeSend: sendAuthentication,
+		    	success:function(){
+		       		console.log("Usuario guardado con exito");
+		       		app.Views.popup.limpiarValores();
+		      		app.Views.tratamientosView.render();
+		    	},
+		    });
 
 	},	
 
@@ -279,12 +280,14 @@ clickDent.Views.Popup = Backbone.View.extend({
 					app.Models.tratamiento.set('medico', app.Models.medico.get('id'));
 					app.Collections.tratamientos.add(app.Models.tratamiento);
 					app.Models.tratamiento.save({},{
+						beforeSend: sendAuthentication,
 						success : function(){
 							console.log(app.Models.tratamiento);
 							console.log(app.Models.tratamiento.get('id'));
 							app.Models.cita.set('tratamiento', app.Models.tratamiento.get('id'))
 							app.Models.cita.save( {}, 
 							{ 
+								beforeSend: sendAuthentication,
 								success : function(data){ 
 									console.log("Se a creado la cita para el " + fechaCalendario + " a las " + horaCalendario + " hrs para el paciente " + clavePac.get('id')); 
 									console.log("CITA AGREGADA LANZAR POP UP CON NOTIFICACION");
@@ -313,6 +316,7 @@ clickDent.Views.Popup = Backbone.View.extend({
 
 			app.Models.cita.save( {}, 
 				{ 
+					beforeSend: sendAuthentication,
 					success : function(data){ 
 						app.Views.menuView.refrescarPantalla();
 						self.$el.hide();
@@ -437,18 +441,18 @@ clickDent.Views.Popup = Backbone.View.extend({
 			app.Models.tratamiento.set('fecha_liquidacion', new Date());
 			app.Models.tratamiento.set('estatus' , 6);
 			app.Models.paciente.set('pendiente', pendiente);
-			app.Models.pago.save();
-			app.Models.paciente.save();
-			app.Models.tratamiento.save();
+			app.Models.pago.save({}, {beforeSend: sendAuthentication });
+			app.Models.paciente.save({}, {beforeSend: sendAuthentication });
+			app.Models.tratamiento.save({}, {beforeSend: sendAuthentication });
 		} else if(app.Models.tratamiento.get('pendiente') < pagado ){
 			$('#errorRealizaPago').html('La cantidad pagada es mayor que la deuda');
 			$('#errorRealizaPago').show();
 			return false;
 		}else{
 			app.Models.paciente.set('pendiente', pendiente);
-			app.Models.pago.save();
-			app.Models.paciente.save();
-			app.Models.tratamiento.save();
+			app.Models.pago.save({}, {beforeSend: sendAuthentication });
+			app.Models.paciente.save({}, {beforeSend: sendAuthentication });
+			app.Models.tratamiento.save({}, {beforeSend: sendAuthentication });
 		}
 		
 		this.$el.hide();
@@ -495,7 +499,7 @@ clickDent.Views.Popup = Backbone.View.extend({
 		var cita = app.Collections.citasInicio.at(indice);
 
 		cita.set('costo', convertirADecimal(costoConsulta));
-		cita.save();
+		cita.save({}, {beforeSend: sendAuthentication });
 
 		if(cita.get('tratamiento')){
 			var pagadoTratamiento = convertirADecimal(pagado) - convertirADecimal(costoConsulta);
@@ -508,7 +512,7 @@ clickDent.Views.Popup = Backbone.View.extend({
 
 				app.Collections.pagos = new clickDent.Collections.Pagos();
 				app.Collections.pagos.add(app.Models.pago);
-				app.Models.pago.save();
+				app.Models.pago.save({},{beforeSend: sendAuthentication });
 			}
 		}
 
@@ -519,13 +523,13 @@ clickDent.Views.Popup = Backbone.View.extend({
 
 		var pc1 = app.Collections.pacientes.findWhere({ id : cita.get('paciente')});
 		pc1.set('pendiente', sumaDeuda);
-		pc1.save();
+		pc1.save({}, {beforeSend: sendAuthentication });
 
 		if(cita.get('tratamiento') && $('#popupPrecioTratamiento').is(':visible')){
 			var tratamiento = app.Collections.tratamientoCita.at(0);
 			tratamiento.set('total_precio', precioTratamiento.replace('$', '').replace(',',''));
-			tratamiento.save('estatus_pago', sumaDeuda ? 8 : 7);
-			tratamiento.save();
+			tratamiento.set('estatus_pago', sumaDeuda ? 8 : 7);
+			tratamiento.save({}, {beforeSend: sendAuthentication });
 		}
 
 		app.Views.popup.render('popup-pagado-template');
@@ -643,6 +647,7 @@ clickDent.Views.Popup = Backbone.View.extend({
 					}
 
 					cita.save({}, {
+						beforeSend: sendAuthentication ,
 						success: function(data) {
 							app.Views.menuView.refrescarPantalla();	
 							self.$el.hide();
@@ -663,12 +668,15 @@ clickDent.Views.Popup = Backbone.View.extend({
 					});
 					tratamientos.add(tratamiento);
 					tratamiento.save({}, {
+						beforeSend: sendAuthentication ,
 						success: function(data) {
 							cita.set('tratamiento', tratamiento.get('id'));
 							cita.save({}, {
+								beforeSend: sendAuthentication ,
 								success: function(data) {
 									cita.set('tratamiento', tratamiento.get('id'));
 									cita.save({}, {
+										beforeSend: sendAuthentication ,
 										success: function(data) {
 											app.Views.menuView.refrescarPantalla();	
 											self.$el.hide();
@@ -707,6 +715,7 @@ clickDent.Views.Popup = Backbone.View.extend({
 				citaActual = cita;
 				self.validarTiempoCita(function() {
 					cita.save({}, {  
+						beforeSend: sendAuthentication ,
 			    		success:function(){
 							app.Views.menuView.refrescarPantalla();	
 							self.$el.hide();
@@ -739,31 +748,33 @@ clickDent.Views.Popup = Backbone.View.extend({
 		var cita = app.Collections.citasInicio.findWhere({ id : parseInt(idCita) });
 		cita.set('estatus', utils.constantes.estatus.cancelada)
 		cita.save({}, {  
-			    		success:function(){
-			    			if(chkTratamineto){
-								var lstTratamiento = new clickDent.Collections.Tratamientos();
-								lstTratamiento.fetch({ data: {id : cita.get('tratamiento')},
-					        		success : function(data){
-					        			data.at(0).set('estatus', utils.constantes.estatus.tratamientoFinalizado);
-					        			data.at(0).save();
-					        		}
-					        	});
-							}
-							app.Views.menuView.refrescarPantalla();	
-							self.$el.hide();
-						}
-					});
+			beforeSend: sendAuthentication ,
+			success:function(){
+				if(chkTratamineto){
+				var lstTratamiento = new clickDent.Collections.Tratamientos();
+				lstTratamiento.fetch({ data: {id : cita.get('tratamiento')},
+			   		success : function(data){
+			   			data.at(0).set('estatus', utils.constantes.estatus.tratamientoFinalizado);
+			   			data.at(0).save({}, {beforeSend: sendAuthentication });
+			   		}
+			   	});
+			}
+			app.Views.menuView.refrescarPantalla();	
+			self.$el.hide();
+			}
+		});
 	},
 
 	cancelarCitaCalendario: function() {
 		var self = this;
 		citaActual.set('estatus', utils.constantes.estatus.cancelada);
 		citaActual.save({}, {  
-			    		success:function(){
-			    			app.Views.menuView.refrescarPantalla();	
-							self.$el.hide();
-						}
-					});
+			beforeSend: sendAuthentication ,
+			success:function(){
+				app.Views.menuView.refrescarPantalla();	
+				self.$el.hide();
+			}
+		});
 	},
 
 	concluirCita : function() {
@@ -772,14 +783,15 @@ clickDent.Views.Popup = Backbone.View.extend({
 		var idCita = $('#popup-cancelar-idcita').val();
 		var cita = app.Collections.citasInicio.findWhere({ id : parseInt(idCita) });
 		cita.set('estatus', utils.constantes.estatus.realizada)
-		cita.save({}, {  
+		cita.save({}, {
+						beforeSend: sendAuthentication,  
 			    		success:function(){
 			    			if(chkTratamineto){
 								var lstTratamiento = new clickDent.Collections.Tratamientos();
 								lstTratamiento.fetch({ data: {id : cita.get('tratamiento')},
 					        		success : function(data){
 					        			data.at(0).set('estatus', utils.constantes.estatus.tratamientoFinalizado);
-					        			data.at(0).save();
+					        			data.at(0).save({},{beforeSend: sendAuthentication });
 					        		}
 					        	});
 							}

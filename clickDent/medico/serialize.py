@@ -4,21 +4,21 @@ from django.contrib.auth.models import User
 from .models import *
 
 class MedicoSerializer(serializers.HyperlinkedModelSerializer):
-    especialidad = serializers.PrimaryKeyRelatedField(many=False)
-    usuario = serializers.PrimaryKeyRelatedField(many=False)
+    especialidad = serializers.PrimaryKeyRelatedField(queryset=Especialidad.objects.all())
+    usuario = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
     class Meta:
         model = Medico
         fields = ('id','nombre','ape_paterno','ape_materno','num_cedula','declaracion','url_imagen', 'especialidad', 'usuario')
 
 
 class FormacionSerializer(serializers.HyperlinkedModelSerializer):
-    medico = serializers.PrimaryKeyRelatedField(many=False)
+    medico = serializers.PrimaryKeyRelatedField(queryset=Medico.objects.all())
     class Meta:
         model = Formacion
         fields = ('id','escuela','titulo','medico')
 
 class ConsultorioSerializer(serializers.HyperlinkedModelSerializer):
-    direccion = serializers.PrimaryKeyRelatedField(many=False)
+    direccion = serializers.PrimaryKeyRelatedField(queryset=Direccion.objects.all())
     class Meta:
         model = Consultorio
         fields = ('id', 'nombre','num_telefono','num_emergencias','direccion','url_imagen') 
