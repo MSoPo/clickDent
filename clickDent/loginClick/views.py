@@ -5,7 +5,7 @@ from django.contrib.auth import logout as auth_logout, authenticate, login
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.contrib.auth.models import User
-from django.utils import simplejson
+from django.http import JsonResponse
 from medico.models import *
 import time
 from django.conf import settings
@@ -115,8 +115,7 @@ def validaLogin(request):
    		'validacion': validacion,
    		'username': usuario,
 	}
-	data = simplejson.dumps(json)
-	return HttpResponse(data, mimetype='application/json')
+	return JsonResponse(json)
 
 
 	
@@ -142,8 +141,8 @@ def validaUsuario(request):
    		'validacion': validacion,
    		'username': usuario,
 	}
-	data = simplejson.dumps(json)
-	return HttpResponse(data, mimetype='application/json')
+	
+	return JsonResponse(json)
 
 def validaCorreo(request):
 	correo = request.GET['correo']
@@ -158,8 +157,7 @@ def validaCorreo(request):
    		'validacion': validacion,
    		'mail': correo,
 	}
-	data = simplejson.dumps(json)
-	return HttpResponse(data, mimetype='application/json')
+	return JsonResponse(json)
 
 def handle_uploaded_file(f):
 	extension = f.name.split('.')
@@ -193,8 +191,7 @@ def actualizarConsultorio(request):
    		'validacion': 'ok',
    		'url' : consultorio.url_imagen
 	}
-	data = simplejson.dumps(json)
-	return HttpResponse(data, mimetype='application/json')
+	return JsonResponse(json)
 
 def actualizarPerfil(request):
 	correo = request.POST['correo']
@@ -218,8 +215,8 @@ def actualizarPerfil(request):
    		'validacion': 'ok',
    		'mail': correo,
 	}
-	data = simplejson.dumps(json)
-	return HttpResponse(data, mimetype='application/json')
+	
+	return JsonResponse(json)
 
 def cambiarContrasena(request):
 	actualPass = request.POST['actual']
@@ -240,9 +237,8 @@ def cambiarContrasena(request):
 		json = {
    			'validacion': 'error'
 		}
-
-	data = simplejson.dumps(json)
-	return HttpResponse(data, mimetype='application/json')
+		
+	return JsonResponse(json)
 
 def actualizarPlan(request):
 	plan = request.POST['plan']
@@ -263,9 +259,7 @@ def actualizarPlan(request):
 	json = {
    			'validacion': 'ok'
 		}
-
-	data = simplejson.dumps(json)
-	return HttpResponse(data, mimetype='application/json')
+	return JsonResponse(json)
 
 
 
